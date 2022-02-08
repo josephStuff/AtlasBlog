@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasBlog.Data.Migrations
+namespace AtlasBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -87,7 +87,7 @@ namespace AtlasBlog.Data.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("BlogPosts");
                 });
 
             modelBuilder.Entity("AtlasBlog.Models.BlogUser", b =>

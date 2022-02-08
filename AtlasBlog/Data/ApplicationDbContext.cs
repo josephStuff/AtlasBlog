@@ -1,5 +1,4 @@
-﻿using AtlasBlog.Data.Migrations;
-using AtlasBlog.Models;
+﻿using AtlasBlog.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

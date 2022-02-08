@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasBlog.Data.Migrations
+namespace AtlasBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220208165744_BlogPosts")]
-    partial class BlogPosts
+    [Migration("20220208212527_Initial _0001")]
+    partial class Initial_0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,7 @@ namespace AtlasBlog.Data.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("BlogPosts");
                 });
 
             modelBuilder.Entity("AtlasBlog.Models.BlogUser", b =>
