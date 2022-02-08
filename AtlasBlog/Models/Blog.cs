@@ -10,6 +10,7 @@ namespace AtlasBlog.Models
         [Display(Name = "Blog Name")]
         [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
         public string BlogName { get; set; } = "";
+
         [Required]
         [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
         public string Description { get; set;} = "";

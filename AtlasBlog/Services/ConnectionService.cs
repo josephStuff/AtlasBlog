@@ -24,7 +24,7 @@ namespace AtlasBlog.Services
             {
                 Host = databaseUri.Host,
                 Port = databaseUri.Port,
-                UserName = userInfo[0],
+                Username = userInfo[0],
                 Password = userInfo[1],
                 Database = databaseUri.LocalPath.TrimStart('/'),
                 SslMode = SslMode.Require,
