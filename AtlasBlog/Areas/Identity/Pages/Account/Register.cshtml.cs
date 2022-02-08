@@ -88,12 +88,8 @@ namespace AtlasBlog.Areas.Identity.Pages.Account
             [Required]
             [StringLength(40, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
             [Display(Name = "Last Name")]
-            public string LastName { get; set; }
-
-            
-            [Display(Name = "Display Name")]
-            [StringLength(40, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
-            public string DisplayName { get; set; }
+            public string LastName { get; set; }          
+           
 
 
 
@@ -135,8 +131,7 @@ namespace AtlasBlog.Areas.Identity.Pages.Account
 
 
                 user.FirstName = Input.FirstName;
-                user.LastName = Input.LastName;
-                user.DisplayName = Input.DisplayName;
+                user.LastName = Input.LastName;                
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
