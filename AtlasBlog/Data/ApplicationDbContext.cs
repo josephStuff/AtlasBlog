@@ -1,4 +1,5 @@
-﻿using AtlasBlog.Models;
+﻿using AtlasBlog.Data.Migrations;
+using AtlasBlog.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,5 +12,10 @@ namespace AtlasBlog.Data
         {
 
         }
+
+        public DbSet<Blog> Blogs { get; set; }             
+        public DbSet<BlogPost> Posts { get; set; }
+
+        
     }
 }

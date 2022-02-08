@@ -10,7 +10,7 @@ namespace AtlasBlog.Models
 
         public string LastName { get; set; } = "";
 
-        public string? Displayname { get; set; }
+        public string? DisplayName { get; set; }
     }
 
 }
