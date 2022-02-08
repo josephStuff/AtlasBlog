@@ -10,7 +10,7 @@ namespace AtlasBlog.Services
 
         public DataService(ApplicationDbContext dbContext)
         {
-            this._dbContext = dbContext;
+            _dbContext = dbContext;
         }
 
 
