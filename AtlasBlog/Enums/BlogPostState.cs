@@ -2,8 +2,11 @@
 {
     public enum BlogPostState
     {
-        ProductionReady,
+        JustStarted,
         InDevelopment,
-        PreviewReady
+        AnotherEdit,
+        AwaitingApproval,
+        PreviouslyModerated,
+        DefinitelyReady
     }
 }

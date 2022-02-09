@@ -107,6 +107,8 @@ namespace AtlasBlog.Controllers
             {
                 try
                 {
+                    blogPost.Updated = DateTime.UtcNow;
+
                     _context.Update(blogPost);
                     await _context.SaveChangesAsync();
                 }
