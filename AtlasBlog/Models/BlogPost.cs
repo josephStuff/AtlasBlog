@@ -6,6 +6,8 @@ namespace AtlasBlog.Models
     public class BlogPost
     {
         public int Id { get; set; }
+
+        [Display(Name ="Blog Id")]
         public int BlogId { get; set; }
 
         [Required]
@@ -14,6 +16,7 @@ namespace AtlasBlog.Models
 
         public string Slug { get; set; } = "";
 
+        [Display(Name = "Mark for Deletion")]
         public bool IsDeleted { get; set; }
 
 
@@ -21,6 +24,7 @@ namespace AtlasBlog.Models
         [StringLength(200, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Abstract { get; set; } = "";
 
+        [Display(Name = "Post State")]
         public BlogPostState BlogPostState { get; set; }
 
         [Required]
@@ -36,7 +40,7 @@ namespace AtlasBlog.Models
 
 
         // --------------- NAVIGATION PROPERTIES -----------------------------
-        public Blog Blog { get; set; } = default!;
+        public Blog? Blog { get; set; }
 
         //------------------------------ Tags -------------------------------
 
