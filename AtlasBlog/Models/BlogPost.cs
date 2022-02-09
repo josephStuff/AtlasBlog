@@ -31,7 +31,10 @@ namespace AtlasBlog.Models
         [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Body { get; set; } = "";
 
+        
         public DateTime Created { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
 
 

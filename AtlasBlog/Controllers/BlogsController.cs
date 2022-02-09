@@ -101,6 +101,7 @@ namespace AtlasBlog.Controllers
                 try
                 {
                     blog.Updated = DateTime.UtcNow;
+                    blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
 
                     _context.Update(blog);
                     await _context.SaveChangesAsync();
