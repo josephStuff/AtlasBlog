@@ -23,14 +23,10 @@
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Slug" class="control-label"></label>
-                <input asp-for="Slug" class="form-control" />
-                <span asp-validation-for="Slug" class="text-danger"></span>
-            </div>
             <div class="form-group form-check">
+                <input class="form-check-input" asp-for="IsDeleted" />
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                    @Html.DisplayNameFor(model => model.IsDeleted)
                 </label>
             </div>
             <div class="form-group">
@@ -59,7 +55,7 @@
                 <span asp-validation-for="Updated" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary mt-2" />
             </div>
         </form>
     </div>
