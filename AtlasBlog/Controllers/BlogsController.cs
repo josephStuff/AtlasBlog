@@ -7,16 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
+using AtlasBlog.Services.Interfaces;
 
 namespace AtlasBlog.Controllers
 {
     public class BlogsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IImageService _imageService;
 
         public BlogsController(ApplicationDbContext context)
         {
             _context = context;
+            _imageService = _imageService;
         }
 
         // GET: Blogs
@@ -49,15 +52,22 @@ namespace AtlasBlog.Controllers
             return View();
         }
 
+
         // POST: Blogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogName,Description,Created,Updated")] Blog blog)
+        public async Task<IActionResult> Create([Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
+                if(imageFile is not null)
+                {
+                    blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
+                    blog.ImageExt = imageFile.ContentType;
+                }
+
                 // ------- SPECIFY THE DATETIME KIND FOR THE INCOMING CREATED DATE ----------------------------->
                 blog.Created = DateTime.UtcNow;
 
@@ -65,6 +75,7 @@ namespace AtlasBlog.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(blog);
         }
 

@@ -20,6 +20,10 @@ namespace AtlasBlog.Models
 
         public DateTime? Updated { get; set; }
 
+        [Display]
+        public byte[] ImageData { get; set; } = Array.Empty<byte>();
+        public string ImageExt { get; set; } = "";
+
         //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN ---------------------------
         public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
     }

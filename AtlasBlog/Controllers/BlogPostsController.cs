@@ -50,7 +50,7 @@ namespace AtlasBlog.Controllers
         // GET: BlogPosts/Create
         public IActionResult Create()
         {
-            //ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
             return View();
         }
 
@@ -71,7 +71,7 @@ namespace AtlasBlog.Controllers
 
             }
 
-            //ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
 

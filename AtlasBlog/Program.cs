@@ -1,6 +1,7 @@
 using AtlasBlog.Data;
 using AtlasBlog.Models;
 using AtlasBlog.Services;
+using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<DataService>();
+builder.Services.AddScoped<IImageService,BasicImageService>();
 
 // ---------------------------- LINE OF DEMARCATION ---------------
 var app = builder.Build();

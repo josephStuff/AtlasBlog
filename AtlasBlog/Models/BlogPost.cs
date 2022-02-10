@@ -49,7 +49,7 @@ namespace AtlasBlog.Models
 
         // --------------- NAVIGATION PROPERTIES -----------------------------
 
-        public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
+        //public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
         public Blog? Blog { get; set; }
 
         //------------------------------ Tags -------------------------------
