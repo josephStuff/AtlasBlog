@@ -38,6 +38,7 @@ namespace AtlasBlog.Controllers
             var blogPost = await _context.BlogPosts
                 .Include(b => b.Blog)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (blogPost == null)
             {
                 return NotFound();
@@ -49,7 +50,7 @@ namespace AtlasBlog.Controllers
         // GET: BlogPosts/Create
         public IActionResult Create()
         {
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName");
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
             return View();
         }
 
@@ -58,7 +59,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogId,Title,Abstract,BlogPostState,Body")] BlogPost blogPost)
+        public async Task<IActionResult> Create([Bind("Id,BlogId,Title,Abstract,BlogPostState,Body")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +70,7 @@ namespace AtlasBlog.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
 
@@ -86,7 +87,7 @@ namespace AtlasBlog.Controllers
             {
                 return NotFound();
             }
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
 
