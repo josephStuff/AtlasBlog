@@ -35,21 +35,12 @@ namespace AtlasBlog.Services
             await SeedUsersAsync();
         }
 
-        private async Task SeedRolesAsync()
-        {
-            if (_roleManager.Roles.Count() == 0)
-            {
-                await _roleManager.CreateAsync(new IdentityRole("Administrator"));
-                await _roleManager.CreateAsync(new IdentityRole("Moderator"));
-            }
-
-        }
-
+        
         private async Task SeedUsersAsync()
         {
             BlogUser adminUser = new()
             {
-                UserName = "joe watson",
+                UserName = "joewatson@email.com",
                 Email = "joewatson@email.com",
                 FirstName = "joe",
                 LastName = "watson",
@@ -57,30 +48,29 @@ namespace AtlasBlog.Services
                 PhoneNumber = "555-555-5555",
                 EmailConfirmed = true
             };
-            
+
+            BlogUser modUser = new()
+            {
+                UserName = "mrwatson@email.com",
+                Email = "mrwatson@email.com",
+                FirstName = "mr",
+                LastName = "watson",
+                DisplayName = "mrwatson",
+                PhoneNumber = "555-555-5555",
+                EmailConfirmed = true
+            };
+
             try
             {
-                var newUser = await _userManager.FindByEmailAsync(adminUser.Email);
-                if (newUser == null)
+                 
+                if (await _userManager.FindByEmailAsync(adminUser.Email) is null)
                 {
                     await _userManager.CreateAsync(adminUser, "Abc&123!");
                     await _userManager.AddToRoleAsync(adminUser, "Administrator");
                 }
-
-                //newUser = new();
-                BlogUser modUser = new()
-                {
-                    UserName = "mr watson",
-                    Email = "mrwatson@email.com",
-                    FirstName = "mr",
-                    LastName = "watson",
-                    DisplayName = "mrwatson",
-                    PhoneNumber = "555-555-5555",
-                    EmailConfirmed = true
-                };
-
-                newUser = await _userManager.FindByEmailAsync(newUser?.Email);
-                if (newUser is null)
+                                
+                                
+                if (await _userManager.FindByEmailAsync(modUser.Email) is null)
                 {
                     await _userManager.CreateAsync(modUser, "Abc&123!");
                     await _userManager.AddToRoleAsync(modUser, "Moderator");
@@ -93,5 +83,18 @@ namespace AtlasBlog.Services
             }
 
         }
+
+        private async Task SeedRolesAsync()
+        {
+            if (_roleManager.Roles.Any())
+            {
+                return;    
+            }
+            
+            await _roleManager.CreateAsync(new IdentityRole("Administrator"));
+            await _roleManager.CreateAsync(new IdentityRole("Moderator"));
+
+        }
     }
+
 }

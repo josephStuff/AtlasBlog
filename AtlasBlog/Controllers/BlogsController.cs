@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable disable
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
 using AtlasBlog.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AtlasBlog.Controllers
 {
@@ -47,6 +49,7 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: Blogs/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
