@@ -7,14 +7,18 @@ namespace AtlasBlog.Models
     {
         public int Id { get; set; }
 
-        [Display(Name ="Blog Id")]
-        public int BlogId { get; set; }
+        [Required]
+        [Display(Name = "Blog Identification")]
+        [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
+        public string BlogId { get; set; } = "";
+
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Title { get; set; } = "";
 
         public string Slug { get; set; } = "";
+
 
         [Display(Name = "Mark for Deletion")]
         public bool IsDeleted { get; set; }
@@ -24,8 +28,10 @@ namespace AtlasBlog.Models
         [StringLength(200, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Abstract { get; set; } = "";
 
+
         [Display(Name = "Post State")]
         public BlogPostState BlogPostState { get; set; }
+
 
         [Required]
         [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
@@ -34,10 +40,9 @@ namespace AtlasBlog.Models
         
         public DateTime Created { get; set; }
 
+
         [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
-
-
 
 
 
