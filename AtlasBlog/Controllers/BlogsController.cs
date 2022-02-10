@@ -16,10 +16,10 @@ namespace AtlasBlog.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IImageService _imageService;
 
-        public BlogsController(ApplicationDbContext context)
+        public BlogsController(ApplicationDbContext context, IImageService imageService)
         {
             _context = context;
-            _imageService = _imageService;
+            _imageService = imageService;
         }
 
         // GET: Blogs
@@ -58,7 +58,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
+        public async Task<IActionResult> Create([Bind("BlogName,Description")] Blog blog, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {

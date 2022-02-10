@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasBlog.Migrations
+namespace AtlasBlog.Data.Migrations
 {
-    public partial class Initial_0001 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,7 +61,9 @@ namespace AtlasBlog.Migrations
                     BlogName = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
+                    ImageExt = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,7 +184,10 @@ namespace AtlasBlog.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BlogId = table.Column<int>(type: "integer", nullable: false),
                     Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
+                    Slug = table.Column<string>(type: "text", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: false),
                     Abstract = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    BlogPostState = table.Column<int>(type: "integer", nullable: false),
                     Body = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)

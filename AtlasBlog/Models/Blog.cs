@@ -20,7 +20,7 @@ namespace AtlasBlog.Models
 
         public DateTime? Updated { get; set; }
 
-        [Display]
+        [Display(Name = "Choose Image")]
         public byte[] ImageData { get; set; } = Array.Empty<byte>();
         public string ImageExt { get; set; } = "";
 

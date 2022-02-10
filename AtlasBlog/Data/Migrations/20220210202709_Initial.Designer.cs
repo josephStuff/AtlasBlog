@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasBlog.Migrations
+namespace AtlasBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220210171628__0008")]
-    partial class _0008
+    [Migration("20220210202709_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,12 +74,7 @@ namespace AtlasBlog.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
 
-                    b.Property<string>("BlogId")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<int?>("BlogId1")
+                    b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
                     b.Property<int>("BlogPostState")
@@ -110,7 +105,7 @@ namespace AtlasBlog.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId1");
+                    b.HasIndex("BlogId");
 
                     b.ToTable("BlogPosts");
                 });
@@ -326,7 +321,9 @@ namespace AtlasBlog.Migrations
                 {
                     b.HasOne("AtlasBlog.Models.Blog", "Blog")
                         .WithMany("BlogPosts")
-                        .HasForeignKey("BlogId1");
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Blog");
                 });

@@ -8,10 +8,8 @@ namespace AtlasBlog.Models
         public int Id { get; set; }
 
         //[Required]
-        [Display(Name = "Blog Identification")]
-        [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
-        public string BlogId { get; set; } = "";
-
+        [Display(Name = "Blog Identification")]        
+        public int BlogId { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]

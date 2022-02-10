@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AtlasBlog.Controllers
 {
@@ -48,6 +49,7 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: BlogPosts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");

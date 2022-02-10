@@ -1,4 +1,10 @@
-﻿@model IEnumerable<AtlasBlog.Models.Blog>
+﻿@using AtlasBlog.Models
+@using AtlasBlog.Services.Interfaces
+
+@model IEnumerable<AtlasBlog.Models.Blog>
+
+@inject IImageService _imageService
+
 
 @{
     ViewData["Title"] = "Index";
@@ -12,6 +18,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageExt)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.BlogName)
             </th>
@@ -28,26 +37,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BlogName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Created)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Updated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if(item.ImageData is not null)
+                    {
+                        <img class="container-fluid" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
+                    }                    
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Updated)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
