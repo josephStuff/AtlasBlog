@@ -50,7 +50,7 @@ namespace AtlasBlog.Controllers
         // GET: BlogPosts/Create
         public IActionResult Create()
         {
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
+            //ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
             return View();
         }
 
@@ -65,12 +65,13 @@ namespace AtlasBlog.Controllers
             {
                 blogPost.Created = DateTime.UtcNow;
 
-
                 _context.Add(blogPost);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+
+            //ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
 
@@ -84,10 +85,12 @@ namespace AtlasBlog.Controllers
 
             var blogPost = await _context.BlogPosts.FindAsync(id);
             if (blogPost == null)
+
             {
                 return NotFound();
             }
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+
+            // ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);            
             return View(blogPost);
         }
 
@@ -126,7 +129,8 @@ namespace AtlasBlog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
+
+            // ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
 

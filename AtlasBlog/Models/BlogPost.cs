@@ -7,7 +7,7 @@ namespace AtlasBlog.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         [Display(Name = "Blog Identification")]
         [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
         public string BlogId { get; set; } = "";
@@ -37,7 +37,7 @@ namespace AtlasBlog.Models
         [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Body { get; set; } = "";
 
-        
+
         public DateTime Created { get; set; }
 
 
@@ -48,6 +48,8 @@ namespace AtlasBlog.Models
 
 
         // --------------- NAVIGATION PROPERTIES -----------------------------
+
+        public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
         public Blog? Blog { get; set; }
 
         //------------------------------ Tags -------------------------------

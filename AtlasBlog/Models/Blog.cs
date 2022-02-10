@@ -17,6 +17,7 @@ namespace AtlasBlog.Models
 
         [DataType(DataType.Date)]
         public DateTime Created { get; set; }
+
         public DateTime? Updated { get; set; }
 
         //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN ---------------------------

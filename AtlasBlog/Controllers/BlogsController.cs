@@ -78,9 +78,11 @@ namespace AtlasBlog.Controllers
 
             var blog = await _context.Blogs.FindAsync(id);
             if (blog == null)
+
             {
                 return NotFound();
             }
+
             return View(blog);
         }
 
