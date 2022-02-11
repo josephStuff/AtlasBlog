@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AtlasBlog.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Initial_0001 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,7 +63,8 @@ namespace AtlasBlog.Data.Migrations
                     Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Updated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ImageData = table.Column<byte[]>(type: "bytea", nullable: false),
-                    ImageExt = table.Column<string>(type: "text", nullable: false)
+                    ImageExt = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

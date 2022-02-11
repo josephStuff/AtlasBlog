@@ -62,7 +62,7 @@ namespace AtlasBlog.Services
 
     }
 
-    public static class ConstHelper
+    public class ConstHelper
     {
         /// <summary>
         /// Remaps international characters to ascii compatible ones
@@ -152,7 +152,4 @@ namespace AtlasBlog.Services
         }
     }
     
-
-    
-
 }

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AtlasBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220210202709_Initial")]
-    partial class Initial
+    [Migration("20220211211821_Initial_0001")]
+    partial class Initial_0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,10 @@ namespace AtlasBlog.Data.Migrations
                         .HasColumnType("bytea");
 
                     b.Property<string>("ImageExt")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 

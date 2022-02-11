@@ -35,16 +35,16 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: BlogPosts/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string slug)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(slug))
             {
                 return NotFound();
             }
 
             var blogPost = await _context.BlogPosts
                 .Include(b => b.Blog)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug== slug);
 
             if (blogPost == null)
             {
@@ -135,15 +135,42 @@ namespace AtlasBlog.Controllers
 
             if (ModelState.IsValid)
             {
+                
                 try
                 {
+                    // IF THE SLUG HAS CHANGED I NEED TO DO THIS CHECK ------------------->
+                    var slug = _slugService.UrlFriendly(blogPost.Title, 100);
+
+                    if (blogPost.Slug != slug)
+                    {
+                        // HAVE TO ENSURE THE SLUG IS UNIQUE BEFORE ALLOW TO BE STORED IN THE DB  ------------>
+                        // IF YES TO UNIQUE, CAN BE USED. OTHERWISE WE HAVE TO THROW A CUSTOM ERROR LETTING USER KNOW WHAT HAPPENED
+                        var isUnique = !_context.BlogPosts.Any(blogpost => blogPost.Slug == slug);
+
+                        if (isUnique)
+                        {
+                            blogPost.Slug = slug;
+                        }
+
+                        else
+                        {
+                            // THE SLUG CANNOT BE USED AND AN ERROR MUST BE SHOWN TO THE USER
+                            ModelState.AddModelError("Title", "Incorrect TItle (duplicate SLUG)");
+                            ModelState.AddModelError("", "Incorrect TItle (duplicate SLUG)");
+                            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+                            return View(blogPost);
+                        }
+
+                    }
+
                     blogPost.Updated = DateTime.UtcNow;
-                    blogPost.Created = DateTime.SpecifyKind(blogPost.Created,DateTimeKind.Utc);
+                    blogPost.Created = DateTime.SpecifyKind(blogPost.Created, DateTimeKind.Utc);
 
                     _context.Update(blogPost);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!BlogPostExists(blogPost.Id))
                     {
@@ -154,12 +181,13 @@ namespace AtlasBlog.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
             }
 
-            // ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
             return View(blogPost);
         }
+
 
         // GET: BlogPosts/Delete/5
         public async Task<IActionResult> Delete(int? id)

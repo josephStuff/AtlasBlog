@@ -24,6 +24,8 @@ namespace AtlasBlog.Models
         public byte[] ImageData { get; set; } = Array.Empty<byte>();
         public string ImageExt { get; set; } = "";
 
+        public string Title { get; set; } = "";
+
         //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN ---------------------------
         public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
     }

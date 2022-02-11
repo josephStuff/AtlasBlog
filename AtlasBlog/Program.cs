@@ -56,9 +56,6 @@ else
 }
 
 
-
-
-
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -68,8 +65,15 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
+    name: "custom",
+    pattern: "PostsDetails/{slug}",
+    defaults: new { controller = "BlogPosts", action = "Details" }
+    );
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 app.MapRazorPages();
 
 app.Run();

@@ -8,7 +8,7 @@ namespace AtlasBlog.Models
         public int Id { get; set; }
 
         //[Required]
-        [Display(Name = "Blog Identification")]        
+        [Display(Name = "Blog Identification")]
         public int BlogId { get; set; }
 
         [Required]
