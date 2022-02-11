@@ -29,6 +29,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<DataService>();
 builder.Services.AddScoped<IImageService,BasicImageService>();
+builder.Services.AddTransient<SlugService>();
 
 // ---------------------------- LINE OF DEMARCATION ---------------
 var app = builder.Build();

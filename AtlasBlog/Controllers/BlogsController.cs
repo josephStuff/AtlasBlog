@@ -10,6 +10,7 @@ using AtlasBlog.Data;
 using AtlasBlog.Models;
 using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using AtlasBlog.Services;
 
 namespace AtlasBlog.Controllers
 {
@@ -17,11 +18,12 @@ namespace AtlasBlog.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IImageService _imageService;
+        
 
         public BlogsController(ApplicationDbContext context, IImageService imageService)
         {
             _context = context;
-            _imageService = imageService;
+            _imageService = imageService;            
         }
 
         // GET: Blogs

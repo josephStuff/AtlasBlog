@@ -9,16 +9,22 @@ using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
 using Microsoft.AspNetCore.Authorization;
+using AtlasBlog.Services;
+using AtlasBlog.Services.Interfaces;
 
 namespace AtlasBlog.Controllers
 {
     public class BlogPostsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IImageService _imageService;
+        private readonly SlugService _slugService;
 
-        public BlogPostsController(ApplicationDbContext context)
+        public BlogPostsController(ApplicationDbContext context, SlugService slugService, IImageService imageService)
         {
             _context = context;
+            _slugService = slugService;
+            _imageService = imageService;
         }
 
         // GET: BlogPosts
@@ -65,6 +71,25 @@ namespace AtlasBlog.Controllers
         {
             if (ModelState.IsValid)
             {
+                var slug = _slugService.UrlFriendly(blogPost.Title, 100);
+
+                // HAVE TO ENSURE THE SLUG IS UNIQUE BEFORE ALLOW TO BE STORED IN THE DB  ------------>
+                // IF YES TO UNIQUE, CAN BE USED. OTHERWISE WE HAVE TO THROW A CUSTOM ERROR LETTING USER KNOW WHAT HAPPENED
+                var isUnique = !_context.BlogPosts.Any(blogpost => blogPost.Slug == slug);
+
+                if (isUnique)
+                {
+                    blogPost.Slug = slug;
+                }
+                else
+                {
+                    // THE SLUG CANNOT BE USED AND AN ERROR MUST BE SHOWN TO THE USER
+                    ModelState.AddModelError("Title", "Incorrect TItle (duplicate SLUG)");
+                    ModelState.AddModelError("", "Incorrect TItle (duplicate SLUG)");
+                    ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+                    return View(blogPost);
+                }
+
                 blogPost.Created = DateTime.UtcNow;
 
                 _context.Add(blogPost);

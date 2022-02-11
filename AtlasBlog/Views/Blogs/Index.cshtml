@@ -48,8 +48,12 @@
                 <td>
                     @if(item.ImageData is not null)
                     {
-                        <img class="container-fluid" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
-                    }                    
+                        <img class="img-fluid" style="width:200px;height:200px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
+                    }
+                    else
+                    {
+                        <img class="img-fluid img-thumbnail" style="width:200px;height:200px" src="/img/DefaultImage.png">
+                    }
                 </td>
 
                 <td>
