@@ -58,7 +58,7 @@ namespace AtlasBlog.Controllers
         // [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId");
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName");
             return View();
         }
 
