@@ -107,7 +107,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
         {
             if (id != blog.Id)
             {
@@ -120,6 +120,9 @@ namespace AtlasBlog.Controllers
                 {
                     blog.Updated = DateTime.UtcNow;
                     blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
+
+                    blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
+                    blog.ImageExt = imageFile.ContentType;
 
                     _context.Update(blog);
                     await _context.SaveChangesAsync();
