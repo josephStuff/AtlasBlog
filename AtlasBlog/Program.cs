@@ -5,6 +5,7 @@ using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -37,7 +38,7 @@ var app = builder.Build();
 // ------------------------ WHEN CALLING A SERVICE FROM THIS MIDDLEWARE WE NEED AN INSTANCE OF IServiceScope
 var scope = app.Services.CreateScope();
 var dataService = scope.ServiceProvider.GetRequiredService<DataService>();
-await dataService.SetupDb();
+await dataService.SetupDbAsync();
 
 
 // --------- await scope.ServiceProvider.GetRequiredService<DataService>().SetupDbAsync();

@@ -71,7 +71,7 @@ namespace AtlasBlog.Controllers
                 {
                     blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
                     blog.ImageExt = imageFile.ContentType;
-                }
+                }                
 
                 // ------- SPECIFY THE DATETIME KIND FOR THE INCOMING CREATED DATE ----------------------------->
                 blog.Created = DateTime.UtcNow;

@@ -42,12 +42,7 @@ namespace AtlasBlog.Models
         [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
 
-
-        [Display(Name = "Choose Image")]
-        public byte[] ImageData { get; set; } = Array.Empty<byte>();
-        public string ImageExt { get; set; } = "";
-
-
+        
 
 
         // --------------- NAVIGATION PROPERTIES -----------------------------

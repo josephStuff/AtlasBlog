@@ -26,7 +26,7 @@ namespace AtlasBlog.Models
 
         public string Title { get; set; } = "";
 
-        //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN ---------------------------
+        //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN --------------------------->
         public ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
     }
 }
