@@ -65,7 +65,7 @@ namespace AtlasBlog.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogPostId,CommentBody")] Comment comment)
+        public async Task<IActionResult> Create([Bind("BlogPostId,CommentBody")] Comment comment, string slug)
         {
             if (ModelState.IsValid)
             {
@@ -73,12 +73,11 @@ namespace AtlasBlog.Controllers
                 comment.CreatedDate = DateTime.UtcNow;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                
             }
-            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorId);
-            ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract", comment.BlogPostId);
-            //return RedirectToAction("Details", "BlogPosts" new { slug = slug } );  -------- ALSO ADD STRING SLUG NEXT TO COMMENT comment, )
-            return View(comment);
+            
+            return RedirectToAction("Details", "BlogPosts", new { slug }, "CommentSection" );
+            
         }
 
         // GET: Comments/Edit/5

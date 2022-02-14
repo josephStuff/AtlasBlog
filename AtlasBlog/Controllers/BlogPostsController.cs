@@ -44,6 +44,7 @@ namespace AtlasBlog.Controllers
 
             var blogPost = await _context.BlogPosts
                 .Include(b => b.Blog)
+                .Include(c => c.Comments)
                 .FirstOrDefaultAsync(m => m.Slug== slug);
 
             if (blogPost == null)
@@ -199,6 +200,8 @@ namespace AtlasBlog.Controllers
 
             var blogPost = await _context.BlogPosts
                 .Include(b => b.Blog)
+                .Include(c => c.Comments)
+                .ThenInclude(c => c.Author)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (blogPost == null)
             {

@@ -53,6 +53,6 @@ namespace AtlasBlog.Models
         //------------------------------ Tags -------------------------------
 
         // ---------------------------- COMMENTS --------------------------------
-
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

@@ -20,9 +20,9 @@
 
 
         // ------------- NAV PROPERTY THAT IS "LAZY LOADED" -------------------
-        public virtual BlogPost? BlogPost { get; set; } = new();
-        public virtual BlogUser? Author { get; set; } = new();
+        public virtual BlogPost? BlogPost { get; set; }
+        public virtual BlogUser? Author { get; set; }
 
-        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        
     }
 }
