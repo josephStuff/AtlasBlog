@@ -50,17 +50,6 @@ namespace AtlasBlog.Controllers
             return View(comment);
         }
 
-        //// GET: Comments/Create ----------- not needed because it's the POST that's necessary only -------------
-        //public IActionResult Create()
-        //{
-        //    ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
-        //    ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract");
-        //    return View();
-        //}
-
-        // POST: Comments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 
 
         [HttpPost]
