@@ -11,6 +11,8 @@ namespace AtlasBlog.Models
         public string LastName { get; set; } = "";
 
         public string? DisplayName { get; set; }
+
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 
 }

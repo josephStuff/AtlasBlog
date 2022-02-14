@@ -14,6 +14,7 @@ namespace AtlasBlog.Data
 
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogPost> BlogPosts { get; set; }
+        public DbSet<AtlasBlog.Models.Comment> Comment { get; set; }
 
         
     }
