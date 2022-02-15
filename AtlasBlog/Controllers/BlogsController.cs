@@ -23,7 +23,7 @@ namespace AtlasBlog.Controllers
         public BlogsController(ApplicationDbContext context, IImageService imageService)
         {
             _context = context;
-            _imageService = imageService;            
+            _imageService = imageService;
         }
 
         // GET: Blogs

@@ -51,7 +51,6 @@ namespace AtlasBlog.Controllers
         }
 
 
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("BlogPostId,CommentBody")] Comment comment, string slug)
@@ -62,11 +61,11 @@ namespace AtlasBlog.Controllers
                 comment.CreatedDate = DateTime.UtcNow;
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                
+
             }
-            
-            return RedirectToAction("Details", "BlogPosts", new { slug }, "CommentSection" );
-            
+
+            return RedirectToAction("Details", "BlogPosts", new { slug }, "CommentSection");
+
         }
 
         // GET: Comments/Edit/5
@@ -92,36 +91,40 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogPostId,AuthorId,CommentBody,CreatedDate,UpdatedDate,IsDeleted")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CommentBody")] Comment comment, string slug)
         {
             if (id != comment.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            try
             {
-                try
+                var commentSnapShot = await _context.Comment.FindAsync(comment.Id);
+                if (commentSnapShot == null)
                 {
-                    _context.Update(comment);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CommentExists(comment.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                commentSnapShot.CommentBody = comment.CommentBody;
+                commentSnapShot.UpdatedDate = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorId);
-            ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract", comment.BlogPostId);
-            return View(comment);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CommentExists(comment.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction("Detail", "BlogPost", new { slug }, "commentSection");
+
+            //ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorId);
+            //ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract", comment.BlogPostId);
+            //return View(comment);
         }
 
         // GET: Comments/Delete/5

@@ -97,12 +97,12 @@ else
 
 <div class="row redText" id="CommentSection">
 
-    @foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedDate))
+    @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
     {
         <div class="col-12 col-md-4 my-2">
-            <div class="card border-light mb-3 w-100">
+            <div class=" targetParent card border-light mb-3 w-100">
                 <span class="card-header">Created by: @comment.Author?.FirstName</span>
-                <div class="card-body text-dark">
+                <div class="targetChild card-body text-dark">
                     <h5 class="card-title">@comment.CommentBody</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
@@ -112,7 +112,7 @@ else
                     {
                         <div class="row row-cols-1 ">
                             <div class="col">
-                                <button class="btn btn-light btn-sm w-100" data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
+                                <button class="btnModal btn btn-light btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#staticBackdrop">EDIT</button>
                             </div>
                             <div>
                                 @* SWEETALERT WINDOW *@
@@ -136,9 +136,11 @@ else
 @* MODAL CONTENT LOADED HERE *@
 
 <!-- Button trigger modal -->
+@*
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
   Launch static backdrop modal
 </button>
+*@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -158,3 +160,25 @@ else
     </div>
   </div>
 </div>
+
+
+@section Scripts{
+    
+    <script>
+        // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
+        document.querySelectorAll("button.btnModal").forEach(btn => {
+            btn.addEventListener("click", function(){
+                // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
+                document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
+
+                // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+
+            
+                let parent = this.closest("div.targetParent")
+                let header = parent.querySelectorAll("div.targetChild h5")
+                document.getelelementById('modalCommentBody').innerText = child.innerText;
+            });
+        });
+        
+    </script>
+}

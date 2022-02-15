@@ -46,13 +46,13 @@
         {
             <tr>
                 <td>
-                    @if(item.ImageData is not null)
+                    @if(item.ImageData == null)
                     {
-                        <img class="img-fluid" style="width:200px;height:200px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
+                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" src="/img/DefaultImage.png">                        
                     }
                     else
                     {
-                        <img class="img-fluid img-thumbnail" style="width:200px;height:200px" src="/img/DefaultImage.png">
+                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">                        
                     }
                 </td>
 
