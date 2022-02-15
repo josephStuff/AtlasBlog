@@ -1,4 +1,9 @@
-﻿@model AtlasBlog.Models.BlogPost
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject UserManager<BlogUser> _userManager
+
+@model AtlasBlog.Models.BlogPost
+
 
 @{
     ViewData["Title"] = "Details";
@@ -9,7 +14,6 @@
 <div>
     <h4>BlogPost</h4>
     <hr />
-
 
     <dl class="row">
         <dt class="col-sm-2">
@@ -77,7 +81,8 @@
     <form asp-controller="Comments" asp-action="Create">
         <input type="hidden" name="BlogPostId" value="@Model?.Id" />
         <input type="hidden" asp-for="Slug" />
-        <textarea class="form-control" name="CommentBody" rows=3 placeholder="Add Comment"></textarea>
+        <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
+        @*<input class="form-control" name="commentBody" type="text" />*@
         <button class="btn bg-info mt-2">APPLY</button>
     </form>
 }
@@ -92,7 +97,7 @@ else
 
 <div class="row redText" id="CommentSection">
 
-    @foreach (var comment in Model.Comments)
+    @foreach (var comment in Model.Comments.OrderByDescending(c => c.CreatedDate))
     {
         <div class="col-12 col-md-4 my-2">
             <div class="card border-light mb-3 w-100">
@@ -101,7 +106,22 @@ else
                     <h5 class="card-title">@comment.CommentBody</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
-                <div class="card-footer">Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")</div>
+                <div class="card-footer">Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
+
+                    @if(comment.AuthorId == _userManager.GetUserId(User))
+                    {
+                        <div class="row row-cols-1 ">
+                            <div class="col">
+                                <button class="btn btn-light btn-sm w-100" data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
+                            </div>
+                            <div>
+                                @* SWEETALERT WINDOW *@
+                                <a asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-dark w-100">DELETE</a>
+                            </div>
+                        </div>
+                    }
+
+                </div>
             </div>
         </div>
     }
@@ -111,4 +131,30 @@ else
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
+
+@* MODAL CONTENT LOADED HERE *@
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
 </div>
