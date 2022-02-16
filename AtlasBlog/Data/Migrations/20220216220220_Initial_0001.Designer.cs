@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AtlasBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220216141809__4040")]
-    partial class _4040
+    [Migration("20220216220220_Initial_0001")]
+    partial class Initial_0001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

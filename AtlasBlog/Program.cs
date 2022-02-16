@@ -65,11 +65,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.MapControllerRoute(
-//    name: "custom",
-//    pattern: "PostsDetails/{slug}",
-//    defaults: new { controller = "BlogPosts", action = "Details" }
-//    );
+app.MapControllerRoute(
+    name: "custom",
+    pattern: "PostsDetails/{slug}",
+    defaults: new { controller = "BlogPosts", action = "Details" }
+    );
 
 app.MapControllerRoute(
     name: "default",
