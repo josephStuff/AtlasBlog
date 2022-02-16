@@ -143,7 +143,7 @@ namespace AtlasBlog.Controllers
             return View(blog);
         }
 
-        // GET: Blogs/Delete/5
+        // GET: Blogs/Delete/5        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -161,7 +161,7 @@ namespace AtlasBlog.Controllers
             return View(blog);
         }
 
-        // POST: Blogs/Delete/5
+        // POST: Blogs/Delete/5        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

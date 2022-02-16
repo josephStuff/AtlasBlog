@@ -56,8 +56,8 @@ namespace AtlasBlog.Controllers
             return View(blogPost);
         }
 
-        // GET: BlogPosts/Create
-        // [Authorize(Roles = "Administrator")]
+        //GET: BlogPosts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName");
@@ -104,6 +104,7 @@ namespace AtlasBlog.Controllers
             return View(blogPost);
         }
 
+        [Authorize(Roles = "Administrator")]
         // GET: BlogPosts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -119,13 +120,15 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            // ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);            
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
             return View(blogPost);
         }
 
         // POST: BlogPosts/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        //[Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,Slug,IsDeleted,Abstract,BlogPostState,Body,Created")] BlogPost blogPost)

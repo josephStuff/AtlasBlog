@@ -1,8 +1,10 @@
 ﻿@using AtlasBlog.Models
 @using AtlasBlog.Services.Interfaces
+@using Microsoft.AspNetCore.Identity
 
 @model IEnumerable<AtlasBlog.Models.BlogPost>
 
+@inject SignInManager<BlogUser> SignInManager
 @inject IImageService _imageService
 
 
@@ -12,7 +14,7 @@
 
 <h1>Blog Post Index</h1>
 
-@if (User.IsInRole("Administrator"))
+@if (SignInManager.IsSignedIn(User))
 {
     <p>
         <a asp-action="Create">Create New</a>
@@ -24,9 +26,6 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>            
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Abstract)
@@ -34,36 +33,46 @@
             <th>
                 @Html.DisplayNameFor(model => model.BlogPostState)
             </th>
+            <th class="redText fw-bold">
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Body)
             </th>
             <th></th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Abstract)
-            </td>
-            <td class="redText fw-bold">
-                @Html.DisplayFor(modelItem => item.BlogPostState)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Abstract)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogPostState)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsDeleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete |</a>
+                    }
+
+                    <a asp-action="Details" asp-route-slug="@item.Slug">Details</a>
+                </td>
+            </tr>
+        }
     </tbody>
+
 </table>

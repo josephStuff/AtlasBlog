@@ -1,8 +1,10 @@
 ﻿@using AtlasBlog.Models
 @using AtlasBlog.Services.Interfaces
+@using Microsoft.AspNetCore.Identity
 
 @model IEnumerable<AtlasBlog.Models.Blog>
 
+@inject SignInManager<BlogUser> SignInManager
 @inject IImageService _imageService
 
 
@@ -12,10 +14,17 @@
 
 <h1>Blog Index</h1>
 
-@if (User.IsInRole("Administrator"))
+@*@if (User.IsInRole("Administrator"))*@
+@if (SignInManager.IsSignedIn(User))
 {
     <p>
         <a asp-action="Create">Create New</a>
+    </p>
+}
+else
+{
+    <p>
+        <a asp-action="Create" asp-area="Identity">Login to Create</a>
     </p>
 }
 
@@ -46,16 +55,15 @@
         {
             <tr>
                 <td>
-                    @if(item.ImageData == null)
+                    @if (item.ImageData == null)
                     {
-                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" src="/img/DefaultImage.png">                        
+                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" src="@GetType.(~/img/DefaultImage.png)">
                     }
                     else
                     {
-                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">                        
+                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
                     }
                 </td>
-
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogName)
                 </td>
@@ -69,11 +77,22 @@
                     @Html.DisplayFor(modelItem => item.Updated)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <div>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    </div>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        </div>
+                        <div>
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    }
                 </td>
             </tr>
         }
     </tbody>
+
 </table>

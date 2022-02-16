@@ -106,9 +106,10 @@ else
                     <h5 class="card-title">@comment.CommentBody</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
-                <div class="card-footer">Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
+                <div class="card-footer">
+                    Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
 
-                    @if(comment.AuthorId == _userManager.GetUserId(User))
+                    @if (comment.AuthorId == _userManager.GetUserId(User))
                     {
                         <div class="row row-cols-1 ">
                             <div class="col">
@@ -129,7 +130,10 @@ else
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit |</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>
 
@@ -137,48 +141,48 @@ else
 
 <!-- Button trigger modal -->
 @*
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Launch static backdrop modal
-</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+    </button>
 *@
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 @section Scripts{
-    
-    <script>
-        // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
-        document.querySelectorAll("button.btnModal").forEach(btn => {
-            btn.addEventListener("click", function(){
-                // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
-                document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
 
-                // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+<script>
+    // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
+    document.querySelectorAll("button.btnModal").forEach(btn => {
+        btn.addEventListener("click", function(){
+            // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
+            document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
 
-            
-                let parent = this.closest("div.targetParent")
-                let header = parent.querySelectorAll("div.targetChild h5")
-                document.getelelementById('modalCommentBody').innerText = child.innerText;
-            });
+            // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+
+
+            let parent = this.closest("div.targetParent")
+            let header = parent.querySelectorAll("div.targetChild h5")
+            document.getelelementById('modalCommentBody').innerText = child.innerText;
         });
-        
-    </script>
+    });
+
+</script>
 }
