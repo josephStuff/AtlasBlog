@@ -8,6 +8,7 @@
 @inject IImageService _imageService
 
 
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -24,6 +25,9 @@
 <table class="table text-light">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BlogId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
@@ -47,6 +51,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogId)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
