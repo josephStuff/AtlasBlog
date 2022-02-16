@@ -18,12 +18,13 @@ function deleteSweetAlert() {
             Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
-                'success'
+                'success',
             )
+                showConfirmButton: false;
         }
     })
     setTimeout(function () {
-        document.getElementsByTagName("btnSweetAlert").submit();
-    }, 10000);
+        document.btnSweetAlert.submit();
+    }, 30000);
 
 }
