@@ -88,7 +88,7 @@ namespace AtlasBlog.Services
         {
             if (_roleManager.Roles.Any())
             {
-                return;    
+                return;
             }
             
             await _roleManager.CreateAsync(new IdentityRole("Administrator"));
