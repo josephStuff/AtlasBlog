@@ -55,13 +55,13 @@ else
         {
             <tr>
                 <td>
-                    @if (item.ImageData == null)
+                    @if (item.ImageExt == null)
                     {
-                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" src="@GetType.(~/img/DefaultImage.png)">
+                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" />
                     }
                     else
                     {
-                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)">
+                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)" />
                     }
                 </td>
                 <td>

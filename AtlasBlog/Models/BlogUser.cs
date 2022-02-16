@@ -18,7 +18,7 @@ namespace AtlasBlog.Models
         {
             get
             {
-                return $"{LastName}, {FirstName}";
+                return $"{FirstName} {LastName}";
             }
         }
 

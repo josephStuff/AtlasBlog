@@ -74,7 +74,6 @@
 
 </div>
 
-
 @if (User.Identity.IsAuthenticated)
 {
     // ----- Present a simple form for collecting the comment -------------
@@ -82,16 +81,13 @@
         <input type="hidden" name="BlogPostId" value="@Model?.Id" />
         <input type="hidden" asp-for="Slug" />
         <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
-        @*<input class="form-control" name="commentBody" type="text" />*@
         <button class="btn bg-info mt-2">APPLY</button>
     </form>
 }
 else
 {
-    @*<a class="nav-link text-light" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Details", "Comments", new { area = "" })">Login to add a comment</a>*@
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Details", "BlogPosts", new { slug = Model.Slug })">Login to add a comment</a>
 }
-
 
 <hr />
 
@@ -101,7 +97,7 @@ else
     {
         <div class="col-12 col-md-4 my-2">
             <div class=" targetParent card border-light mb-3 w-100">
-                <span class="card-header">Created by: @comment.Author?.FirstName</span>
+                <span class="card-header">Created by: @comment.Author?.FullName</span>
                 <div class="targetChild card-body text-dark">
                     <h5 class="card-title">@comment.CommentBody</h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -116,8 +112,9 @@ else
                                 <button class="btnModal btn btn-light btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#staticBackdrop">EDIT</button>
                             </div>
                             <div>
-                                @* SWEETALERT WINDOW *@
-                                <a asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-dark w-100">DELETE</a>
+                                @* put in a SWEETALERT WINDOW *@
+                                <a id="btnSweetAlert" asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-danger w-100">DELETE</a>
+                                @*<a id="btnSweetAlert" asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-dark w-100">DELETE</a>*@
                             </div>
                         </div>
                     }
@@ -139,14 +136,9 @@ else
 
 @* MODAL CONTENT LOADED HERE *@
 
-<!-- Button trigger modal -->
-@*
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Launch static backdrop modal
-    </button>
-*@
 
-<!-- Modal -->
+<!----------------- Modal ------------------->
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -155,7 +147,6 @@ else
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -168,6 +159,20 @@ else
 
 @section Scripts{
 
+    @* ------------------  HERE IS SOME SWEET ALERT INPUTS ------------------>     *@
+<script>
+    document.getElementById("btnSweetAlert").addEventListener("click", deleteSweetAlert);
+</script>
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link rel="stylesheet" href="sweetalert2.min.css">
+
+<script src="sweetalert2.min.js"></script>
+
+
+    @*----------- should I decide to use   QUILL  i'll need this code below _---------------_--_-------_->*@
 <script>
     // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
     document.querySelectorAll("button.btnModal").forEach(btn => {
@@ -185,4 +190,5 @@ else
     });
 
 </script>
+
 }
