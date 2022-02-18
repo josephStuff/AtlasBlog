@@ -1,12 +1,15 @@
 ﻿@using AtlasBlog.Services.Interfaces
-@inject IImageService _imageService
-
 @using Microsoft.IdentityModel
 @using Microsoft.AspNetCore.Identity
-
+@using X.PagedList.Mvc.Core
+@inject IImageService _imageService
 @inject SignInManager<BlogUser> SignInManager
-@model IEnumerable<AtlasBlog.Models.Blog>
 
+@model X.PagedList.IPagedList<Blog>
+
+@*
+    @model IEnumerable<AtlasBlog.Models.Blog>
+    *@
 
 @{
     ViewData["Title"] = "Home Page";
@@ -18,7 +21,7 @@
 @foreach (var item in Model)
 {
 
-    <div class="mb-3 glass-jw-style">
+    <div class="mb-3 glass-jw-style" style="width: 18rem">
         <div class="g-2">
             <div class="col-md-4">
                 <div class="card-body">
@@ -40,7 +43,7 @@
                         <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
                     </a>
                 </div>
-                <div class="col-md-4">
+                <div class="img-fluid">
                     @*<img  class="contactList-image" alt="..." src="@_imageService.ConvertByteArrayToFile(item.ImageData!,item.ImageType!)"></img>*@
                     <img class="img-fluid" style="width:500px;height:50px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)" />
                 </div>
@@ -49,11 +52,28 @@
     </div>
 }
 
-@*<div class="card glass-jw-style">
-    <h5 class="card-header">Featured</h5>
-    <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+<div class="row">
+    <div class="col">
+        @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum })),
+        new PagedListRenderOptions
+        {
+        LiElementClasses = New string[] { "page-link"}
+
+        }
+
     </div>
-</div>*@
+</div>
+
+
+
+
+
+
+@*<div class="glass-jw-style">
+    <h5 class="card-header">Featured</h5>
+    <div class="card-body col-4">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    </div>*@

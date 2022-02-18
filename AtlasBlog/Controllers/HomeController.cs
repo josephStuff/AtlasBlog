@@ -4,6 +4,7 @@ using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace AtlasBlog.Controllers
 {
@@ -20,9 +21,18 @@ namespace AtlasBlog.Controllers
             _imageService = imageService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNum)
         {
-            var blogs = _context.Blogs.ToList();
+            pageNum ??= 1;
+
+
+            //var blogs = _context.Blogs.ToList();
+
+            // ------------------------ ------------------ ToPagedList() ALWAYS NEEDS TO KNOW WHAT PAGE TO RENDER ---->
+            // ------------------------- PagedList always need to be ordered expliicitly ---------<
+            // var blogs = _context.Blogs.ToPagedList((int)pageNum, 5);
+            var blogs = await _context.Blogs.OrderByDescending(b => b.Created).ToPagedListAsync(pageNum, 5);
+
             return View(blogs);
         }
 
