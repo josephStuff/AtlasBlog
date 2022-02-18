@@ -21,7 +21,7 @@
                 <select asp-for="BlogId" class="form-control" asp-items="ViewBag.BlogId"></select>
                 <span asp-validation-for="BlogId" class="text-danger"></span>
             </div>
-            
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -43,8 +43,9 @@
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
                 @*<div id="editor"></div>*@
-                <textarea></textarea>
+                <textarea asp-for="Body"></textarea>
                 <input asp-for="Body" type="hidden" />
+                <span asp-validation-for="BlogPostState" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -61,13 +62,16 @@
 
 @section Scripts {
 
-    <script>    
-        document.getElementById('quillCreate').addEventListener("submit", function() {
-            document.getElementById('Body').value = quill.container.firstChild.innerHTML;           
-        });
+<script>
 
-    </script>
+    document.getElementById('quillCreate').addEventListener("submit", function() {
+        document.getElementById('Body').value = quill.container.firstChild.innerHTML;
+    });
+
+</script>
 
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
