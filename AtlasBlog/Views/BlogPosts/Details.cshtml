@@ -121,7 +121,6 @@ else
                             <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
                         }
                     </div>
-                    Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
 
                     @*--------------------  THIS IS FOR THE COMMENT ROLE ---------------*@
                     @if (comment.ModeratedDate is null && (comment.AuthorId == _userManager.GetUserId(User)))
