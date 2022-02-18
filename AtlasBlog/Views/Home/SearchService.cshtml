@@ -1,0 +1,26 @@
+﻿@using AtlasBlog.Services.Interfaces
+@using X.PagedList
+@inject IImageService _imageService
+
+@model IPagedList<BlogPost>
+
+
+<div class="row row-cols-1 row-cols-md-3 g-2">
+    @foreach (var blogPost in Model)
+    {
+        <div class="col">
+            <div class="card">
+                <img />
+                <div class="card-body">
+                    <h5 class="card-title">@blogPost.Title</h5>
+                    <p class="card-text">@blogPost.Abstract</p>
+                    <h6 class="card-text">@blogPost.Body</h6>
+                </div>
+                <div class="card-footer">
+                    <h5 class="">What up homey!</h5>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+

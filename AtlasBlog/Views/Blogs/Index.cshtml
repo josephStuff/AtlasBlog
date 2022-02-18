@@ -32,7 +32,7 @@ else
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ImageExt)
+                Input Code
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BlogName)
@@ -55,14 +55,7 @@ else
         {
             <tr>
                 <td>
-                    @if (item.ImageExt == null)
-                    {
-                        <img class="img-fluid img-thumbnail" style="width:100px;height:100px" src="~/img/DefaultImage.png" >
-                    }
-                    else
-                    {
-                        <img class="img-fluid" style="width:100px;height:100px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)" />
-                    }
+                   <input type="text"/>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogName)

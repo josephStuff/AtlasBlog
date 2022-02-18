@@ -11,6 +11,7 @@ using AtlasBlog.Models;
 using Microsoft.AspNetCore.Authorization;
 using AtlasBlog.Services;
 using AtlasBlog.Services.Interfaces;
+using X.PagedList;
 
 namespace AtlasBlog.Controllers
 {
@@ -19,12 +20,14 @@ namespace AtlasBlog.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IImageService _imageService;
         private readonly SlugService _slugService;
+        private readonly SearchService _searchService;
 
-        public BlogPostsController(ApplicationDbContext context, SlugService slugService, IImageService imageService)
+        public BlogPostsController(ApplicationDbContext context, SlugService slugService, IImageService imageService, SearchService searchService)
         {
             _context = context;
             _slugService = slugService;
             _imageService = imageService;
+            _searchService = searchService;
         }
 
         // GET: BlogPosts
@@ -32,6 +35,24 @@ namespace AtlasBlog.Controllers
         {
             var applicationDbContext = _context.BlogPosts.Include(b => b.Blog);
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> SearchIndex(int? pageNum, string searchTerm)
+        {
+            pageNum ??= 1;
+            var pageSize = 5;
+
+
+            //  ---  SEARCH SERVICE WILL BE USED FOR THIS ----------------<
+            var posts = _searchService.TermSearch(searchTerm);
+            var pagedPosts = await posts.ToPagedListAsync(pageNum, pageSize);
+
+
+            ViewData["SearchTerm"] = searchTerm;
+            return View(pagedPosts);
+
+
         }
 
         // GET: BlogPosts/Details/5

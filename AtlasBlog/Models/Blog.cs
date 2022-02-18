@@ -20,9 +20,11 @@ namespace AtlasBlog.Models
 
         public DateTime? Updated { get; set; }
 
-        [Display(Name = "Choose Image")]
-        public byte[] ImageData { get; set; } = Array.Empty<byte>();
-        public string ImageExt { get; set; } = "";
+        [Display(Name = "Input Code")]
+        public string? ResearchTopic { get; set; }
+
+        //public byte[] ImageData { get; set; } = Array.Empty<byte>();
+        //public string ImageExt { get; set; } = "";
 
         public string Title { get; set; } = "";
 

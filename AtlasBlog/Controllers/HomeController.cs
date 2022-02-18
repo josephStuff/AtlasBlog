@@ -31,7 +31,7 @@ namespace AtlasBlog.Controllers
             // ------------------------ ------------------ ToPagedList() ALWAYS NEEDS TO KNOW WHAT PAGE TO RENDER ---->
             // ------------------------- PagedList always need to be ordered expliicitly ---------<
             // var blogs = _context.Blogs.ToPagedList((int)pageNum, 5);
-            var blogs = await _context.Blogs.OrderByDescending(b => b.Created).ToPagedListAsync(pageNum, 5);
+            var blogs = await _context.Blogs.OrderByDescending(b => b.Created).ToPagedListAsync(pageNum, 10);
 
             return View(blogs);
         }
@@ -69,8 +69,9 @@ namespace AtlasBlog.Controllers
                     blog.Updated = DateTime.UtcNow;
                     blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
 
-                    blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
-                    blog.ImageExt = imageFile.ContentType;
+                    //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(imageFile);
+
+                    //blog.ImageExt = imageFile.ContentType;
 
                     _context.Update(blog);
                     await _context.SaveChangesAsync();

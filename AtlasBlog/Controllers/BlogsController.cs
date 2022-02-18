@@ -63,14 +63,14 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogName,Description")] Blog blog, IFormFile imageFile)
+        public async Task<IActionResult> Create([Bind("BlogName,Description")] Blog blog)
         {
             if (ModelState.IsValid)
             {
-                if(imageFile is not null)
+                if(blog is not null)
                 {
-                    blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
-                    blog.ImageExt = imageFile.ContentType;
+                    //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(blog);
+                    //blog.ImageExt = imageFile.ContentType;
                 }
                 //else
                 //{
@@ -111,7 +111,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog)
         {
             if (id != blog.Id)
             {
@@ -125,11 +125,12 @@ namespace AtlasBlog.Controllers
                     blog.Updated = DateTime.UtcNow;
                     blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
 
-                    blog.ImageData = await _imageService.ConvertFileToByteArrayAsync(imageFile);
-                    blog.ImageExt = imageFile.ContentType;
+                    //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(blog);
+                    //blog.ImageExt = imageFile.ContentType;
 
                     _context.Update(blog);
                     await _context.SaveChangesAsync();
+                    
                 }
                 catch (DbUpdateConcurrencyException)
                 {
