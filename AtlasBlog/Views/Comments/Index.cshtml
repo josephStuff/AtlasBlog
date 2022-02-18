@@ -6,9 +6,7 @@
 
 <h1>Comments Index Page</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
 
     <thead class="text-light fw-bold">
@@ -27,7 +25,7 @@
             </th>
             <th>
                 Delete Soon
-            </th>            
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Author)
             </th>
@@ -55,11 +53,11 @@
                     @Html.DisplayFor(modelItem => item.IsDeleted)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Author.Id)
+                    @Html.DisplayFor(modelItem => item.AuthorId)
                 </td>
                 <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">View Details/Add Comments</a>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

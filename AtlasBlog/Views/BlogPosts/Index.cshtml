@@ -41,15 +41,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Body)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Comments)
-            </th>
-            <th class="fw-bold">
-                @if (User.IsInRole("Administrator, Moderator"))
-                {
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                }
-            </th>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <th class="fw-bold">
+                    @Html.DisplayNameFor(model => model.IsDeleted)                
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
@@ -71,25 +68,25 @@
                     @Html.DisplayFor(modelItem => item.BlogPostState)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Body)
+                    @Html.Raw(item.Body)
                 </td>
-                <td>
-                    <a asp-action="Comments" asp-route-slug="@item.Id">Add Comment</a>
-                </td>
-                <td>
-                    @if (User.IsInRole("Administrator, Moderator"))
-                    {
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <td>
                         @Html.DisplayFor(modelItem => item.IsDeleted)
-                    }
-                </td>
+                    </td>
+                }
                 <td>
+                    <div>
+                        <a asp-action="Details" asp-route-slug="@item.Slug">View Details/Add Comments</a>
+                    </div>
+
                     @if (SignInManager.IsSignedIn(User))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete |</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                     }
 
-                    <a asp-action="Details" asp-route-slug="@item.Slug">Details</a>
                 </td>
             </tr>
         }

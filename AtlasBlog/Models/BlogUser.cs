@@ -1,6 +1,4 @@
-﻿
-
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AtlasBlog.Models
@@ -22,7 +20,7 @@ namespace AtlasBlog.Models
             }
         }
 
-        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+        //public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 
 }

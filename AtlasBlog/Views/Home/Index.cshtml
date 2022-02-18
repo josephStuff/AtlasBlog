@@ -1,8 +1,59 @@
-﻿@{
+﻿@using AtlasBlog.Services.Interfaces
+@inject IImageService _imageService
+
+@using Microsoft.IdentityModel
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<BlogUser> SignInManager
+@model IEnumerable<AtlasBlog.Models.Blog>
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1 class="display-4">Welcome</h1>
+<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@foreach (var item in Model)
+{
+
+    <div class="mb-3 glass-jw-style">
+        <div class="g-2">
+            <div class="col-md-4">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                    <div class="card-text">
+                        CREATED - @Html.DisplayFor(modelItem => item.Created)
+                    </div>
+                    <div class="card-text">
+                        TITLE - @Html.DisplayFor(modelItem => item.Description)
+                    </div>
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a>*@
+                    <a asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="bi-pencil-fill" style="font-size: 1.5rem; color:white;"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item?.Id">
+                        <i class="bi-person-fill" style="font-size: 1.5rem; color:white;"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item?.Id">
+                        <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    @*<img  class="contactList-image" alt="..." src="@_imageService.ConvertByteArrayToFile(item.ImageData!,item.ImageType!)"></img>*@
+                    <img class="img-fluid" style="width:500px;height:50px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@*<div class="card glass-jw-style">
+    <h5 class="card-header">Featured</h5>
+    <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>*@

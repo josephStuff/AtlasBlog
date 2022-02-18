@@ -1,4 +1,6 @@
-﻿namespace AtlasBlog.Models
+﻿using AtlasBlog.Enums;
+
+namespace AtlasBlog.Models
 {
     public class Comment
     {
@@ -8,6 +10,7 @@
 
         // ---------------------  I NEED TO REFERENCE THE AUTHOR OF THIS COMMENT ---------------
         public string? AuthorId { get; set; }
+        public string? ModeratorId { get; set; }
 
 
         public string CommentBody { get; set; } = "";
@@ -17,6 +20,12 @@
             
 
         public bool IsDeleted { get; set; }
+
+        // ------------ MODERATOR RELATED PROPERTIES --------------
+        public DateTime? ModeratedDate{ get; set; }
+        public ModerateReason ModerateReason { get; set; }
+        public string? ModeratedBody { get; set; }
+
 
 
         // ------------- NAV PROPERTY THAT IS "LAZY LOADED" -------------------

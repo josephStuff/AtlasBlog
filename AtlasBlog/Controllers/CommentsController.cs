@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace AtlasBlog.Controllers
 {
@@ -26,7 +28,7 @@ namespace AtlasBlog.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comment.Include(c => c.Author).Include(c => c.BlogPost);
+            var applicationDbContext = _context.Comments.Include(c => c.Author).Include(c => c.BlogPost);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -38,7 +40,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comment
+            var comment = await _context.Comments
                 .Include(c => c.Author)
                 .Include(c => c.BlogPost)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -63,7 +65,7 @@ namespace AtlasBlog.Controllers
                 await _context.SaveChangesAsync();
 
             }
-
+                        
             return RedirectToAction("Details", "BlogPosts", new { slug }, "CommentSection");
 
         }
@@ -76,7 +78,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comment.FindAsync(id);
+            var comment = await _context.Comments.FindAsync(id);
             if (comment == null)
             {
                 return NotFound();
@@ -100,7 +102,7 @@ namespace AtlasBlog.Controllers
 
             try
             {
-                var commentSnapShot = await _context.Comment.FindAsync(comment.Id);
+                var commentSnapShot = await _context.Comments.FindAsync(comment.Id);
                 if (commentSnapShot == null)
                 {
                     return NotFound();
@@ -122,9 +124,48 @@ namespace AtlasBlog.Controllers
             }
             return RedirectToAction("Detail", "BlogPost", new { slug }, "commentSection");
 
-            //ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorId);
-            //ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract", comment.BlogPostId);
-            //return View(comment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Moderate(int id, [Bind("Id,ModeratedBody,ModerateReason")] Comment comment)
+        {
+            if (id != comment.Id)
+            {
+                return NotFound();
+            }
+
+            Comment commentSnapShot = new();
+            try
+            {
+                //var commentSnapShot = await _context.Comment.FindAsync(comment.Id);
+                //commentSnapShot = await _context.Comments.Include(c => c.BlogPost)
+                //                                         .Include(c => c.Id == comment.Id);
+                if (commentSnapShot == null)
+                {
+                    return NotFound();
+                }
+
+                commentSnapShot.ModeratedDate = DateTime.UtcNow;
+                commentSnapShot.ModeratedBody = comment.ModeratedBody;
+                commentSnapShot.ModerateReason = comment.ModerateReason;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CommentExists(comment.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Detail", "BlogPost", new { slug = commentSnapShot.BlogPost.Slug }, "commentSection");
+
         }
 
         // GET: Comments/Delete/5
@@ -135,7 +176,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var comment = await _context.Comment
+            var comment = await _context.Comments
                 .Include(c => c.Author)
                 .Include(c => c.BlogPost)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -152,15 +193,15 @@ namespace AtlasBlog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var comment = await _context.Comment.FindAsync(id);
-            _context.Comment.Remove(comment);
+            var comment = await _context.Comments.FindAsync(id);
+            _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CommentExists(int id)
         {
-            return _context.Comment.Any(e => e.Id == id);
+            return _context.Comments.Any(e => e.Id == id);
         }
     }
 }

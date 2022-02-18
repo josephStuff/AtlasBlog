@@ -74,7 +74,7 @@ namespace AtlasBlog.Controllers
                 }
                 //else
                 //{
-                //    return (img/DefaultImage.png)
+                //    return)
                 //}
 
                 // ------- SPECIFY THE DATETIME KIND FOR THE INCOMING CREATED DATE ----------------------------->

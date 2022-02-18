@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AtlasBlog.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220216220220_Initial_0001")]
-    partial class Initial_0001
+    [Migration("20220218033521__434343")]
+    partial class _434343
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,6 +213,18 @@ namespace AtlasBlog.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
+                    b.Property<int>("ModerateReason")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ModeratedBody")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ModeratedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ModeratorId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -222,7 +234,7 @@ namespace AtlasBlog.Data.Migrations
 
                     b.HasIndex("BlogPostId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -371,7 +383,7 @@ namespace AtlasBlog.Data.Migrations
             modelBuilder.Entity("AtlasBlog.Models.Comment", b =>
                 {
                     b.HasOne("AtlasBlog.Models.BlogUser", "Author")
-                        .WithMany("Comments")
+                        .WithMany()
                         .HasForeignKey("AuthorId");
 
                     b.HasOne("AtlasBlog.Models.BlogPost", "BlogPost")
@@ -442,11 +454,6 @@ namespace AtlasBlog.Data.Migrations
                 });
 
             modelBuilder.Entity("AtlasBlog.Models.BlogPost", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("AtlasBlog.Models.BlogUser", b =>
                 {
                     b.Navigation("Comments");
                 });

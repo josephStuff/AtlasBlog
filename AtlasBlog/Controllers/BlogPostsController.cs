@@ -175,7 +175,7 @@ namespace AtlasBlog.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException ex)
+                catch (DbUpdateConcurrencyException)
                 {
                     if (!BlogPostExists(blogPost.Id))
                     {

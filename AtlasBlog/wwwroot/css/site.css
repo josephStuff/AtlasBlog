@@ -24,7 +24,7 @@ body {
 }
 
 .pageBG {
-   background: url(/img/lighterFire.png);
+   background: url(/img/windowsRedHero.png);
    background-size: cover;
    color: var(--dark-jw-color);
 }
@@ -32,3 +32,9 @@ body {
 .redText{
     color:#ff0000;
 }
+
+.mainHeader {    
+    background: url(/img/windowsRedHero.png);
+    background-size: cover;
+}
+
