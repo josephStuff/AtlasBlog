@@ -9,15 +9,15 @@
     @foreach (var blogPost in Model)
     {
         <div class="col">
-            <div class="card">
-                <img />
+            <div class="card h-100">
+                @*<img />*@
                 <div class="card-body">
-                    <h5 class="card-title">@blogPost.Title</h5>
+                    <h6 class="card-title">@blogPost.Title</h6>
                     <p class="card-text">@blogPost.Abstract</p>
-                    <h6 class="card-text">@blogPost.Body</h6>
+                    <h6 class="card-title text-muted fst-italic">Created: @blogPost.Created.ToString("MMM dd, yyyy")</h6>
                 </div>
                 <div class="card-footer">
-                    <h5 class="">What up homey!</h5>
+                    <a asp-action="Details" asp-controller="BlogPosts" asp-route-slug="@blogPost.Slug" class="">ANCHOR ALASKA</a>
                 </div>
             </div>
         </div>

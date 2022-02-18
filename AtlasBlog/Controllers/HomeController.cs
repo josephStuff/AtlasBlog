@@ -36,61 +36,61 @@ namespace AtlasBlog.Controllers
             return View(blogs);
         }
 
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
-            {
-                return NotFound();
-            }
+        //    var blog = await _context.Blogs
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (blog == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(blog);
-        }
+        //    return View(blog);
+        //}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
-        {
-            if (id != blog.Id)
-            {
-                return NotFound();
-            }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog, IFormFile imageFile)
+        //{
+        //    if (id != blog.Id)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    blog.Updated = DateTime.UtcNow;
-                    blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            blog.Updated = DateTime.UtcNow;
+        //            blog.Created = DateTime.SpecifyKind(blog.Created, DateTimeKind.Utc);
 
-                    //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(imageFile);
+        //            //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(imageFile);
 
-                    //blog.ImageExt = imageFile.ContentType;
+        //            //blog.ImageExt = imageFile.ContentType;
 
-                    _context.Update(blog);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (blog.Id == null)
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(blog);
-        }
+        //            _context.Update(blog);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (blog.Id == null)
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(blog);
+        //}
 
         public IActionResult Privacy()
         {

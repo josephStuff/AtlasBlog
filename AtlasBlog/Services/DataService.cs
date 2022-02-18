@@ -79,7 +79,7 @@ namespace AtlasBlog.Services
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
 
         }
