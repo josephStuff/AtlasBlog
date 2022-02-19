@@ -4,6 +4,10 @@
 }
 
 
+mainHeight {
+    min-height: 90vh;
+}
+
 html {
   font-size: 14px;
 }

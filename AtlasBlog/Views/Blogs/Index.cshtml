@@ -28,11 +28,11 @@ else
     </p>
 }
 
-<table class="table text-light">
-    <thead>
+<table class="table">
+    <thead class="greenText">
         <tr>
             <th>
-                Input Code
+                The Code
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BlogName)
@@ -50,12 +50,12 @@ else
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="text-light">
         @foreach (var item in Model!)
         {
             <tr>
                 <td>
-                   @Html.
+                    @Html.DisplayFor(modelItem => item.ResearchTopic)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogName)
