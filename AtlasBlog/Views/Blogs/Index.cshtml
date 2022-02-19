@@ -12,7 +12,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Blog Index</h1>
+<h1 class="light-gs-color">Blog Index</h1>
 
 @*@if (User.IsInRole("Administrator"))*@
 @if (SignInManager.IsSignedIn(User))
@@ -55,7 +55,7 @@ else
         {
             <tr>
                 <td>
-                   <input type="text"/>
+                   @Html.
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogName)
@@ -70,7 +70,10 @@ else
                     @Html.DisplayFor(modelItem => item.Updated)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">View Details</a>
+                    <div class="row">
+                        <div>
+                            <a asp-action="Details" asp-route-id="@item.Id">View Details</a>
+                        </div>
 
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -79,6 +82,7 @@ else
                             <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                         </div>
                     }
+                    </div>
                 </td>
             </tr>
         }

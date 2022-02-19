@@ -40,6 +40,9 @@
     outline: 0 none;
 }
 
+.opacityInput{
+    opacity: .36;
+}
 
 .glass-jw-style.darkGlass {
     color: var(--light-gs-color);

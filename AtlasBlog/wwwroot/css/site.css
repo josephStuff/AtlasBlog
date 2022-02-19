@@ -20,21 +20,29 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
 }
 
 .pageBG {
-   background: url(/img/windowsRedHero.png);
-   background-size: cover;
-   color: var(--dark-jw-color);
+    position: relative;
+    width: 100%;
+    /*background: url(/img/windowsRedHero.png);*/
+    background-size:contain;
+    color: var(--dark-jw-color);
+    padding-bottom: 1rem;                       /*calc(3em + 74px);*/
 }
 
 .redText{
     color:#ff0000;
 }
 
-.mainHeader {    
-    background: url(/img/windowsRedHero.png);
-    background-size: cover;
+.greenText {
+    color: var(--dark-jw-color);
+}
+
+.bigBackground {    
+    background: url(/img/honeycombPurplejpg.jpg);
+    background-size: 100%;
+    height: 100%;
 }
 
