@@ -1,14 +1,14 @@
 ﻿@model AtlasBlog.Models.Blog
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit";   
 }
 
-<h1>Edit</h1>
+<h1 class="greenText mt-4">Edit Blog</h1>
 
-<h4>Blog</h4>
+
 <hr />
-<div class="row">
+<div class="row greenText">
     <div class="col-md-4">
 
         <form asp-action="Edit" enctype="multipart/form-data">
@@ -29,10 +29,10 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-
+            
             <div class="form-group">
                 <label asp-for="ResearchTopic" class="control-label"></label>
-                <input type="file" name="ImageFile" class="form-control" />
+                <input name="ResearchTopic" class="form-control" />
                 <span asp-validation-for="ResearchTopic" class="text-danger"></span>
             </div>
 

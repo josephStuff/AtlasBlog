@@ -12,7 +12,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="light-gs-color">Blog Index</h1>
+<h1 class="greenText mt-4">Blog Index</h1>
 
 @*@if (User.IsInRole("Administrator"))*@
 @if (SignInManager.IsSignedIn(User))
@@ -29,7 +29,8 @@ else
 }
 
 <table class="table">
-    <thead class="greenText">
+    
+    <thead class="greenText">    
         <tr>
             <th>
                 The Code
@@ -49,6 +50,7 @@ else
             <th></th>
         </tr>
     </thead>
+    
 
     <tbody class="text-light">
         @foreach (var item in Model!)

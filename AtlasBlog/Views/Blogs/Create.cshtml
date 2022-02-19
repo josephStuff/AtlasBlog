@@ -9,7 +9,7 @@
 <h4 class="greenText">Blog</h4>
 <hr class="row greenText"/>
 <div class="row greenText">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
                                         @*--------------- this is for images files ---------------------*@
         <form asp-action="Create" enctype="multipart/form-data">
 
@@ -29,8 +29,7 @@
 
             <div class="form-group">
                 <label asp-for="ResearchTopic" class="control-label"></label>
-                <input type="text" class="bg-dark"/>
-                @*<input type="file" name="ImageFile" class="form-control" />*@
+                <input type="text" class="bg-dark text-white"/>                
                 <span asp-validation-for="ResearchTopic" class="text-danger"></span>
             </div>
 
