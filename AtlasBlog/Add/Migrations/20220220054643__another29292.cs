@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace AtlasBlog.Data.Migrations
+namespace AtlasBlog.Add.Migrations
 {
-    public partial class _2030302 : Migration
+    public partial class _another29292 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

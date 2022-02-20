@@ -14,16 +14,19 @@
     ViewData["Title"] = "Home Page";
 }
 
+<h5 class="greenText pt-3">Home Index</h5>
+
+
 <div class="pageBG py-md-5">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading text-center">
                     @*<h1>Clean Blog</h1>*@
-                    <h3 class="subheading">A Research Blog by Yours Truly</h3>
+                    <h3 class="subheading">A Code Research Blog</h3>
 
                     <form asp-action="SearchIndex" asp-controller="BlogPosts">
-                        <input name="SearchTerm" class="form-control opacityInput" />
+                        <input name="SearchTerm" class="form-control" />
                         <button type="submit" class="btn-outline w-100 glass-button redText">SEARCH</button>
                     </form>
 
@@ -34,48 +37,47 @@
 </div>
 
 
-
-<div class="row row-cols-md-3">
+<div class="row row-cols-md-3 row-cols-lg-4 g-4">
     @foreach (var item in Model)
     {
-        <div class="col col-md-4 col-lg-3 gy-4">
-            <div class="glass-jw-style h-100" style="height: 20rem;">
-                <div class="p-1">
+        <div>
+            <div class="glass-jw-style h-100 px-1 hoverButton">
+                <div>
                     <div class="text-center">
                         <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.BlogName)</h5>
-                        <div class="card-text border-bottom border-top border-primary">
-                            TITLE - @Html.DisplayFor(modelItem => item.Description)
+                        <div class="card bg-black card-text border-bottom border-primary overflow">
+                            @Html.DisplayFor(modelItem => item.ResearchTopic)
                         </div>
-                        <div class="border-bottom border-primary img-fluid" style="width:500px;height:50px">
-
-                            @*<img  class="contactList-image" alt="..." src="@_imageService.ConvertByteArrayToFile(item.ImageData!,item.ImageType!)"></img>*@
-                            @*<img class="img-fluid" style="width:500px;height:50px" src="@_imageService.ConvertByteArrayToFile(item.ImageData, item.ImageExt)" />*@
+                        <div class="card bg-black card-text border-bottom border-top border-primary overflow" style="height: 3rem;">
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </div>
+                        <div class="card bg-black card-text border-bottom border-top border-primary overflow" style="height: 3rem;">
+                            @Html.DisplayFor(modelItem => item.Description)
                         </div>
                     </div>
                 </div>
-                <div class="row text-center">
-                    <div class="card-text row row-cols-2">
-                        <div class="d-flex justify-content-start">
-                            Posted: @Html.DisplayFor(modelItem => item.Created)
-                        </div>
-                        <div class="text-end">
-                            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a>*@
-                            <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
-                                <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                            </a>
-                            <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
-                                <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                            </a>
-                            <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
-                                <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
-                            </a>
-                        </div>
+                <div class="footer row row-cols-2 d-flex align-items-end p-2">
+                    <div class="d-flex justify-content-start">
+                        Posted: @Html.DisplayFor(modelItem => item.Created)
+                    </div>
+                    <div class="text-end">
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a>*@
+                        <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
+                            <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                        </a>
+                        <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
+                            <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                        </a>
+                        <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
+                            <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     }
 </div>
+
 
 
 <div class="">
@@ -93,12 +95,3 @@
 
 
 
-
-@*<div class="glass-jw-style">
-    <h5 class="card-header">Featured</h5>
-    <div class="card-body col-4">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-    </div>*@

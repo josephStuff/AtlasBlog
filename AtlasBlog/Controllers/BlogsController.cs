@@ -63,7 +63,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogName,Description")] Blog blog)
+        public async Task<IActionResult> Create([Bind("BlogName,Description,Title,ResearchTopic")] Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Created,Updated")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogName,Description,Title,ResearchTopic,Created,Updated")] Blog blog)
         {
             if (id != blog.Id)
             {

@@ -26,7 +26,7 @@ namespace AtlasBlog.Services
         public async Task SetupDbAsync()
         {
             // ---------------  _RUN THE MIGRATIONS ASYNC --------------
-            await _dbContext.Database.MigrateAsync();
+            //await _dbContext.Database.MigrateAsync();
 
             // Add ROLES INTO THE SYSTEM ------------------------
             await SeedRolesAsync();
@@ -60,6 +60,17 @@ namespace AtlasBlog.Services
                 EmailConfirmed = true
             };
 
+            BlogUser regularUser = new()
+            {
+                UserName = "regular@email.com",
+                Email = "regular@email.com",
+                FirstName = "Regular",
+                LastName = "Person",
+                DisplayName = "RegularPerson",
+                PhoneNumber = "555-555-5555",
+                EmailConfirmed = true
+            };
+
             try
             {
                  
@@ -68,12 +79,18 @@ namespace AtlasBlog.Services
                     await _userManager.CreateAsync(adminUser, "Abc&123!");
                     await _userManager.AddToRoleAsync(adminUser, "Administrator");
                 }
-                                
-                                
+
+
                 if (await _userManager.FindByEmailAsync(modUser.Email) is null)
                 {
                     await _userManager.CreateAsync(modUser, "Abc&123!");
                     await _userManager.AddToRoleAsync(modUser, "Moderator");
+                }
+
+                if (await _userManager.FindByEmailAsync(regularUser.Email) is null)
+                {
+                    await _userManager.CreateAsync(regularUser, "Abc&123!");
+                    await _userManager.AddToRoleAsync(regularUser, "Moderator");
                 }
 
             }

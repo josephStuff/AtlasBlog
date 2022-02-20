@@ -4,33 +4,41 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="greenText">Create</h1>
 
-<h4 class="greenText">Blog</h4>
+<h3 class="mt-4 pt-4 greenText">Create A Blog</h3>
+
+
 <hr class="row greenText"/>
+
 <div class="row greenText">
     <div class="col-12 col-md-4">
                                         @*--------------- this is for images files ---------------------*@
-        <form asp-action="Create" enctype="multipart/form-data">
+        <form asp-action="Create" enctype="multipart/form-data" class="mt-3">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
+            <div class="form-group py-2">
                 <label asp-for="BlogName" class="control-label"></label>
-                <input asp-for="BlogName" class="form-control" />
+                <input asp-for="BlogName" class="form-control mt-1" />
                 <span asp-validation-for="BlogName" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+            <div class="form-group py-2">
+                <div><label asp-for="ResearchTopic" class="control-label"></label></div>  @* Dispalyed as -- Actual Code --*@
+                <input asp-for="ResearchTopic" class="form-control bg-dark mt-1 text-white" />
+                <span asp-validation-for="ResearchTopic" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="ResearchTopic" class="control-label"></label>
-                <input type="text" class="bg-dark text-white"/>                
-                <span asp-validation-for="ResearchTopic" class="text-danger"></span>
+            <div class="form-group py-2">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control mt-1" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group py-2">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control mt-1" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
             <div class="form-group">

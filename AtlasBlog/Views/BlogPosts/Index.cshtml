@@ -14,7 +14,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Blog Posts</h1>
+<h1 class="greenText">Blog Posts</h1>
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -41,7 +41,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Body)
             </th>
-            @if (SignInManager.IsSignedIn(User))
+            @if (User.IsInRole("Moderator"))
             {
                 <th class="fw-bold">
                     @Html.DisplayNameFor(model => model.IsDeleted)

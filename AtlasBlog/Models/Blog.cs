@@ -12,7 +12,7 @@ namespace AtlasBlog.Models
         public string BlogName { get; set; } = "";
 
         [Required]
-        [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
+        [StringLength(500, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 2)]
         public string Description { get; set;} = "";
 
         [DataType(DataType.Date)]
@@ -20,12 +20,12 @@ namespace AtlasBlog.Models
 
         public DateTime? Updated { get; set; }
 
-        [Display(Name = "Input Code")]
+
+        [Required]
+        [Display(Name = "Research Code")]
         public string? ResearchTopic { get; set; }
 
-        //public byte[] ImageData { get; set; } = Array.Empty<byte>();
-        //public string ImageExt { get; set; } = "";
-
+        [Required]
         public string Title { get; set; } = "";
 
         //  THIS MODEL SHOULD HAVE A LIST OF POSTS AS CHILDREN --------------------------->

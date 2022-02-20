@@ -28,28 +28,25 @@
                 </div>
                 @* <div class="card-footer">
                     <a asp-action="Details" asp-controller="BlogPosts" asp-route-slug="@blogPost.Slug" class="">ANCHOR ALASKA</a>
-                </div>*@
+                    </div>*@
             </div>
         </div>
     }
 </div>
 
 <div class="row">
-    <div class="col h3">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    </div>
-</div>
+    <div>
+        <div class="col h3 greenText">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
 
-
-<div class="row">
-    <div class="col">
-
-        @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
-        new PagedListRenderOptions
-        {
-        LiElementClasses = new string[] { "page-link"},
-        PageClasses = new string[] { "page-link" }
-        })
-
+        <div class="col greenText">
+            @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
+            new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "page-link"},
+            PageClasses = new string[] { "page-link" }
+            })
+        </div>
     </div>
 </div>

@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - AtlasBlog</title>
+        <title>@ViewData["Title"] - The Study Blog</title>
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
         <link rel="stylesheet" href="~/css/glassStyle.css" asp-append-version="true" />
@@ -17,9 +17,10 @@
 
     <body class="bigBackground mainHeight">
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow">
-            <div class="container-fluid bg-transparent">
-                <span  img="~/img/favicon-32x32.png"><a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">some text</a></span>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow sticky-top">
+            <div class="container-fluid">
+                <img src="~/img/favicon-32x32.png">
+                <a class="navbar-brand ps-3" asp-area="" asp-controller="Home" asp-action="Index">The Study Blog</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -28,16 +29,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link redText" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Blogs" asp-action="Index">Blog</a>
+                            <a class="nav-link redText" asp-area="" asp-controller="Blogs" asp-action="Index">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="BlogPo6sts" asp-action="Index">Blog Posts</a>
+                            <a class="nav-link redText" asp-area="" asp-controller="BlogPosts" asp-action="Index">Blog Posts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                            <a class="nav-link redText" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -66,14 +67,14 @@
 
         </header>
 *@
-        <div class="container-fluid">
+        <div class="container-fluid px-5 pb-5">
 
-            <main role="main" class="h-100">
+            <main role="main" class="">
                 @RenderBody()
             </main>
         </div>
 
-        <footer class="footer border-top text-muted bg-opacity-25">
+        <footer class="footer border-top bg-opacity-25">
             <div class="container bg-transparent redText">
                 &copy; 2022 - AtlasBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>

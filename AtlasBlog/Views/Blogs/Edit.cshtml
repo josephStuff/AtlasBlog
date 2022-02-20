@@ -1,13 +1,14 @@
-﻿@model AtlasBlog.Models.Blog
+﻿@using Microsoft.AspNetCore.Identity
+@model AtlasBlog.Models.Blog
 
 @{
-    ViewData["Title"] = "Edit";   
+    ViewData["Title"] = "Edit";
 }
 
 <h1 class="greenText mt-4">Edit Blog</h1>
 
 
-<hr />
+<hr class="greenText" />
 <div class="row greenText">
     <div class="col-md-4">
 
@@ -18,24 +19,33 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="Created" />
 
-            <div class="form-group">
+             <div class="form-group py-2">
                 <label asp-for="BlogName" class="control-label"></label>
-                <input asp-for="BlogName" class="form-control" />
+                <input asp-for="BlogName" class="form-control mt-1" />
                 <span asp-validation-for="BlogName" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="ResearchTopic" class="control-label"></label>
-                <input name="ResearchTopic" class="form-control" />
+            <div class="form-group py-2">
+                <div><label asp-for="ResearchTopic" class="control-label"></label></div>  @* Dispalyed as -- Actual Code --*@
+                <input asp-for="ResearchTopic" class="form-control bg-dark mt-1 text-white" />
                 <span asp-validation-for="ResearchTopic" class="text-danger"></span>
             </div>
 
+            @if(User.IsInRole("Moderator"))
+            {
+                <div class="form-group py-2">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control mt-1" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="form-group py-2">
+                <p>Body of your post</p>@*<label asp-for="Description" class="control-label"></label>*@
+                <input asp-for="Description" class="form-control mt-1" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+           
             <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

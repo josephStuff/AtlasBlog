@@ -33,10 +33,13 @@ else
     <thead class="greenText">    
         <tr>
             <th>
-                The Code
+                @Html.DisplayNameFor(model => model.ResearchTopic)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BlogName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -61,6 +64,9 @@ else
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)

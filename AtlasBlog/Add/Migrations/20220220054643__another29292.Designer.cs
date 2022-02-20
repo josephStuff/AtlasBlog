@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace AtlasBlog.Data.Migrations
+namespace AtlasBlog.Add.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220217192030_Initial_0001")]
-    partial class Initial_0001
+    [Migration("20220220054643__another29292")]
+    partial class _another29292
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,14 +42,10 @@ namespace AtlasBlog.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("character varying(300)");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("bytea");
-
-                    b.Property<string>("ImageExt")
+                    b.Property<string>("ResearchTopic")
                         .IsRequired()
                         .HasColumnType("text");
 
