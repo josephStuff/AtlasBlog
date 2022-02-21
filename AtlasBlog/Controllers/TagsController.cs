@@ -23,7 +23,7 @@ namespace AtlasBlog.Controllers
         // GET: Tags
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tag.ToListAsync());
+            return View(await _context.Tags.ToListAsync());
         }
 
         // GET: Tags/Details/5
@@ -34,7 +34,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var tag = await _context.Tag
+            var tag = await _context.Tags
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tag == null)
             {
@@ -74,7 +74,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var tag = await _context.Tag.FindAsync(id);
+            var tag = await _context.Tags.FindAsync(id);
             if (tag == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
-            var tag = await _context.Tag
+            var tag = await _context.Tags
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tag == null)
             {
@@ -140,15 +140,15 @@ namespace AtlasBlog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tag = await _context.Tag.FindAsync(id);
-            _context.Tag.Remove(tag);
+            var tag = await _context.Tags.FindAsync(id);
+            _context.Tags.Remove(tag);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TagExists(int id)
         {
-            return _context.Tag.Any(e => e.Id == id);
+            return _context.Tags.Any(e => e.Id == id);
         }
     }
 }

@@ -10,10 +10,10 @@ namespace AtlasBlog.Models
         [Required]
         public string Text { get; set; } = "";
         public string Description { get; set; } = string.Empty;
-        
 
 
-        public virtual ICollection<BlogPost> BlogPosts { get; set; } 
+
+        public virtual ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
         
     }
 }
