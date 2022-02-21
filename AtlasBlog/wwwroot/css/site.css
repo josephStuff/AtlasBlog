@@ -4,7 +4,7 @@
 }
 
 
-mainHeight {
+.mainHeight {
     min-height: 90vh;
     margin-bottom: 6rem;
 }
@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .pageBG {
@@ -34,7 +34,7 @@ body {
     /*background: url(/img/windowsRedHero.png);*/
     background-size:contain;
     color: var(--dark-jw-color);
-    padding-bottom: 1rem;                       /*calc(3em + 74px);*/
+    padding-bottom: 10rem;                       /*calc(3em + 74px);*/
 }
 
 .redText{
@@ -48,10 +48,11 @@ body {
 .bigBackground {    
     background: url(/img/honeycombPurplejpg.jpg);
     background-size: cover;
-    height:;    
+    height:;
 }
 
 .overflow {
     text-overflow: ellipsis;
     overflow: hidden;
+    /*white-space: nowrap;*/
 }

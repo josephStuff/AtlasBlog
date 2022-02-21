@@ -22,7 +22,8 @@ namespace AtlasBlog.Controllers
         private readonly SlugService _slugService;
         private readonly SearchService _searchService;
 
-        public BlogPostsController(ApplicationDbContext context, SlugService slugService, IImageService imageService, SearchService searchService)
+        public BlogPostsController(ApplicationDbContext context, SlugService slugService, IImageService imageService, 
+                                                                SearchService searchService)
         {
             _context = context;
             _slugService = slugService;
@@ -41,7 +42,7 @@ namespace AtlasBlog.Controllers
         public async Task<IActionResult> SearchIndex(int? pageNum, string searchTerm)
         {
             pageNum ??= 1;
-            var pageSize = 5;
+            var pageSize = 2;
 
 
             //  ---  SEARCH SERVICE WILL BE USED FOR THIS ----------------<

@@ -27,7 +27,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BlogId)
+                Blog Name
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
@@ -35,13 +35,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.Abstract)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogPostState)
-            </th>
+
+            @if (User.IsInRole("Administrator || Moderator"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.BlogPostState)
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Body)
             </th>
-            @if (User.IsInRole("Moderator"))
+            @if (User.IsInRole("Moderator || Administrator"))
             {
                 <th class="fw-bold">
                     @Html.DisplayNameFor(model => model.IsDeleted)
@@ -56,7 +60,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BlogId)
+                    @Html.DisplayFor(modelItem => item.Blog.BlogName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
@@ -64,13 +68,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Abstract)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogPostState)
-                </td>
+
+                @if (User.IsInRole("Moderator || Administrator"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BlogPostState)
+                    </td>
+                }
                 <td>
                     @Html.Raw(item.Body)
                 </td>
-                @if (SignInManager.IsSignedIn(User))
+
+                @if (User.IsInRole("Moderator || Administrator"))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.IsDeleted)
@@ -95,51 +104,51 @@
 </table>
 
 @*@if (User.Identity.IsAuthenticated)
-{
+    {
     // ----- Present a simple form for collecting the comment -------------
     <form asp-controller="Comments" asp-action="Create">
-        <input type="hidden" name="BlogPostId" value="@Model?.Id" />
-        <input type="hidden" asp-for="Slug" />
-        <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
-        <button class="btn bg-info mt-2">APPLY</button>
+    <input type="hidden" name="BlogPostId" value="@Model?.Id" />
+    <input type="hidden" asp-for="Slug" />
+    <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
+    <button class="btn bg-info mt-2">APPLY</button>
     </form>
-}*@
+    }*@
 @*else
-{
+    {
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Details", "BlogPosts", new { slug = Model.Slug })">Login to add a comment</a>
-}*@
+    }*@
 
 @*<div class="row redText" id="CommentSection">
 
     @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
     {
-        <div class="col-12 col-md-4 my-2">
-            <div class=" targetParent card border-light mb-3 w-100">
-                <span class="card-header">Created by: @comment.Author?.FullName</span>
-                <div class="targetChild card-body text-dark">
-                    <h5 class="card-title">@comment.CommentBody</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-                <div class="card-footer">
-                    Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
+    <div class="col-12 col-md-4 my-2">
+    <div class=" targetParent card border-light mb-3 w-100">
+    <span class="card-header">Created by: @comment.Author?.FullName</span>
+    <div class="targetChild card-body text-dark">
+    <h5 class="card-title">@comment.CommentBody</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <div class="card-footer">
+    Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
 
-                    @if (comment.AuthorId == _userManager.GetUserId(User))
-                    {
-                        <div class="row row-cols-1 ">
-                            <div class="col">
-                                <button class="btnModal btn btn-light btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#staticBackdrop">EDIT</button>
-                            </div>
-                            <div>*@
-                                @* put in a SWEETALERT WINDOW *@
+    @if (comment.AuthorId == _userManager.GetUserId(User))
+    {
+    <div class="row row-cols-1 ">
+    <div class="col">
+    <button class="btnModal btn btn-light btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#staticBackdrop">EDIT</button>
+    </div>
+    <div>*@
+@* put in a SWEETALERT WINDOW *@
 
 @*                                <a asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-dark w-100 btnSweetAlert">DELETE</a>
-                            </div>
-                        </div>
-                    }
-
-                </div>
-            </div>
-        </div>
+    </div>
+    </div>
     }
 
-</div>*@
+    </div>
+    </div>
+    </div>
+    }
+
+    </div>*@

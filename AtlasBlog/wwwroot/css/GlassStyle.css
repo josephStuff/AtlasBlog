@@ -42,10 +42,11 @@
 }
 
 .hoverButton:hover{
-    border-color: orange;
-    outline-style: hidden;
-    /*border: 0px solid red;*/
-    /*background-color: #fcaa0119;*/
+    /*border-color: orange;*/
+    /*outline-style: ridge;*/
+    /*outline-width: thick;*/
+    border: 4px solid orange;
+    background-color: #fcaa0119;
 }
 
 .opacityInput{
