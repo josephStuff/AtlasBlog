@@ -141,7 +141,7 @@ else
                     }
 
                     @*--------------- THIS IS FOR THE COMMENT MODERATOR --------------------------*@
-                    @if (User.IsInRole("Moderator"))
+                    @if (User.IsInRole("Moderator || Administrator"))
                     {
                         <div class="card-footer">
                             <div class="row row-cols-1 g-2">

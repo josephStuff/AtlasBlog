@@ -3,89 +3,94 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - The Study Blog</title>
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/glassStyle.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/AtlasBlog.styles.css" asp-append-version="true" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
-        <link rel="stylesheet" href="/css/prism.css" />
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - The Study Blog</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/glassStyle.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/AtlasBlog.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="/css/prism.css" />
+</head>
 
-    <body class="bigBackground mainHeight greenText">
+<body class="bigBackground mainHeight greenText">
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow sticky-top">
-            <div class="container-fluid">
-                <img src="~/img/favicon-32x32.png">
-                <a class="navbar-brand ps-3" asp-area="" asp-controller="Home" asp-action="Index">The Study Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="navbar navbar-expand-sm navbarBG navbar-toggleable-sm border-bottom box-shadow sticky-top">
+        <div class="container-fluid">
+            <img src="~/img/favicon-32x32.png">
+            <a class="navbar-brand ps-3" asp-area="" asp-controller="Home" asp-action="Index">The Study Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                @if (User.Identity.IsAuthenticated)
+                {
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link redText" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Blogs" asp-action="Index">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link redText" asp-area="" asp-controller="Blogs" asp-action="Index">Blog</a>
+                            <a class="nav-link " asp-area="" asp-controller="BlogPosts" asp-action="Index">Blog Posts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link redText" asp-area="" asp-controller="BlogPosts" asp-action="Index">Blog Posts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link redText" asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
+                            <a class="nav-link " asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
-                </div>
+
+                }
+                <partial name="_LoginPartial" />
             </div>
-        </nav>
+        </div>
+    </nav>
 
 
-@*        <header class="masthead" style="background-image: url(~/img/lighterFire.png)">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Research Blog Theme by Yours Truly</span>
+    @*        <header class="masthead" style="background-image: url(~/img/lighterFire.png)">
+        <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+        <h1>Clean Blog</h1>
+        <span class="subheading">A Research Blog Theme by Yours Truly</span>
 
-                            <form asp-action="SearchIndex" asp-controller="BlogPosts">
-                                <input name="SearchTerm" class="form-control" />
-                                <button type="submit" class="btn-primary btn-sm btn-warning btn-outline-light w-100">Search!</button>
-                            </form>
+        <form asp-action="SearchIndex" asp-controller="BlogPosts">
+        <input name="SearchTerm" class="form-control" />
+        <button type="submit" class="btn-primary btn-sm btn-warning btn-outline-light w-100">Search!</button>
+        </form>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </header>
-*@
-        <div class="container-fluid px-5 pb-5">
-
-            <main role="main" class="">
-                @RenderBody()
-            </main>
+        </div>
+        </div>
+        </div>
         </div>
 
-        <footer class="footer border-top bg-opacity-25">
-            <div class="container bg-transparent redText">
-                &copy; 2022 - AtlasBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
+        </header>
+    *@
+    <div class="container-fluid px-5 pb-5">
 
-        <script src="/js/prism.js"></script>
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-        @await RenderSectionAsync("Scripts", required: false)
+        <main role="main" class="">
+            @RenderBody()
+        </main>
+    </div>
 
-    </body>
+    <footer class="footer border-top bg-opacity-25">
+        <div class="container bg-transparent redText">
+            &copy; 2022 - AtlasBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="/js/prism.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
 
 </html>

@@ -22,7 +22,7 @@ namespace AtlasBlog.Models
 
 
         [Required]
-        [Display(Name = "Research Code")]
+        [Display(Name = "Actual Code")]
         public string? ResearchTopic { get; set; }
 
         [Required]

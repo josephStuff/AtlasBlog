@@ -19,6 +19,11 @@
     border-right: 2px rgba(40, 40, 40, 3.35) solid;
 }
 
+.navbarBG{
+    background-color: lightpink;
+    
+}
+
 .glass-button {
     display: inline-block;
     border: 0;
