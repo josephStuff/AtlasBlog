@@ -3,6 +3,7 @@ using AtlasBlog.Models;
 using AtlasBlog.Services;
 using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -30,7 +31,9 @@ builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.R
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<DataService>();
-builder.Services.AddScoped<IImageService,BasicImageService>();
+builder.Services.AddScoped<IImageService, BasicImageService>();
+builder.Services.AddTransient<IEmailSender, BasicEmailService>();
+
 builder.Services.AddTransient<SlugService>();
 builder.Services.AddTransient<SearchService>();
 

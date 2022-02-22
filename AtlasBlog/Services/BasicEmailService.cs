@@ -31,7 +31,7 @@ namespace AtlasBlog.Services
             newEmail.Body = emailBody.ToMessageBody();
 
             // ------  THIS POINT WE'RE DONE COMPOSING THE EMAIL AND NOW --------<
-            // ------ OUR FOCUS IS ON CONFIGURING THE Simple Mail Trasfer Protocol (SMTP) server ----< 
+            // ------ OUR FOCUS IS ON CONFIGURING THE Simple Mail Trasfer Protocol (SMTP) server ----<
             using SmtpClient smtpClient = new();
 
             var host = _appSettings["SmtpSettings:Host"];
