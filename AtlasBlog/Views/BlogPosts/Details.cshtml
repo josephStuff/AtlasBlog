@@ -95,11 +95,11 @@ else
 <hr />
 
 <div class="container">
-    <div class="row redText" id="CommentSection">
+    <div class="row redText row-cols-md-4 row-cols-lg-5" id="CommentSection">
         @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
         {
-            <div class="col-12 col-md-4 col-lg-5 my-2 overflow">
-                <div class=" targetParent card border-light mb-3 w-100 overflow">
+            <div class="my-2">
+                <div class="targetParent card border-light mb-3" >
                     <div class="card-header">
                         <span class="float-start">Author: @comment.Author?.FullName</span>
                         @if (comment.ModeratedDate is null)
