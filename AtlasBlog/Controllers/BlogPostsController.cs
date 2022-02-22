@@ -42,7 +42,7 @@ namespace AtlasBlog.Controllers
         public async Task<IActionResult> SearchIndex(int? pageNum, string searchTerm)
         {
             pageNum ??= 1;
-            var pageSize = 2;
+            var pageSize = 4;
 
 
             //  ---  SEARCH SERVICE WILL BE USED FOR THIS ----------------<
