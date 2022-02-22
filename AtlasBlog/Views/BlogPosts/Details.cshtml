@@ -192,7 +192,7 @@ else
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -308,7 +308,7 @@ else
             document.querySelectorAll("button.btnModModal").forEach(btn => {
                 btn.addEventListener("click", function(){
                     // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
-                    document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
+                    document.getelementById('modalCommentId').value = this.getAttribute("data-commentId");
 
                     // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
 
@@ -336,5 +336,25 @@ else
                  });
                  @* ---------   this was copied and pasted from J.T. -------- this section  --^^^^ *@
         </script>
+
+        <script>
+            // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
+            document.querySelectorAll("button.btnModal").forEach(btn => {
+                btn.addEventListener("click", function(){
+                    // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
+                    document.getElementById('modalCommentId').value = this.getAttribute("data-commentId");
+
+                    // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+
+
+                    let parent = this.closest("div.targetParent");
+                    let child = parent.querySelector("div.targetChild h5");
+                    document.getElementById('modalCommentBody').innerText = child.innerText;
+                });
+            });
+
+        </script>
+
+       
 
 }
