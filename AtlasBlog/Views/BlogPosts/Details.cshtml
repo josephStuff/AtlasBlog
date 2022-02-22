@@ -187,13 +187,12 @@ else
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-sm btn-warning btn-outline-dark fw-bold w-100 fw-bold">EDIT</button>
+                        <button class="btn btn-sm btn-warning btn-outline-dark fw-bold w-100 fw-bold mt-2">EDIT</button>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                @*<button type="button" class="btn btn-primary">Understood</button>*@
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>                
             </div>
         </div>
     </div>
@@ -222,7 +221,7 @@ else
 
                     <div class="form-group">
                         <label class="control-label">Moderated Body</label>
-                        <textarea name="ModeratedBody" rows=3 class="form-control"></textarea>
+                        <textarea name="ModeratedBody" rows=3 class="form-control" placeholder="Please copy and paste the above comment first."></textarea>
                     </div>
 
                     <div class="form-group">
@@ -314,9 +313,9 @@ else
                     // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
 
 
-                    let parent = this.closest("div.targetParent")
-                    let child = parent.querySelectorAll("div.targetChild h5")
-                    document.getelelementById('modalModerateCommentBody').innerText = child.innerText;
+                    let parent = this.closest("div.targetParent");
+                    let child = parent.querySelectorAll("div.targetChild h5");
+                    document.getelelementById('modalCommentBody').innerText = child.innerText;
                 });
             });
 

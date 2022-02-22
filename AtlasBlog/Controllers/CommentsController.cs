@@ -139,8 +139,8 @@ namespace AtlasBlog.Controllers
             try
             {
                 //var commentSnapShot = await _context.Comment.FindAsync(comment.Id);
-                //commentSnapShot = await _context.Comments.Include(c => c.BlogPost)
-                //                                         .Include(c => c.Id == comment.Id);
+                commentSnapShot = await _context.Comments.Include(c => c.BlogPost)
+                                                         .FirstOrDefaultAsync(c => c.Id == comment.Id);
                 if (commentSnapShot == null)
                 {
                     return NotFound();
@@ -164,7 +164,7 @@ namespace AtlasBlog.Controllers
                 }
             }
 
-            return RedirectToAction("Detail", "BlogPost", new { slug = commentSnapShot.BlogPost.Slug }, "commentSection");
+            return RedirectToAction("Details", "BlogPosts", new { slug = commentSnapShot.BlogPost.Slug }, "CommentSection");
 
         }
 

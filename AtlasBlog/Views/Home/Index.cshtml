@@ -10,32 +10,17 @@
 
 @model X.PagedList.IPagedList<Blog>
 
-    @*asp-route-returnUrl="@Url.Action("Index", "Home", new { slug = Model.Slug })"*@
 
 @{
     ViewData["Title"] = "Home Page";
 }
+
 
 @if ((User.IsInRole("Moderator")) || (User.IsInRole("Administrator")))
 {
     <h5 class="greenText pt-3">Home Index</h5>
 }
 
-<div class="pt-2">
-@if (SignInManager.IsSignedIn(User))
-{
-    <p>
-        <a asp-action="Create" asp-controller="Blogs">Create New</a>
-    </p>
-}
-else
-{
-    <p>        
-        <a class="nav-link" asp-action="Create" asp-area="Identity">Login to Create</a>
-    </p>
-}
-
-</div>
 
 <div class="pageBG py-md-5 d-flex d-block">
     <div class="container">
@@ -75,7 +60,7 @@ else
                         </div>
                     </div>
                 </div>
-                <div class="footer row row-cols-2 p-2">
+                <div class=" row row-cols-2 p-2">
                     <div class="">
                         Posted: @Html.DisplayFor(modelItem => item.Created)
                     </div>

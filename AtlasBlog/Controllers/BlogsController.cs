@@ -18,7 +18,7 @@ namespace AtlasBlog.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IImageService _imageService;
-        
+
 
         public BlogsController(ApplicationDbContext context, IImageService imageService)
         {
@@ -41,7 +41,7 @@ namespace AtlasBlog.Controllers
             }
 
             var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.Id == id);
+                                           .FirstOrDefaultAsync(m => m.Id == id);
             if (blog == null)
             {
                 return NotFound();
@@ -49,6 +49,7 @@ namespace AtlasBlog.Controllers
 
             return View(blog);
         }
+
 
         // GET: Blogs/Create
         [Authorize(Roles = "Administrator, Moderator")]
@@ -67,7 +68,7 @@ namespace AtlasBlog.Controllers
         {
             if (ModelState.IsValid)
             {
-                if(blog is not null)
+                if (blog is not null)
                 {
                     //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(blog);
                     //blog.ImageExt = imageFile.ContentType;
@@ -130,7 +131,7 @@ namespace AtlasBlog.Controllers
 
                     _context.Update(blog);
                     await _context.SaveChangesAsync();
-                    
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -148,7 +149,7 @@ namespace AtlasBlog.Controllers
             return View(blog);
         }
 
-        // GET: Blogs/Delete/5        
+        // GET: Blogs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,7 +167,7 @@ namespace AtlasBlog.Controllers
             return View(blog);
         }
 
-        // POST: Blogs/Delete/5        
+        // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
