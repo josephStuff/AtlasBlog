@@ -25,11 +25,11 @@ html {
 }
 
 body {
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 .pageBG {
-    position: relative;
+    position:  center;
     width: 100%;
     /*background: url(/img/windowsRedHero.png);*/
     background-size: cover;

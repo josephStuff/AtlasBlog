@@ -93,7 +93,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CommentBody")] Comment comment, string slug)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CommentBody,BlogPost")] Comment comment, string slug)
         {
             if (id != comment.Id)
             {
@@ -122,7 +122,9 @@ namespace AtlasBlog.Controllers
                     throw;
                 }
             }
-            return RedirectToAction("Detail", "BlogPost", new { slug }, "commentSection");
+
+            ViewData["BlogPostId"] = new SelectList(_context.BlogPosts, "Id", "Abstract", comment.BlogPostId);
+            return RedirectToAction("Details", "BlogPosts", new { slug }, "CommentSection");
 
         }
 
