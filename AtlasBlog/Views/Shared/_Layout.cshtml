@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="/css/prism.css" />
 </head>
-
+                                                            
 <body class="bigBackground mainHeight greenText">
 
-    <nav class="navbar navbar-expand-sm navbarBG navbar-toggleable-sm border-bottom box-shadow sticky-top">
+    <nav class="navbar navbar-expand-sm navbarBG navbar-toggleable-sm navbar-light border-bottom box-shadow sticky-top">
         <div class="container-fluid">
             <img src="~/img/favicon-32x32.png">
             <a class="navbar-brand ps-3" asp-area="" asp-controller="Home" asp-action="Index">The Study Blog</a>
@@ -52,34 +52,15 @@
     </nav>
 
 
-    @*        <header class="masthead" style="background-image: url(~/img/lighterFire.png)">
-        <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="site-heading">
-        <h1>Clean Blog</h1>
-        <span class="subheading">A Research Blog Theme by Yours Truly</span>
+    
+    <div class="container">
 
-        <form asp-action="SearchIndex" asp-controller="BlogPosts">
-        <input name="SearchTerm" class="form-control" />
-        <button type="submit" class="btn-primary btn-sm btn-warning btn-outline-light w-100">Search!</button>
-        </form>
-
-        </div>
-        </div>
-        </div>
-        </div>
-
-        </header>
-    *@
-    <div class="container-fluid px-5 pb-5">
-
-        <main role="main" class="">
+        <main role="main" class="container-fluid p-2">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="footer border-top bg-opacity-25">
+    <footer class="footer border-top bg-opacity-25 mt-2">
         <div class="container bg-transparent redText">
             &copy; 2022 - AtlasBlog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

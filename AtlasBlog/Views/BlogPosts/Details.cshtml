@@ -12,7 +12,6 @@
 }
 
 
-<body>
 <h1>Details</h1>
 
 <div>
@@ -84,8 +83,8 @@
     <form asp-controller="Comments" asp-action="Create">
         <input type="hidden" name="BlogPostId" value="@Model?.Id" />
         <input type="hidden" asp-for="Slug" />
-        <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
-        <button class="btn bg-info mt-2">APPLY</button>
+        <textarea class="form-control w-50" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
+        <button class="btn btn-info mt-2">APPLY</button>
     </form>
 }
 else
@@ -99,13 +98,13 @@ else
     <div class="row redText" id="CommentSection">
         @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
         {
-            <div class="col-12 col-md-4 my-2">
-                <div class=" targetParent card border-light mb-3 w-100">
+            <div class="col-12 col-md-4 col-lg-5 my-2 overflow">
+                <div class=" targetParent card border-light mb-3 w-100 overflow">
                     <div class="card-header">
-                        <span class="float-start">Created by: @comment.Author?.FullName</span>
+                        <span class="float-start">Author: @comment.Author?.FullName</span>
                         @if (comment.ModeratedDate is null)
                         {
-                            <span class="float-end">Created on: @comment.CreatedDate.ToString("MMM dd, yyyy")</span>
+                            <span class="float-end">Posted: @comment.CreatedDate.ToString("MMM dd, yyyy")</span>
                         }
                         else
                         {
@@ -130,23 +129,23 @@ else
                         <div class="card-footer">
                             <div class="row row-cols-1 row-cols-md-2 g-2">
                                 <div class="col">
-                                    <button class="btnModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
+                                    <button class="btnModal btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
                                 </div>
                                 <div class="col">
                                     @*SweetAlert Window*@
-                                    <button class="btnSweetAlert btn btn-danger btn-sm w-100" data-commentId=@comment.Id>DELETE</button>
+                                    <button class="btnSweetAlert btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id >DELETE</button>
                                 </div>
                             </div>
                         </div>
                     }
 
-                    @*--------------- THIS IS FOR THE COMMENT MODERATOR --------------------------*@
-                    @if (User.IsInRole("Moderator || Administrator"))
+                    @* --------------- THIS IS FOR THE COMMENT MODERATOR -------------------------- *@
+                    @if (User.IsInRole("Moderator"))
                     {
                         <div class="card-footer">
                             <div class="row row-cols-1 g-2">
                                 <div class="col">
-                                    <button class="btnModModal btn btn-dark btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
+                                    <button class="btnModModal btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +169,7 @@ else
 
 <!----------------- Modal ------------------->
 
-<div class="modal fade" id="editCommentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="editCommentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -179,12 +178,12 @@ else
             </div>
             <div class="modal-body">
                 <form asp-action="Edit" asp-controller="Comments">
-                    <input type="hidden" name="Id" id="modalCommentId" />
+                    <input type="hidden" name="Id" id="modalCommentId" rows=5 />
                     <input type="hidden" asp-for="Slug" />
 
                     <div class="form-group">
                         <label class="control-label">Comment</label>
-                        <textarea class="form-control" rows=10 name="CommentBody" id="modalCommentBody"></textarea>
+                        <textarea class="form-control" rows=5 name="CommentBody" id="modalCommentBody"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -200,7 +199,7 @@ else
     </div>
 </div>
 
-<div class="modal fade" id="moderateCommentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="moderateCommentModal" aria-hidden="true">
+<div class="modal fade" id="moderateCommentModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,12 +217,12 @@ else
 
                     <div class="form-group">
                         <label class="control-label">Original Body</label>
-                        <textarea id="modalModerateCommentBody" rows=10 class="form-control" readonly></textarea>
+                        <textarea id="modalModerateCommentBody" rows=3 class="form-control" readonly></textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">Moderated Body</label>
-                        <textarea name="ModeratedBody" rows=5 class="form-control"></textarea>
+                        <textarea name="ModeratedBody" rows=3 class="form-control"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -232,7 +231,7 @@ else
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-sm btn-warning btn-outline-light w-100 fw-bold">SAVE</button>
+                        <button class="btn btn-sm btn-warning btn-outline-dark w-100 fw-bold mt-1">SAVE</button>
                     </div>
                 </form>
             </div>
@@ -245,85 +244,98 @@ else
 </div>
 
 
-@*<form name="btnSweetAlert" asp-action="Delete" asp-controller="Comments">
+<form name="formDeleteComment" asp-action="Delete" asp-controller="Comments">
     <input type="hidden" name="Id" id="deleteCommentId" />
-    </form>*@
+</form>
 
 
 @section Scripts{
 
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
 
 
-    @* ------------------  HERE IS SOME SWEET ALERT INPUTS ------------------>     *@
-<script>
-    document.getElementById("btnSweetAlert").addEventListener("click", deleteSweetAlert);
-</script>
+            @* ------------------  HERE IS SOME SWEET ALERT INPUTS ------------------>     *@
 
-<script>
-        document.querySelectorAll("button.btnSwal").forEach(btn => {
-        btn.addEventListener("click", function () {
-            document.getElementById("deleteCommentId").value = this.getAttribute('data-CommentId');
-            DeleteComment();
-        });
-        });
+        <script>
+            document.querySelectorAll("button.btnSweetAlert").forEach(btn => {
+                btn.addEventListener("click", function () {
+                    document.getElementById("deleteCommentId").value = this.getAttribute('data-CommentId');
+                    deleteSweetAlert();
+                });
+            });
 
-    function deleteSweetAlert(){
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-        }).then((result) => {
-            if (result.isConfirmed) {
+            function deleteSweetAlert(){
 
                 Swal.fire({
-                    title: 'Deleted!',
-                    text: 'Your comment has been deleted.',
-                    icon: 'success',
-                    showConfirmButton: false
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Swal.fire({
+                            title: 'Deleted!',
+                            text: 'Your comment has been deleted.',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+
+                        setTimeout(function () {
+                            document.formDeleteComment.submit();
+                        }, 3000);
+
+                    }
                 })
-
-                setTimeout(function () {
-                    document.btnSweetAlert.submit();
-                }, 3000);
-
             }
-        })
-    }
-</script>
+        </script>
 
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<link rel="stylesheet" href="sweetalert2.min.css">
+        <link rel="stylesheet" href="sweetalert2.min.css">
 
-<script src="sweetalert2.min.js"></script>
-
-
-@*----------- should I decide to use   QUILL  i'll need this code below _---------------_--_-------_->*@
-
-<script>
-    // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
-    document.querySelectorAll("button.btnModal").forEach(btn => {
-        btn.addEventListener("click", function(){
-            // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
-            document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
-
-            // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+        <script src="sweetalert2.min.js"></script>
 
 
-            let parent = this.closest("div.targetParent")
-            let header = parent.querySelectorAll("div.targetChild h5")
-            document.getelelementById('modalModerateCommentBody').innerText = child.innerText;
-        });
-    });
+        @*----------- should I decide to use   QUILL  i'll need this code below _---------------_--_-------_->*@
 
-</script>
+        <script>
+            // ----  I WILL NEED A CLICK EVENT HANDLER FOR ALL BUTTONS WITH CLASS ---> btnMODAL <-----
+            document.querySelectorAll("button.btnModModal").forEach(btn => {
+                btn.addEventListener("click", function(){
+                    // --- THING 1:  GET THE ID OF THE COMMENT INTO THE MODAL -----
+                    document.getelementById('modalCommentId').value = this.getAttribute("data-commentId")
 
-}</body>
+                    // --- THING 2:  GET THE CommentBody INTO THE MODAL --------
+
+
+                    let parent = this.closest("div.targetParent")
+                    let child = parent.querySelectorAll("div.targetChild h5")
+                    document.getelelementById('modalModerateCommentBody').innerText = child.innerText;
+                });
+            });
+
+        </script>
+
+        <script>
+                 document.querySelectorAll("button.btnModModal").forEach(btn => {
+                    btn.addEventListener("click", function(){
+                
+                        //Thing 1: Get the Id of the comment into the Modal
+                        document.getElementById('modalModerateCommentId').value = this.getAttribute('data-commentId');
+
+                        //Thing 2: Get the original CommentBody into the read only textarea of the modal
+                        let parent = this.closest("div.targetParent");
+                        let child = parent.querySelector("div.targetChild h5");
+                        document.getElementById('modalModerateCommentBody').innerText = child.innerText;
+                    });
+                 });
+                 @* ---------   this was copied and pasted from J.T. -------- this section  --^^^^ *@
+        </script>
+
+}

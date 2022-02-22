@@ -28,7 +28,7 @@ namespace AtlasBlog.Controllers
         // GET: Comments
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Comments.Include(c => c.Author).Include(c => c.BlogPost);
+            var applicationDbContext = _context.Comments.Include(c => c.Author).Include(c => c.BlogPost).ThenInclude(c => c.Blog);
             return View(await applicationDbContext.ToListAsync());
         }
 

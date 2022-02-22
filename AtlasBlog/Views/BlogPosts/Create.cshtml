@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <div><textarea asp-for="Body"></textarea></div>
+                <div><textarea asp-for="Body" class="w-100"></textarea></div>
                 <input asp-for="Body" type="hidden" />
                 @*<span asp-validation-for="BlogPostState" class="text-danger"></span>*@
             </div>
@@ -52,13 +52,15 @@
                 
                 @*--------------- this is the multi select list  ----------*@
                 <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagIds" multiple></select>
-                @*
-                @Html.ListBox("TaskIds")
-                *@
+
+            </div>
+
+             <div class="form-group text-center">
+                <button type="button" class="btn btn-sm btn-warning mt-2 fw-bold" data-bs-toggle="modal" data-bs-target="#addNewTag"><h6>Create Tag</h6></button>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary mt-2" />
+                <input type="submit" value="Create" class="btn btn-primary mt-2"  />
             </div>
 
         </form>
@@ -67,6 +69,46 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
+
+@* --------  THE MODAL SECTION ----------- *@
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addNewTag" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adding A New Tag</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          @* ------ ADD IN A FORM FOR CREATING A NEW TAG ------------*@
+          <form asp-action="Create" asp-controller="Tags">
+              <div class="form-group">
+                  <label class="form-label" for="text">Text</label>
+                  <input name="Text" id="text" class="form-control w-100" />
+              </div>
+              <div class="form-group">
+                  <label class="form-label" for="text">Text</label>
+                  <textarea class="form-label w-100" name="Description" id="Description" rows="3"></textarea>
+              </div>
+
+              <div class="form-group">
+                  <label class="form-label" for="text">Text</label>
+                  <button class="btn btn-sm btn-dark mt-2 fw-bold w-100" ></button>
+              </div>
+          </form>
+
+                  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>        
+      </div>
+    </div>
+  </div>
 </div>
 
 @section Scripts {

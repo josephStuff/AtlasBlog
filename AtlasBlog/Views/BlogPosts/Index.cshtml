@@ -36,7 +36,7 @@
                 @Html.DisplayNameFor(model => model.Abstract)
             </th>
 
-            @if (User.IsInRole("Administrator || Moderator"))
+            @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
             {
                 <th>
                     @Html.DisplayNameFor(model => model.BlogPostState)
@@ -45,7 +45,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Body)
             </th>
-            @if (User.IsInRole("Moderator || Administrator"))
+            @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
             {
                 <th class="fw-bold">
                     @Html.DisplayNameFor(model => model.IsDeleted)
@@ -69,7 +69,7 @@
                     @Html.DisplayFor(modelItem => item.Abstract)
                 </td>
 
-                @if (User.IsInRole("Moderator || Administrator"))
+                @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.BlogPostState)
@@ -79,7 +79,7 @@
                     @Html.Raw(item.Body)
                 </td>
 
-                @if (User.IsInRole("Moderator || Administrator"))
+                @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.IsDeleted)
@@ -103,52 +103,20 @@
 
 </table>
 
-@*@if (User.Identity.IsAuthenticated)
-    {
-    // ----- Present a simple form for collecting the comment -------------
-    <form asp-controller="Comments" asp-action="Create">
-    <input type="hidden" name="BlogPostId" value="@Model?.Id" />
-    <input type="hidden" asp-for="Slug" />
-    <textarea class="form-control" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
-    <button class="btn bg-info mt-2">APPLY</button>
-    </form>
-    }*@
-@*else
-    {
-    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login" asp-route-returnUrl="@Url.Action("Details", "BlogPosts", new { slug = Model.Slug })">Login to add a comment</a>
-    }*@
 
-@*<div class="row redText" id="CommentSection">
+@*<div class="row">
+    <div>
+        <div class="col h3 greenText">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        </div>
 
-    @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
-    {
-    <div class="col-12 col-md-4 my-2">
-    <div class=" targetParent card border-light mb-3 w-100">
-    <span class="card-header">Created by: @comment.Author?.FullName</span>
-    <div class="targetChild card-body text-dark">
-    <h5 class="card-title">@comment.CommentBody</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <div class="col greenText">
+            @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
+            new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "page-link"},
+            PageClasses = new string[] { "page-link" }
+            })
+        </div>
     </div>
-    <div class="card-footer">
-    Posted on: @comment.CreatedDate.ToString("MMM dd, yyy")
-
-    @if (comment.AuthorId == _userManager.GetUserId(User))
-    {
-    <div class="row row-cols-1 ">
-    <div class="col">
-    <button class="btnModal btn btn-light btn-sm w-100" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#staticBackdrop">EDIT</button>
-    </div>
-    <div>*@
-@* put in a SWEETALERT WINDOW *@
-
-@*                                <a asp-action="Delete" asp-controller="Comments" asp-route-id="@comment.Id" class="btn btn-sm btn-dark w-100 btnSweetAlert">DELETE</a>
-    </div>
-    </div>
-    }
-
-    </div>
-    </div>
-    </div>
-    }
-
-    </div>*@
+</div>*@

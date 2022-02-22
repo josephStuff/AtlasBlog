@@ -16,7 +16,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@if (User.IsInRole("Administrator || Moderator"))
+@if ((User.IsInRole("Moderator")) || (User.IsInRole("Administrator")))
 {
     <h5 class="greenText pt-3">Home Index</h5>
 }
@@ -37,8 +37,8 @@ else
 
 </div>
 
-<div class="pageBG py-md-5">
-    <div class="container position-relative px-4 px-lg-5">
+<div class="pageBG py-md-5 d-flex d-block">
+    <div class="container">
         <div class="row gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading text-center">
@@ -60,26 +60,26 @@ else
     @foreach (var item in Model)
     {
         <div>
-            <div class="glass-jw-style h-100 px-1 hoverButton">
+            <div class="glass-jw-style px-1 hoverButton">
                 <div>
-                    <div class="text-center">
-                        <h5 class="card-title text-center">@Html.DisplayFor(modelItem => item.BlogName)</h5>
-                        <div class="card bg-black card-text border-bottom border-primary overflow">
+                    <div class="text-center overflow">
+                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                        <div class="card bg-black card-text border-bottom border-primary ">
                             @Html.DisplayFor(modelItem => item.ResearchTopic)
                         </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary overflow" style="height: 3rem;">
+                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
                             @Html.DisplayFor(modelItem => item.Title)
                         </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary overflow" style="height: 3rem;">
+                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
                             @Html.DisplayFor(modelItem => item.Description)
                         </div>
                     </div>
                 </div>
-                <div class="footer row row-cols-2 d-flex align-items-end p-2">
-                    <div class="d-flex justify-content-start">
+                <div class="footer row row-cols-2 p-2">
+                    <div class="">
                         Posted: @Html.DisplayFor(modelItem => item.Created)
                     </div>
-                    <div class="text-end">
+                    <div class="d-flex justify-content-end align-items-end">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
@@ -93,8 +93,8 @@ else
                             </a>
 
                         }
-
                     </div>
+
                 </div>
             </div>
         </div>
@@ -103,16 +103,19 @@ else
 
 
 
-<div class="">
-    <div class="greenText" type="text">
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-        @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
-        new PagedListRenderOptions
-        {
-        LiElementClasses = new string[] { "page-link"},
-        PageClasses = new string[] { "page-link" }
-        })
+<div class="row mt-5">
+    <div class="d-flex align-content-end">
+        <div class="greenText" type="text">
 
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
+            new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "page-link"},
+            PageClasses = new string[] { "page-link" }
+            })
+
+        </div>
     </div>
 </div>
 
