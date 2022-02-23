@@ -28,72 +28,119 @@ else
     </p>
 }
 
-<table class="table">
-    
-    <thead class="greenText">    
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ResearchTopic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BlogName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Created)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Updated)
-            </th>
-            <th></th>
-        </tr>
+
+@*
+    <table class="table">
+
+    <thead class="greenText">
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.ResearchTopic)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.BlogName)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Description)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Created)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Updated)
+    </th>
+    <th></th>
+    </tr>
     </thead>
-    
+
 
     <tbody class="text-light">
-        @foreach (var item in Model!)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResearchTopic)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BlogName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Created)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Updated)
-                </td>
-                <td>
-                    <div class="row">
-                        <div>
-                            <a asp-action="Details" asp-route-id="@item.Id">View Details</a>
-                        </div>
+    @foreach (var item in Model!)
+    {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.ResearchTopic)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.BlogName)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Created)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Updated)
+    </td>
+    <td>
+    <div class="row">
+    <div>
+    <a asp-action="Details" asp-route-id="@item.Id">View Details</a>
+    </div>
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <div>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    }
-                    </div>
-                </td>
-            </tr>
-        }
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <div>
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </div>
+    }
+    </div>
+    </td>
+    </tr>
+    }
     </tbody>
 
-</table>
+    </table>
+*@
+
+<div class="row row-cols-2">
+    <div class="col-3 my-2">
+        @foreach (var item in Model)
+        {
+            <div class="gy-2">
+                <div class="glass-jw-style p-1 hoverButton">
+                    <div>
+                        <div class="text-center overflow">
+                            <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                            <div class="card bg-black card-text border-bottom border-primary ">
+                                @Html.DisplayFor(modelItem => item.ResearchTopic)
+                            </div>
+                            <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </div>
+                            <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" row row-cols-2 p-2">
+                        <div class="">
+                            Posted: @Html.DisplayFor(modelItem => item.Created)
+                        </div>
+                        <div class="d-flex justify-content-end align-items-end">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
+                                    <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                                </a>
+                                <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
+                                    <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                                </a>
+                                <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
+                                    <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+</div>

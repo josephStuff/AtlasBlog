@@ -22,7 +22,7 @@
 }
 
 
-<div class="pageBG py-md-5 d-flex d-block">
+<div class="py-md-5 d-flex d-block">
     <div class="container">
         <div class="row gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
@@ -41,22 +41,16 @@
 </div>
 
 
-<div class="row row-cols-md-3 row-cols-lg-4 g-4">
+<div class="row row-cols-md-3 row-cols-lg-4 nav-item">
     @foreach (var item in Model)
     {
-        <div>
-            <div class="glass-jw-style px-1 hoverButton">
+        <button class="bg-transparent hoverButton" asp-action="Identity" asp-controller="Blogs" asp-route-id="">
+            <div class="glass-jw-style px-1">
                 <div>
                     <div class="text-center overflow">
                         <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => item.BlogName)</h5>
                         <div class="card bg-black card-text border-bottom border-primary ">
-                            @Html.DisplayFor(modelItem => item.ResearchTopic)
-                        </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-                            @Html.DisplayFor(modelItem => item.Description)
+                            <p>Blog</p>
                         </div>
                     </div>
                 </div>
@@ -76,16 +70,13 @@
                             <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
                                 <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
                             </a>
-
                         }
                     </div>
-
                 </div>
             </div>
-        </div>
+        </button>
     }
 </div>
-
 
 
 <div class="row mt-5">
@@ -103,6 +94,3 @@
         </div>
     </div>
 </div>
-
-
-
