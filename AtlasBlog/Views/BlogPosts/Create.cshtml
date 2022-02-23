@@ -42,21 +42,14 @@
 
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <div><textarea asp-for="Body" class="w-100"></textarea></div>
+                <div id="editor" class="bg-dark"></div>
+                @*<div><textarea asp-for="Body" class="w-100"></textarea></div>*@
                 <input asp-for="Body" type="hidden" />
-                @*<span asp-validation-for="BlogPostState" class="text-danger"></span>*@
             </div>
 
             <div class="form-group">
                 <label class="control-label" for="TagIds">Tag(s)</label>
-                
-                @*--------------- this is the multi select list  ----------*@
                 <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagIds" multiple></select>
-
-            </div>
-
-             <div class="form-group text-center">
-                <button type="button" class="btn btn-sm btn-warning mt-2 fw-bold" data-bs-toggle="modal" data-bs-target="#addNewTag"><h6>Create Tag</h6></button>
             </div>
 
             <div class="form-group">
@@ -115,7 +108,7 @@
 
 <script>
 
-    document.getElementById('quillCreate').addEventListener("submit", function() {
+    document.getElementById('frmCreate').addEventListener("submit", function() {
         document.getElementById('Body').value = quill.container.firstChild.innerHTML;
     });
 
