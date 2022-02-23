@@ -11,6 +11,7 @@ using AtlasBlog.Models;
 using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using AtlasBlog.Services;
+using AtlasBlog.ViewModels;
 
 namespace AtlasBlog.Controllers
 {
@@ -29,7 +30,15 @@ namespace AtlasBlog.Controllers
         // GET: Blogs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Blogs.ToListAsync());
+                        
+            //var blogPosts = new List<BlogPost>();
+
+            //model = blogPosts.OrderByDescending(b => b.Created).Max(b => b.Created);
+            var model = await _context.Blogs.Include(b => b.BlogPosts).ToListAsync();
+
+
+            return View(model);
+            //await _context.Blogs.ToListAsync()
         }
 
         // GET: Blogs/Details/5

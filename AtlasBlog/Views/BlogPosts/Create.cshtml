@@ -18,7 +18,7 @@
 
             <div class="form-group">
                 <label asp-for="Blog.BlogName" class="control-label"></label>
-                <select asp-for="BlogId" class="form-control" asp-items="ViewBag.BlogId"></select>
+                <select asp-for="BlogId" class="form-control" asp-items="@ViewBag.BlogId"></select>
                 <span asp-validation-for="BlogId" class="text-danger"></span>
             </div>
 
@@ -43,7 +43,7 @@
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
                 <div id="editor" class="bg-dark"></div>
-                @*<div><textarea asp-for="Body" class="w-100"></textarea></div>*@
+                @*<div><textarea asp-for="Body" class="w-100"></textarea></div> editor *@
                 <input asp-for="Body" type="hidden" />
             </div>
 
@@ -108,7 +108,7 @@
 
 <script>
 
-    document.getElementById('frmCreate').addEventListener("submit", function() {
+    document.getElementById('editor').addEventListener("submit", function() {
         document.getElementById('Body').value = quill.container.firstChild.innerHTML;
     });
 

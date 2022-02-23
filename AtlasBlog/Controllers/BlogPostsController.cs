@@ -44,15 +44,12 @@ namespace AtlasBlog.Controllers
             pageNum ??= 1;
             var pageSize = 4;
 
-
             //  ---  SEARCH SERVICE WILL BE USED FOR THIS ----------------<
             var posts = _searchService.TermSearch(searchTerm);
             var pagedPosts = await posts.ToPagedListAsync(pageNum, pageSize);
 
-
             ViewData["SearchTerm"] = searchTerm;
             return View(pagedPosts);
-
 
         }
 
@@ -67,6 +64,7 @@ namespace AtlasBlog.Controllers
             var blogPost = await _context.BlogPosts
                 .Include(b => b.Blog)
                 .Include(c => c.Comments)
+                //.Include(t => t.Tags)
                 .ThenInclude(c => c.Author)
                 .FirstOrDefaultAsync(m => m.Slug== slug);
 
