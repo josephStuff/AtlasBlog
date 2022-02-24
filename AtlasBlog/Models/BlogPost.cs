@@ -40,8 +40,7 @@ namespace AtlasBlog.Models
 
         [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
-
-        
+                
 
 
         // --------------- NAVIGATION PROPERTIES -----------------------------

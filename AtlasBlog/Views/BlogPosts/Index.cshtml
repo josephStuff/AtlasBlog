@@ -14,7 +14,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="greenText">Blog Posts</h1>
+<h1 class="purpleText">Blog Posts</h1>
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -106,11 +106,11 @@
 
 @*<div class="row">
     <div>
-        <div class="col h3 greenText">
+        <div class="col h3 purpleText">
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
         </div>
 
-        <div class="col greenText">
+        <div class="col purpleText">
             @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
             new PagedListRenderOptions
             {

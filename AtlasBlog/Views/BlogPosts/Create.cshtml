@@ -42,8 +42,7 @@
 
             <div class="form-group">
                 <label asp-for="Body" class="control-label"></label>
-                <div id="editor" class="bg-dark"></div>
-                @*<div><textarea asp-for="Body" class="w-100"></textarea></div> editor *@
+                <div id="editor" class="bg-dark"></div>                
                 <input asp-for="Body" type="hidden" />
             </div>
 
@@ -108,7 +107,7 @@
 
 <script>
 
-    document.getElementById('editor').addEventListener("submit", function() {
+    document.getElementById('quillCreate').addEventListener("submit", function() {
         document.getElementById('Body').value = quill.container.firstChild.innerHTML;
     });
 

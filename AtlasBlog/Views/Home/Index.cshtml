@@ -18,7 +18,7 @@
 
 @if ((User.IsInRole("Moderator")) || (User.IsInRole("Administrator")))
 {
-    <h5 class="greenText pt-3">Home Index</h5>
+    <h5 class="purpleText pt-3">Home Index</h5>
 }
 
 
@@ -81,7 +81,7 @@
 
 <div class="row mt-5">
     <div class="d-flex align-content-end">
-        <div class="greenText" type="text">
+        <div class="purpleText" type="text">
 
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
             @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),

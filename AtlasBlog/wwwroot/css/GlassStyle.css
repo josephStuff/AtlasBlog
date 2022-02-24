@@ -8,7 +8,7 @@
 }
 
 .glass-jw-style {
-    color: var(--light-gs-color);
+    color: yellow;
     backdrop-filter: blur(14px);
     backdrop-filter: brightness(3);
     background-color: rgba(153, 223, 255, 0.178, 0.17);

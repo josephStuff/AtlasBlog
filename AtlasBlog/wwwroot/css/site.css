@@ -41,13 +41,13 @@ body {
     color:#ff0000;
 }
 
-.greenText {
-    color: var(--dark-jw-color);
+.purpleText {
+    color: white;
 }
 
 .bigBackground {
     position: center;
-    background: url(/img/diagonalRedGrid.jpg);
+    background: black;
     background-size: cover;
     height:;
     background-repeat: no-repeat;
@@ -56,7 +56,7 @@ body {
 .overflow {
     text-overflow: ellipsis;
     overflow: hidden;
-    /*white-space: nowrap;*/    
+    /*white-space: nowrap;*/
 }
 
 
