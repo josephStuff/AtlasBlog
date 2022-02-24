@@ -10,7 +10,7 @@ using AtlasBlog.Data;
 using AtlasBlog.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace AtlasBlog.Controllers
 {
@@ -70,6 +70,7 @@ namespace AtlasBlog.Controllers
 
         }
 
+        [Authorize]
         // GET: Comments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
