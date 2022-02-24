@@ -77,7 +77,7 @@ namespace AtlasBlog.Controllers
         }
 
         //GET: BlogPosts/Create
-        [Authorize(Roles = "Administrator, Moderator")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName");
@@ -138,7 +138,8 @@ namespace AtlasBlog.Controllers
             return View(blogPost);
         }
 
-        [Authorize(Roles = "Administrator, Moderator")]
+        
+        [Authorize]
         // GET: BlogPosts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -61,7 +61,7 @@ namespace AtlasBlog.Controllers
 
 
         // GET: Blogs/Create
-        [Authorize(Roles = "Administrator, Moderator")]
+        [Authorize]
         public IActionResult Create()
         {
             return View();

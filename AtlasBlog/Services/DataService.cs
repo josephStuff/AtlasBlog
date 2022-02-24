@@ -89,7 +89,8 @@ namespace AtlasBlog.Services
 
                 if (await _userManager.FindByEmailAsync(regularUser.Email) is null)
                 {
-                    await _userManager.CreateAsync(regularUser, "Abc&123!");                    
+                    await _userManager.CreateAsync(regularUser, "Abc&123!");
+                    await _userManager.AddToRoleAsync(modUser, "Regular");
                 }
 
             }
