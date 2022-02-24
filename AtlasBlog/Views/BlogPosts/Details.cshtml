@@ -12,43 +12,35 @@
 }
 
 
-<h1>Details</h1>
-
-<div>
-    <h4>BlogPost</h4>
+<div class="mt-5">
+    <h1>BlogPost Details/Comments</h1>
     <hr />
 
     <div class="row row-cols-2">
         <dl class="row row-cols-1">
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Blog)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Blog.BlogName)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Title)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Title)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Abstract)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Abstract)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-4">
                 @Html.DisplayNameFor(model => model.Created)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-8">
                 @Html.DisplayFor(model => model.Created)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Body)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Body)
             </dd>
         </dl>
 
@@ -82,7 +74,15 @@
             </dl>
         }
     </div>
+</div>
 
+<div>
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.Body)
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Body)
+    </dd>
 </div>
 
 @if (User.Identity.IsAuthenticated)
@@ -91,8 +91,8 @@
     <form asp-controller="Comments" asp-action="Create">
         <input type="hidden" name="BlogPostId" value="@Model?.Id" />
         <input type="hidden" asp-for="Slug" />
-        <textarea class="form-control w-50" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
-        <button class="btn btn-info mt-2">APPLY</button>
+        <textarea class="form-control w-100" name="CommentBody" rows=2 placeholder="Add Comment"></textarea>
+        <button class="btn btn-info mt-2">ADD COMMENT</button>
     </form>
 }
 else
@@ -103,63 +103,60 @@ else
 <hr />
 
 <div class="row">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-4 redText" id="CommentSection">
+        <div class="row " id="CommentSection">
             @foreach (var comment in Model.Comments.OrderByDescending(c => c.UpdatedDate))
             {
-                <div class="col g-3">
-                    <div class=" targetParent card container-fluid border-light g-2 mb-3">
-                        <div class="card-header py-1" style="height: 3.2rem;">
-                            <span class="float-start">Author: @comment.Author?.FullName</span>
+                <div class="col-12 g-3">
+                    <div class=" targetParent container-fluid border-bottom g-2 mb-3">
+                        <div class="card-header py-1" style="">
+                            <span class="float-start redText">Author:   @comment.Author?.FullName</span>
                             @if (comment.ModeratedDate is null)
                             {
-                                <span class="float-end">Posted: @comment.CreatedDate.ToString("MMM dd, yyyy")</span>
+                                <span class="float-end redText">Posted:  @comment.CreatedDate.ToString("MMM dd, yyyy")</span>
                             }
                             else
                             {
-                                <span class="float-end text-danger fst-italic">Moderated on: @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
+                                <span class="float-end text-danger fst-italic">Moderated on:  @comment.ModeratedDate?.ToString("MMM dd, yyyy")</span>
                             }
                         </div>
-                        <div class="targetChild card-body text-dark overflow" style="height: 3.2rem;">
+                        <div class="targetChild card-body text-light overflow w-100" style="">
                             @if (comment.ModeratedDate is null)
                             {
                                 <h5 class="card-title">@comment.CommentBody</h5>
                             }
                             else
                             {
-                                <h6 class="text-danger fst-italic">Moderation Reason: @comment.ModerateReason</h6>
-                                <h5 class="card-title">@comment.ModeratedBody <span class="fst-italic text-muted ms-2">(modified...)</span></h5>
+                                <h6 class="text-danger fst-italic">Moderation Reason:  @comment.ModerateReason</h6>
+                                <h5 class="card-title">@comment.ModeratedBody </h5>  @* <span class="fst-italic text-muted ms-2">(modified...)</span> *@
                             }
                         </div>
 
                         @*--------------------  THIS IS FOR THE COMMENT ROLE ---------------*@
                         @if (comment.ModeratedDate is null && (_userManager.GetUserId(User) == comment.AuthorId))
                         {
-                            <div class="card-footer" style="height: 3.2rem;">
-                                <div class="row row-cols-1 row-cols-md-2 g-1">
+                            <div class="pb-2" style="">
+                                <div class="row g-1">
                                     <div class="col">
-                                        <button class="btnModal btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
-                                    </div>
-                                    <div class="col">
+                                        <button class="btnModal btn btn-outline-light btn-sm mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#editCommentModal">EDIT</button>
                                         @*SweetAlert Window*@
-                                        <button class="btnSweetAlert btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id>DELETE</button>
+                                        <button class="btnSweetAlert btn btn-outline-light btn-sm mt-1 float-end" data-commentId=@comment.Id>DELETE</button>
                                     </div>
                                 </div>
                             </div>
                         }
                         else if (_userManager.GetUserId(User) == comment.AuthorId)
                         {
-                            <div class="card-footer" style="height: 3.2rem;">
-                                <div class="row row-cols-1 row-cols-md-2 g-1">
+                            <div class="card-footer pb-2" style="">
+                                <div class="row g-1">
                                     <div class="col">                                        
-                                        <button class="btnSweetAlert btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id>DELETE</button>
+                                        <button class="btnSweetAlert btn btn-outline-light btn-sm mt-1 float-end" data-commentId=@comment.Id>DELETE</button>
                                     </div>
                                 </div>
                             </div>
                         }
                         else
                         {
-                            <div class="card-footer" style="height: 3.2rem;">
+                            <div class="card-footer" style="">
                                 <div class="row g-1">
                                     <div class="col">
                                         <div data-commentId=@comment.Id></div>
@@ -169,12 +166,12 @@ else
                         }
 
                         @* --------------- THIS IS FOR THE COMMENT MODERATOR -------------------------- *@
-                        @if (User.IsInRole("Moderator"))
+                        @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
                         {
-                            <div class="card-footer" style="height: 3.2rem;">
+                            <div class="card-footer pb-2" style="">
                                 <div class="row row-cols-1 g-2">
                                     <div class="col">
-                                        <button class="btnModModal btn btn-warning btn-sm w-100 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
+                                        <button class="btnModModal btn btn-warning btn-sm w-50 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
                                     </div>
                                 </div>
                             </div>
@@ -183,14 +180,16 @@ else
                 </div>
             }
         </div>
-    </div>
 </div>
 
+@*  @if (_userManager.GetUserId(User) == Model.Body.))  *@
+@* else if (_userManager.GetUserId(User) == comment.AuthorId) *@
+
 <div>
-    @if (User.Identity.IsAuthenticated)
+    @*@if (User.Identity.IsAuthenticated)
     {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit |</a>
-    }
+        <a asp-action="Edit" asp-route-id="@Model?.Id"></a>
+    }*@
     <a asp-action="Index">Back to List</a>
 </div>
 
@@ -383,7 +382,6 @@ else
     });
 
 </script>
-
 
 
 }

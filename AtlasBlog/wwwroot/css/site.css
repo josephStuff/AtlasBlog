@@ -45,6 +45,10 @@ body {
     color: white;
 }
 
+.yellowText {
+    color: yellow;
+}
+
 .bigBackground {
     position: center;
     background: black;

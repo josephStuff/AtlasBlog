@@ -6,7 +6,7 @@
 
 @inject IImageService _imageService
 @inject SignInManager<BlogUser> SignInManager
-
+@inject UserManager<BlogUser> _userManager
 
 @model X.PagedList.IPagedList<Blog>
 
@@ -31,7 +31,7 @@
 
                     <form asp-action="SearchIndex" asp-controller="BlogPosts">
                         <input name="SearchTerm" class="form-control" />
-                        <button type="submit" class="btn-outline w-100 fw-bold glass-button redText">SEARCH</button>
+                        <button type="submit" class="btn-outline w-100 fw-bold glass-button text-light">SEARCH</button>
                     </form>
 
                 </div>
@@ -41,40 +41,36 @@
 </div>
 
 
-<div class="row row-cols-md-3 row-cols-lg-4 nav-item">
+<div class="row">
     @foreach (var item in Model)
     {
-        <button class="bg-transparent hoverButton" id="toBlogPosts">
-            <div class="glass-jw-style px-1">
-                <div>
-                    <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => item.BlogName)</h5>
-                        <div class="card bg-black card-text border-bottom border-primary ">
-                            <p>Blog</p>
-                        </div>
-                    </div>
+        <div class="col-12 col-md-4 col-lg-3 border px-1 g-3 mx-1">
+            <div class="text-center overflow">
+                <h5 class="card-title text-center overflow yellowText" style="">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                <hr />
+                <div>@Html.DisplayFor(AbandonedMutexException => item.ResearchTopic)</div>
+                <hr />
+            </div>
+            <div class="row p-2">
+                <div class="text-center">
+                    Posted: @Html.DisplayFor(modelItem => item.Created)
                 </div>
-                <div class="row row-cols-2 p-2">
-                    <div class="">
-                        Posted: @Html.DisplayFor(modelItem => item.Created)
-                    </div>
-                    <div class="d-flex justify-content-end align-items-end">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
-                                <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                            </a>
-                            <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
-                                <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                            </a>
-                            <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
-                                <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
-                            </a>
-                        }
-                    </div>
+                <div class="d-flex justify-content-end align-items-end">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
+                            <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                        </a>
+                        <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
+                            <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                        </a>
+                        <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
+                            <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
+                        </a>
+                    }
                 </div>
             </div>
-        </button>
+        </div>
     }
 </div>
 
