@@ -104,61 +104,36 @@ else
 <div class="row">
     @foreach (var blog in Model)
     {
+
         <div class="row gy-2">
             <div class="col-3">
-                <div class="glass-jw-style p-1 hoverButton h-100 ">
+                <div class="glass-jw-style p-1 ">
                     <div class="text-center overflow">
                         <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => blog.BlogName)</h5>
-                        <div class="card bg-black card-text border-bottom border-primary ">
-                            @Html.DisplayFor(modelItem => blog.ResearchTopic)
-                        </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-                            @Html.DisplayFor(modelItem => blog.Title)
-                        </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-                            @Html.DisplayFor(modelItem => blog.Description)
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="row row-cols-2">
-                            <div>
-                                Posted: @Html.DisplayFor(modelItem => blog.Created)
-                            </div>
-                            <div class="text-end">
-                                @if (User.Identity.IsAuthenticated)
-                                {
-                                    <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@blog?.Id">
-                                        <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                                    </a>
-                                    <a asp-action="Details" asp-controller="Blogs" asp-route-id="@blog?.Id">
-                                        <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                                    </a>
-                                    <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@blog?.Id">
-                                        <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
-                                    </a>
-                                }
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-
             @foreach (var blogPost in blog.BlogPosts)
             {
-                <div class="glass-jw-style p-1 hoverButton" style="width: 18rem">
+                
+                <div class="glass-jw-style" style="width: 18rem" >
+                    <div class="hoverButton">
                     <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(blogPostItem => blogPost.Blog.BlogName)</h5>
-                        <div class="card bg-black card-text border-bottom border-primary">
+                        <a asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
+                        <h5 class="card-title text-center overflow " style="height: 3.2rem;">@Html.DisplayFor(blogPostItem => blogPost.Blog.BlogName)</h5>
+                        <div class="card bg-black card-text border-bottom border-primary " >
                             @Html.DisplayFor(blogPostItem => blogPost.Blog.ResearchTopic)
                         </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary" style="height: 3rem;">
+                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
+                            @Html.DisplayFor(blogPostItem => blogPost.Title)
+                        </div>
+                        <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
                             @Html.DisplayFor(blogPostItem => blogPost.Body)
                         </div>
-                        <div class="card bg-black card-text border-bottom border-top border-primary" style="height: 3rem;">
-                            Posted: @Html.DisplayFor(blogPostItem => blogPost.Title)
-                        </div>
+                        </a>
                     </div>
-                    <div class=" row row-cols-2 p-2">
+                    <a asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
+                    <div class="row row-cols-2 p-2">
                         <div class="">
                             Posted: @Html.DisplayFor(blogPostItem => blogPost.Created)
                         </div>
@@ -177,46 +152,12 @@ else
                             }
                         </div>
                     </div>
+                    </a>
+                    </div>
                 </div>
+                
             }
         </div>
     }
 </div>
 
-@*<div class="col ">
-    <div class="glass-jw-style p-1 hoverButton">
-    <div>
-    <div class="text-center overflow">
-    <h5 class="card-title text-center overflow" style="height: 3.2rem;">NEW HEADER</h5>
-    <div class="card bg-black card-text border-bottom border-primary ">
-    place holder
-    </div>
-    <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-    place holder
-    </div>
-    <div class="card bg-black card-text border-bottom border-top border-primary " style="height: 3rem;">
-    place holder
-    </div>
-    </div>
-    </div>
-    <div class=" row row-cols-2 p-2">
-    <div class="">
-    place holder
-    </div>
-    <div class="d-flex justify-content-end align-items-end">
-    @if (User.Identity.IsAuthenticated)
-    {
-    <a asp-action="Edit" asp-controller="Blogs" asp-route-id="">
-    <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-    </a>
-    <a asp-action="Details" asp-controller="Blogs" asp-route-id="">
-    <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-    </a>
-    <a asp-action="Delete" asp-controller="Blogs" asp-route-id="">
-    <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
-    </a>
-    }
-    </div>
-    </div>
-    </div>
-    </div>*@

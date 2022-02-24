@@ -54,6 +54,16 @@
     background-color: #fcaa0119;
 }
 
+/* a:hover, a:active, a:focus { */
+
+a {
+    color: yellow;
+}
+
+a:hover{
+    color: #24fa04;
+
+}
 .opacityInput{
     opacity: .36;
 }

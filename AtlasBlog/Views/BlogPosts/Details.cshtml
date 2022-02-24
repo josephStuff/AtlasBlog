@@ -133,7 +133,7 @@ else
                         </div>
 
                         @*--------------------  THIS IS FOR THE COMMENT ROLE ---------------*@
-                        @if (comment.ModeratedDate is null && (comment.AuthorId == comment.AuthorId))
+                        @if (comment.ModeratedDate is null && (_userManager.GetUserId(User) == comment.AuthorId))
                         {
                             <div class="card-footer" style="height: 3.2rem;">
                                 <div class="row row-cols-1 row-cols-md-2 g-1">
@@ -142,6 +142,16 @@ else
                                     </div>
                                     <div class="col">
                                         @*SweetAlert Window*@
+                                        <button class="btnSweetAlert btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id>DELETE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (_userManager.GetUserId(User) == comment.AuthorId)
+                        {
+                            <div class="card-footer" style="height: 3.2rem;">
+                                <div class="row row-cols-1 row-cols-md-2 g-1">
+                                    <div class="col">                                        
                                         <button class="btnSweetAlert btn btn-dark btn-sm w-100 mt-1" data-commentId=@comment.Id>DELETE</button>
                                     </div>
                                 </div>

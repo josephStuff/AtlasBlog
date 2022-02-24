@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
 using AtlasBlog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AtlasBlog.Controllers
 {
+    [Authorize(Roles ="Administrator, Moderator")]
     public class TagsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace AtlasBlog.Controllers
             _context = context;
         }
 
+        
         // GET: Tags
         public async Task<IActionResult> Index()
         {
