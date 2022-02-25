@@ -75,14 +75,15 @@
         }
     </div>
 </div>
+<hr/>
 
-<div>
-    <dt class="col-sm-4">
+<div class="pb-2">
+    <div class="fw-bold text-decoration-underline">
         @Html.DisplayNameFor(model => model.Body)
-    </dt>
-    <dd class="col-sm-8">
+    </div>
+    <div class="">
         @Html.DisplayFor(model => model.Body)
-    </dd>
+    </div>
 </div>
 
 @if (User.Identity.IsAuthenticated)
@@ -148,7 +149,7 @@ else
                         {
                             <div class="card-footer pb-2" style="">
                                 <div class="row g-1">
-                                    <div class="col">                                        
+                                    <div class="col">
                                         <button class="btnSweetAlert btn btn-outline-light btn-sm mt-1 float-end" data-commentId=@comment.Id>DELETE</button>
                                     </div>
                                 </div>
@@ -168,10 +169,10 @@ else
                         @* --------------- THIS IS FOR THE COMMENT MODERATOR -------------------------- *@
                         @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
                         {
-                            <div class="card-footer pb-2" style="">
-                                <div class="row row-cols-1 g-2">
+                            <div class="mb-2" style="">
+                                <div class="row g-1">
                                     <div class="col">
-                                        <button class="btnModModal btn btn-warning btn-sm w-50 mt-1" data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
+                                        <button class="btnModModal btn btn-warning btn-sm " data-commentId=@comment.Id data-bs-toggle="modal" data-bs-target="#moderateCommentModal">MODERATE</button>
                                     </div>
                                 </div>
                             </div>

@@ -102,7 +102,7 @@ else
 *@
 
 <div class="row">
-    @foreach (var blog in Model)
+    @foreach (var blog in Model.OrderByDescending(b => b.BlogName))
     {
         <div class="row gy-2">
             <div class="col-3">

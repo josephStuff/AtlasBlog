@@ -15,7 +15,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 @if ((User.IsInRole("Moderator")) || (User.IsInRole("Administrator")))
 {
     <h5 class="purpleText pt-3">Home Index</h5>
@@ -42,7 +41,7 @@
 
 
 <div class="row">
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderByDescending(i => i.BlogName))
     {
         <div class="col-12 col-md-4 col-lg-3 border px-1 g-3 mx-1">
             <div class="text-center overflow">

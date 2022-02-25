@@ -30,10 +30,11 @@ namespace AtlasBlog.Controllers
         // GET: Blogs
         public async Task<IActionResult> Index()
         {
-                        
-            //var blogPosts = new List<BlogPost>();
 
-            //model = blogPosts.OrderByDescending(b => b.Created).Max(b => b.Created);
+            //var blogPosts = new List<BlogPost>();
+            //var model = await _context.Blogs.OrderByDescending(b => b.Created).Max(b => b.Created);
+
+            //var model = await _context.Blogs.OrderByDescending(b => b.Created).ToListAsync();
             var model = await _context.Blogs.Include(b => b.BlogPosts).ToListAsync();
 
 
