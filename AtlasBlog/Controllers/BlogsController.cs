@@ -107,8 +107,9 @@ namespace AtlasBlog.Controllers
                 return NotFound();
             }
 
+            //var blog = await _context.Blogs.Include(b => b.BlogPosts).FindAsync(id);
             var blog = await _context.Blogs.FindAsync(id);
-            if (blog == null)
+            if (blog == null)                                        //.FindAsync(id);
 
             {
                 return NotFound();
