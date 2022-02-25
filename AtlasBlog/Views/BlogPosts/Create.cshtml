@@ -116,8 +116,14 @@
 
 </script>
 
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
 
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
+
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }

@@ -19,7 +19,7 @@
             <input type="hidden" asp-for="Id" />
             <input type="hidden" asp-for="Created" />
 
-             <div class="form-group py-2">
+            <div class="form-group py-2">
                 <label asp-for="BlogName" class="control-label"></label>
                 <input asp-for="BlogName" class="form-control mt-1" />
                 <span asp-validation-for="BlogName" class="text-danger"></span>
@@ -50,8 +50,8 @@
                 <p>Body</p>
                 <input asp-for="Description" class="form-control " />
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div>*@
-           
+                </div>*@
+
             <div class="form-group mt-2">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -75,7 +75,14 @@
 
 </script>
 
-    @{
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
+
+}
+
+@{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
 }

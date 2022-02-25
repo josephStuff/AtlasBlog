@@ -8,7 +8,7 @@
 <h3 class="mt-4 pt-4 purpleText">Create A Blog</h3>
 
 
-<hr class="row purpleText"/>
+<hr class="row purpleText" />
 
 <div class="row purpleText">
     <div class="col-12 col-md-4">
@@ -70,8 +70,14 @@
 
 </script>
 
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
+
 }
 
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
