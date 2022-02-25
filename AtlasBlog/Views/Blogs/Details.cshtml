@@ -2,6 +2,7 @@
 
 @inject SignInManager<BlogUser> SignInManager
 
+
 @model AtlasBlog.Models.Blog
 
 @{
@@ -11,7 +12,7 @@
 <h1 class="purpleText">Details Blog</h1>
 
 <div class="purpleText">
-    <h4></h4>
+    
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -19,12 +20,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BlogName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Created)
@@ -42,14 +37,22 @@
 </div>
 
 <div>
+        <div class="fw-bold text-decoration-underline">
+            Body
+        </div>
+        <div class="">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+        <hr/>
+</div>
 
+<div>
     @if (SignInManager.IsSignedIn(User))
     {
         <div>
-            <a asp-action="Details" asp-route-id="@Model?.BlogPosts" asp-controller="">Add Comments</a>
+            @* <a asp-action="Details" asp-route-id="@Model?.Id" asp-controller="Blogs">Add Comments</a> *@
         </div>
         <a asp-action="Edit" asp-route-id="@Model?.Id">Edit |</a>
     }
-    <a asp-action="Index">Back to List</a>
-
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
 </div>

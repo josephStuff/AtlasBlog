@@ -18,7 +18,7 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <p>
-        <a asp-action="Create">Create New</a>
+        <a asp-action="Create" asp-controller="BlogPosts">Create New</a>
     </p>
 }
 else

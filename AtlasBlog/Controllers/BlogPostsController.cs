@@ -90,7 +90,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlogId,Title,ResearchTopic,Abstract,BlogPostState,Body")] BlogPost blogPost, List<int> tagIds)
+        public async Task<IActionResult> Create([Bind("Id,BlogId,Title,ResearchTopic,Abstract,BlogPostState,Body,Tags")] BlogPost blogPost, List<int> tagIds)
         {
             if (ModelState.IsValid)
             {
@@ -134,7 +134,7 @@ namespace AtlasBlog.Controllers
             }
 
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
-            //ViewData["TagIds"] = new MultiSelectList(_context.Tags, "Id", "Text", tagIds);
+            ViewData["TagIds"] = new MultiSelectList(_context.Tags, "Id", "Text", tagIds);
             return View(blogPost);
         }
 

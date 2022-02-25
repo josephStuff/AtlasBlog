@@ -3,8 +3,7 @@
 @using Microsoft.AspNetCore.Identity
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
- 
-@inject IImageService _imageService
+
 @inject SignInManager<BlogUser> SignInManager
 @inject UserManager<BlogUser> _userManager
 
@@ -12,13 +11,34 @@
 
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Index";
 }
 
 @if ((User.IsInRole("Moderator")) || (User.IsInRole("Administrator")))
 {
     <h5 class="purpleText pt-3">Home Index</h5>
 }
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <p>
+        <a asp-action="Create" asp-controller="Blogs">Create New</a>
+    </p>
+}
+
+@*
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <p>
+    <a asp-action="Create">Create New</a>
+    </p>
+    }
+    else
+    {
+    <p>
+    <a asp-action="Create" asp-area="Identity">Login to Create</a>
+    </p>
+    }*@
 
 
 <div class="py-md-5 d-flex d-block">
