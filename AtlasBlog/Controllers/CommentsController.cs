@@ -25,7 +25,7 @@ namespace AtlasBlog.Controllers
             _userManager = userManager;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Administrator, Moderator")]
         // GET: Comments
         public async Task<IActionResult> Index()
         {

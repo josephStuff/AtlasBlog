@@ -26,7 +26,7 @@ namespace AtlasBlog.Services
         public async Task SetupDbAsync()
         {
             // ---------------  _RUN THE MIGRATIONS ASYNC --------------
-            await _dbContext.Database.MigrateAsync();
+            //await _dbContext.Database.MigrateAsync();
 
             // Add ROLES INTO THE SYSTEM ------------------------
             await SeedRolesAsync();
