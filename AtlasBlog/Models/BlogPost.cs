@@ -31,7 +31,7 @@ namespace AtlasBlog.Models
 
 
         [Required]
-        [StringLength(300, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
+        [StringLength(1000, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Body { get; set; } = "";
 
 

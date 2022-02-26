@@ -125,7 +125,7 @@ else
                                     @Html.DisplayFor(blogPostItem => blogPost.Title)
                                 </div>
                                 <div class="card bg-black card-text border-primary p-2" style="height: 4rem;">
-                                    @Html.DisplayFor(blogPostItem => blogPost.Body)
+                                    @Html.Raw(blogPost.Body)
                                 </div>
                             </a>
                         </div>

@@ -174,7 +174,7 @@ namespace AtlasBlog.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,ResearchTopic,Slug,IsDeleted,Abstract,BlogPostState,Body,Created")] BlogPost blogPost, List<int> tagIds)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,ResearchTopic,Slug,IsDeleted,Abstract,BlogPostState,Body,Created")] BlogPost blogPost, List<int> tagIds)
         {
             if (id != blogPost.Id)
             {
@@ -205,7 +205,7 @@ namespace AtlasBlog.Controllers
                             // THE SLUG CANNOT BE USED AND AN ERROR MUST BE SHOWN TO THE USER
                             ModelState.AddModelError("Title", "Incorrect TItle (duplicate SLUG)");
                             ModelState.AddModelError("", "Incorrect TItle (duplicate SLUG)");
-                            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+                            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
                             return View(blogPost);
                         }
 
@@ -254,7 +254,7 @@ namespace AtlasBlog.Controllers
 
             }
 
-            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+            ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
             return View(blogPost);
         }
 

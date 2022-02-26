@@ -24,85 +24,85 @@
 }
 
 @*
-<table class="table text-light">
+    <table class="table text-light">
     <thead>
-        <tr>
-            <th>
-                Blog Name
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Abstract)
-            </th>
+    <tr>
+    <th>
+    Blog Name
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Title)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Abstract)
+    </th>
 
-            @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
-            {
-                <th>
-                    @Html.DisplayNameFor(model => model.BlogPostState)
-                </th>
-            }
-            <th>
-                @Html.DisplayNameFor(model => model.Body)
-            </th>
-            @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
-            {
-                <th class="fw-bold">
-                    @Html.DisplayNameFor(model => model.IsDeleted)
-                </th>
-            }
-            <th></th>
-        </tr>
+    @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
+    {
+    <th>
+    @Html.DisplayNameFor(model => model.BlogPostState)
+    </th>
+    }
+    <th>
+    @Html.DisplayNameFor(model => model.Body)
+    </th>
+    @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
+    {
+    <th class="fw-bold">
+    @Html.DisplayNameFor(model => model.IsDeleted)
+    </th>
+    }
+    <th></th>
+    </tr>
     </thead>
 
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Blog.BlogName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Abstract)
-                </td>
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.Blog.BlogName)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Abstract)
+    </td>
 
-                @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BlogPostState)
-                    </td>
-                }
-                <td>
-                    @Html.Raw(item.Body)
-                </td>
+    @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
+    {
+    <td>
+    @Html.DisplayFor(modelItem => item.BlogPostState)
+    </td>
+    }
+    <td>
+    @Html.Raw(item.Body)
+    </td>
 
-                @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsDeleted)
-                    </td>
-                }
-                <td>
-                    <div>
-                        <a asp-action="Details" asp-route-slug="@item.Slug">View Details/Add Comments</a>
-                    </div>
+    @if (User.IsInRole("Moderator") || (User.IsInRole("Administrator")))
+    {
+    <td>
+    @Html.DisplayFor(modelItem => item.IsDeleted)
+    </td>
+    }
+    <td>
+    <div>
+    <a asp-action="Details" asp-route-slug="@item.Slug">View Details/Add Comments</a>
+    </div>
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    }
+    @if (SignInManager.IsSignedIn(User))
+    {
+    <a asp-action="Edit" asp-route-id="@item.Id">Edit |</a>
+    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    }
 
-                </td>
-            </tr>
-        }
+    </td>
+    </tr>
+    }
     </tbody>
 
-</table>
+    </table>
 *@
 
 <div class="row">
@@ -112,10 +112,14 @@
             <div class="col-3">
                 <div class="glass-jw-style p-1 hoverButton">
                     <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => blogPost.Blog.BlogName)</h5>
+                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => blogPost.Title)</h5>
                     </div>
                 </div>
             </div>
+            @*@foreach (var comment in Comment)
+            {
+                
+            }*@
         </div>
     }
 </div>
