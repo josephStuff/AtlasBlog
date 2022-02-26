@@ -19,6 +19,10 @@
     border-right: 2px rgba(40, 40, 40, 3.35) solid;
 }
 
+.noUnderline>a:hover {
+    text-decoration: none !important;
+}
+
 .navbarBG{
     background-color: gray;
 }

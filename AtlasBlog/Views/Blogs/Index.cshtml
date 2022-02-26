@@ -12,7 +12,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="purpleText mt-4">Blog Index</h1>
+<h1 class="purpleText mt-4">Blog Posts Index</h1>
 
 @*@if (User.IsInRole("Administrator"))*@
 @if (SignInManager.IsSignedIn(User))
@@ -117,7 +117,7 @@ else
                 <div class="glass-jw-style" style="width: 18rem">
                     <div class="hoverButton mt-1">
                         <div class="text-center overflow">
-                            <a asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
+                            <a class="noUnderline" asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
                                 <div class="card bg-black card-text border-primary p-2">
                                     @Html.DisplayFor(blogPostItem => blogPost.Blog.ResearchTopic)
                                 </div>
