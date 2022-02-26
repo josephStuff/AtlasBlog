@@ -1,4 +1,5 @@
 ﻿@using AtlasBlog.Enums
+
 @model AtlasBlog.Models.BlogPost
 
 @{
@@ -50,7 +51,7 @@
 
                 <div class="form-group">
                     <label class="control-label" for="TagIds">Tag(s)</label>
-                    <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagIds" multiple></select>
+                    <select class="form-select" id="TagIds" name="TagIds" asp-items="@ViewBag.TagId" multiple></select>
                 </div>
             }
 
@@ -67,7 +68,6 @@
 </div>
 
 @* --------  THE MODAL SECTION ----------- *@
-
 
 
 <!-- Modal -->
