@@ -3,15 +3,14 @@
 @model IEnumerable<AtlasBlog.Models.Comment>
 
 
-
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1 class="purpleText">Comments Index Page</h1>
 
-<div class="table-responsive">
-<table class="table">
+<div class="table-responsive ">
+<table class="table purpleText">
 
     <thead class="text-light fw-bold">
         <tr>
@@ -43,7 +42,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr class="text-light">
+            <tr class="">
                 <td>
                     @Html.DisplayFor(modelItem => item.BlogPost.Blog.BlogName)
                 </td>

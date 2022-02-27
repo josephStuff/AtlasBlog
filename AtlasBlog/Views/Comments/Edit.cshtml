@@ -11,15 +11,21 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="quillCreate">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
 
             <div class="form-group">
-                <label asp-for="BlogPostId" class="control-label"></label>
-                <select asp-for="BlogPostId" class="form-control" asp-items="ViewBag.BlogPostId"></select>
+                <label asp-for="BlogPost.Title" class="control-label"></label>
+                <select asp-for="BlogPost.Title" class="form-control" asp-items="ViewBag.BlogPost.Title"></select>
                 <span asp-validation-for="BlogPostId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Author" class="control-label"></label>
+                <select asp-for="Author" class="form-control" asp-items="ViewBag.Author"></select>
+                <span asp-validation-for="Author" class="text-danger"></span>
             </div>
 
             <div class="form-group">
@@ -30,8 +36,8 @@
 
             <div class="form-group">
                 <label asp-for="CommentBody" class="control-label"></label>
-                <input asp-for="CommentBody" class="form-control" />
-                <span asp-validation-for="CommentBody" class="text-danger"></span>
+                <div id="editor" class="bg-dark"></div>
+                <input asp-for="CommentBody" type="hidden" />
             </div>
 
             <div class="form-group">
@@ -66,5 +72,21 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+
+        document.getElementById('quillCreate').addEventListener("submit", function() {
+            document.getElementById('Body').value = quill.container.firstChild.innerHTML;
+        });
+
+    </script>
+
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+
 }
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

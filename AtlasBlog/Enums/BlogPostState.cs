@@ -4,11 +4,7 @@
     {
         JustStarted,
         InDevelopment,
-        AnotherEdit,
-        AwaitingApproval,
-        PreviouslyModerated,
         DefinitelyReady
     }
-
 
 }

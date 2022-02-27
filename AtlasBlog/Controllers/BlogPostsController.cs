@@ -109,7 +109,7 @@ namespace AtlasBlog.Controllers
                     // THE SLUG CANNOT BE USED AND AN ERROR MUST BE SHOWN TO THE USER
                     ModelState.AddModelError("Title", "Incorrect TItle (duplicate SLUG)");
                     ModelState.AddModelError("", "Incorrect TItle (duplicate SLUG)");
-                    ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogId", blogPost.BlogId);
+                    ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
                     return View(blogPost);
                 }
 

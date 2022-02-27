@@ -12,7 +12,6 @@ namespace AtlasBlog.Models
         public string Description { get; set; } = string.Empty;
 
 
-
         public virtual ICollection<BlogPost> BlogPosts { get; set; } = new HashSet<BlogPost>();
         
     }

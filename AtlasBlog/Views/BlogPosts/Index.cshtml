@@ -16,12 +16,8 @@
 
 <h1 class="purpleText">Comments of Blog Posts</h1>
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
+<h3>Select a Blog Post to read or add a comment.</h3>
+<hr/>
 
 @*
     <table class="table text-light">
@@ -110,16 +106,13 @@
     {
         <div class="row gy-2">
             <div class="col-3">
-                <div class="glass-jw-style p-1 hoverButton">
-                    <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => blogPost.Title)</h5>
+                <div class="glass-jw-style p-1 ">
+                    <div class="text-center overflow" >
+                        <a class="card-title text-center overflow noUnderline h4" asp-route-slug="@blogPost.Slug" asp-controller="BlogPosts" asp-action="Details" >@Html.DisplayFor(modelItem => blogPost.Title)</a>
                     </div>
                 </div>
             </div>
-            @*@foreach (var comment in Comment)
-            {
-                
-            }*@
         </div>
     }
 </div>
+
