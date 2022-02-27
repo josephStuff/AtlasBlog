@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AtlasBlog.Controllers
 {
-    [Authorize(Roles ="Administrator, Moderator")]
+    [Authorize(Roles ="Administrator")]
     public class TagsController : Controller
     {
         private readonly ApplicationDbContext _context;

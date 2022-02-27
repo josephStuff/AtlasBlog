@@ -15,6 +15,7 @@ using AtlasBlog.ViewModels;
 
 namespace AtlasBlog.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BlogsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -62,8 +63,7 @@ namespace AtlasBlog.Controllers
 
 
         // GET: Blogs/Create
-        [Authorize]
-        public IActionResult Create()
+        public IActionResult Create() 
         {
             return View();
         }
@@ -74,19 +74,15 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogName,Description,Title,ResearchTopic")] Blog blog)
+        public async Task<IActionResult> Create([Bind("BlogName,Description,Title,ResearchTopic")] Blog blog, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {
                 if (blog is not null)
                 {
-                    //blog.ResearchTopic = await _imageService.ConvertFileToByteArrayAsync(blog);
-                    //blog.ImageExt = imageFile.ContentType;
+                    blog.ImageData= await _imageService.ConvertFileToByteArrayAsync(imageFile);
+                    blog.ImageExt = imageFile.ContentType;
                 }
-                //else
-                //{
-                //    return)
-                //}
 
                 // ------- SPECIFY THE DATETIME KIND FOR THE INCOMING CREATED DATE ----------------------------->
                 blog.Created = DateTime.UtcNow;

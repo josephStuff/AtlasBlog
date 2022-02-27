@@ -26,9 +26,9 @@
             <input type="hidden" asp-for="Slug" />
 
             <div class="form-group">
-                <label asp-for="BlogId" class="control-label"></label>
+                <label asp-for="@Model.Blog.BlogName" class="control-label"></label>
                 <select asp-for="BlogId" class="form-control" asp-items="ViewBag?.BlogId"></select>
-                <span asp-validation-for="BlogId" class="text-danger"></span>
+                <span asp-validation-for="@Model.Blog.BlogName" class="text-danger"></span>
             </div>
 
             <div class="form-group form-check">

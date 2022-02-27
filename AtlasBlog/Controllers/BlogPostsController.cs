@@ -15,6 +15,7 @@ using X.PagedList;
 
 namespace AtlasBlog.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BlogPostsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -31,6 +32,7 @@ namespace AtlasBlog.Controllers
             _searchService = searchService;
         }
 
+        [AllowAnonymous]
         // GET: BlogPosts
         public async Task<IActionResult> Index()
         {
@@ -53,6 +55,8 @@ namespace AtlasBlog.Controllers
 
         }
 
+        [AllowAnonymous]
+        [Authorize]
         // GET: BlogPosts/Details/5
         public async Task<IActionResult> Details(string slug)
         {
@@ -77,7 +81,6 @@ namespace AtlasBlog.Controllers
         }
 
         //GET: BlogPosts/Create
-        [Authorize]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName");
