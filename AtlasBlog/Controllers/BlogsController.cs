@@ -31,15 +31,20 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: Blogs
-        [AllowAnonymous]        
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        public async Task<IActionResult> Index(int? pageNum)
         {
+            pageNum ??= 1;
 
-            //var model = await _context.Blogs.OrderByDescending(b => b.Created).ToListAsync();
-            var model = await _context.Blogs.Include(b => b.BlogPosts).ToListAsync();
+            var blogs = await _context.Blogs.Include(b => b.BlogPosts)
+                                            .OrderByDescending(b => b.Created)
+                                                .ToPagedListAsync(pageNum, 3);
+
+            
+            //var model = await _context.Blogs.Include(b => b.BlogPosts).ToListAsync();
 
 
-            return View(model);
+            return View(blogs);
             //await _context.Blogs.ToListAsync()
         }
 
