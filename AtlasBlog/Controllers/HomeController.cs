@@ -21,7 +21,7 @@ namespace AtlasBlog.Controllers
             _imageService = imageService;
         }
 
-        public async Task<IActionResult> Index(int? pageNum, IFormFile imageFile)
+        public async Task<IActionResult> Index(int? pageNum)
         {
             pageNum ??= 1;
 

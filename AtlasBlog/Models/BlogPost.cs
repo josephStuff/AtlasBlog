@@ -1,5 +1,6 @@
 ﻿using AtlasBlog.Enums;
 using System.ComponentModel.DataAnnotations;
+using X.PagedList;
 
 namespace AtlasBlog.Models
 {
@@ -40,7 +41,6 @@ namespace AtlasBlog.Models
 
         [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
-                
 
 
         // --------------- NAVIGATION PROPERTIES -----------------------------
@@ -53,5 +53,6 @@ namespace AtlasBlog.Models
         // ---------------------------- COMMENTS --------------------------------
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
         public ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
+        
     }
 }

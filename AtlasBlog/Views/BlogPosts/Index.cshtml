@@ -1,13 +1,16 @@
 ﻿@using AtlasBlog.Models
 @using AtlasBlog.Services.Interfaces
 @using Microsoft.AspNetCore.Identity
+@using X.PagedList
 
-@model IEnumerable<AtlasBlog.Models.BlogPost>
+@*@model X.PagedList.IPagedList<BlogPost>*@
 
 @inject SignInManager<BlogUser> SignInManager
 @inject IImageService _imageService
 @inject RoleManager<IdentityRole> roleManager
 @inject UserManager<BlogUser> userManager
+
+@model IEnumerable<AtlasBlog.Models.BlogPost>
 
 
 @{

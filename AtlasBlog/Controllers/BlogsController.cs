@@ -12,6 +12,7 @@ using AtlasBlog.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using AtlasBlog.Services;
 using AtlasBlog.ViewModels;
+using X.PagedList;
 
 namespace AtlasBlog.Controllers
 {
@@ -20,12 +21,13 @@ namespace AtlasBlog.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IImageService _imageService;
+        private readonly SearchService _searchService;
 
-
-        public BlogsController(ApplicationDbContext context, IImageService imageService)
+        public BlogsController(ApplicationDbContext context, IImageService imageService, SearchService searchService)
         {
             _context = context;
             _imageService = imageService;
+            _searchService = searchService;
         }
 
         // GET: Blogs
@@ -39,6 +41,21 @@ namespace AtlasBlog.Controllers
 
             return View(model);
             //await _context.Blogs.ToListAsync()
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> SearchIndex(int? pageNum, string searchTerm)
+        {
+            pageNum ??= 1;
+            var pageSize = 4;
+
+            //  ---  SEARCH SERVICE WILL BE USED FOR THIS ----------------<
+            var posts = _searchService.TermSearch(searchTerm);
+            var pagedPosts = await posts.ToPagedListAsync(pageNum, pageSize);
+
+            ViewData["SearchTerm"] = searchTerm;
+            return View(pagedPosts);
+
         }
 
         // GET: Blogs/Details/5
@@ -59,13 +76,11 @@ namespace AtlasBlog.Controllers
             return View(blog);
         }
 
-
         // GET: Blogs/Create
         public IActionResult Create() 
         {
             return View();
         }
-
 
         // POST: Blogs/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.

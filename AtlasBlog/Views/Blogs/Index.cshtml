@@ -1,6 +1,11 @@
 ﻿@using AtlasBlog.Models
 @using AtlasBlog.Services.Interfaces
 @using Microsoft.AspNetCore.Identity
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@*@model X.PagedList.IPagedList<Blog>*@
 
 @model IEnumerable<AtlasBlog.Models.Blog>
 
@@ -153,3 +158,19 @@
     }
 </div>
 
+@*
+<div class="row mt-5">
+    <div class="d-flex align-content-end">
+        <div class="purpleText" type="text">
+
+            Page @(Model.PageNumber < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
+            new PagedListRenderOptions
+            {
+            LiElementClasses = new string[] { "page-link"},
+            PageClasses = new string[] { "page-link" }
+            })
+
+        </div>
+    </div>
+</div>*@
