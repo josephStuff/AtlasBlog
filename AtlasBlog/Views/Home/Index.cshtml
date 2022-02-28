@@ -4,6 +4,7 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
+@inject IImageService _imageService
 @inject SignInManager<BlogUser> SignInManager
 @inject UserManager<BlogUser> _userManager
 
@@ -19,7 +20,7 @@
     <h5 class="purpleText pt-3">Home Index</h5>
 }
 
-@if (SignInManager.IsSignedIn(User))
+@if (User.IsInRole("Administrator"))
 {
     <p>
         <a asp-action="Create" asp-controller="Blogs">Create New</a>
@@ -70,9 +71,9 @@
                 <div>@Html.DisplayFor(AbandonedMutexException => item.ResearchTopic)</div>
                 <hr />
             </div>
-            <div class="row p-2">
+            <div class="row p-2">                
                 <div class="text-center">
-                    Posted: @Html.DisplayFor(modelItem => item.Created)
+                    <span><img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;" src="@_imageService.ConvertByteArrayToFile(item?.ImageData, item?.ImageExt)">Posted: @Html.DisplayFor(modelItem => item.Created)</span>
                 </div>
                 <div class="d-flex justify-content-end align-items-end">
                     @if (User.IsInRole("Administrator"))

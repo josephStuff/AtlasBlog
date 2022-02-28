@@ -14,20 +14,13 @@
 
 <h1 class="purpleText mt-4">Blog Posts Index</h1>
 
-@*@if (User.IsInRole("Administrator"))*@
-@if (SignInManager.IsSignedIn(User))
+
+@if (User.IsInRole("Administrator"))
 {
     <p>
         <a asp-action="Create" asp-controller="BlogPosts">Create New</a>
     </p>
 }
-else
-{
-    <p>
-        <a asp-action="Create" asp-area="Identity">Login to Create</a>
-    </p>
-}
-
 
 @*
     <table class="table">
@@ -108,7 +101,10 @@ else
             <div class="col-3">
                 <div class="glass-jw-style p-1 ">
                     <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">@Html.DisplayFor(modelItem => blog.BlogName)</h5>
+                        <h5 class="card-title text-center overflow" style="height: 3.2rem;">
+                            <span><img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;" 
+                            src="@_imageService.ConvertByteArrayToFile(blog?.ImageData, blog?.ImageExt)"></span>@Html.DisplayFor(modelItem => blog.BlogName)
+                        </h5>
                     </div>
                 </div>
             </div>

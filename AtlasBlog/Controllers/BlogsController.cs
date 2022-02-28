@@ -29,11 +29,9 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: Blogs
+        [AllowAnonymous]        
         public async Task<IActionResult> Index()
         {
-
-            //var blogPosts = new List<BlogPost>();
-            //var model = await _context.Blogs.OrderByDescending(b => b.Created).Max(b => b.Created);
 
             //var model = await _context.Blogs.OrderByDescending(b => b.Created).ToListAsync();
             var model = await _context.Blogs.Include(b => b.BlogPosts).ToListAsync();
@@ -74,7 +72,7 @@ namespace AtlasBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BlogName,Description,Title,ResearchTopic")] Blog blog, IFormFile imageFile)
+        public async Task<IActionResult> Create([Bind("BlogName,Description,Title,ResearchTopic,ImageData,ImageExt")] Blog blog, IFormFile imageFile)
         {
             if (ModelState.IsValid)
             {

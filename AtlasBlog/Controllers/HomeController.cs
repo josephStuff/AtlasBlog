@@ -21,16 +21,16 @@ namespace AtlasBlog.Controllers
             _imageService = imageService;
         }
 
-        public async Task<IActionResult> Index(int? pageNum)
+        public async Task<IActionResult> Index(int? pageNum, IFormFile imageFile)
         {
             pageNum ??= 1;
 
-            //var blogs = _context.Blogs.ToList();
 
             // --------------- ToPagedList() ALWAYS NEEDS TO KNOW WHAT PAGE TO RENDER ---->
             // ------------------------- PagedList always need to be ordered expliicitly ---------<
             // var blogs = _context.Blogs.ToPagedList((int)pageNum, 5);
-            var blogs = await _context.Blogs.OrderByDescending(b => b.Created).ToPagedListAsync(pageNum, 4);
+            var blogs = await _context.Blogs.OrderByDescending(b => b.Created)                                                
+                                                .ToPagedListAsync(pageNum, 4);
 
             return View(blogs);
         }
