@@ -18,8 +18,8 @@ namespace AtlasBlog.Services
         {
 
             var resultSet = _dbContext.BlogPosts
-                                        .Where(B => B.BlogPostState == Enums.BlogPostState
-                                        .DefinitelyReady && !B.IsDeleted).AsQueryable();
+                                        .Where(b => b.BlogPostState == Enums.BlogPostState
+                                        .DefinitelyReady && !b.IsDeleted).AsQueryable();
 
             // ---------  IF SEARCH TERM IS SUPPLIED   ---   LOOK FOR IT INSIDE THE resultSet -------<
 
