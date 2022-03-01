@@ -5,13 +5,12 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
-@*@model IEnumerable<AtlasBlog.Models.Blog>*@
 
 @inject SignInManager<BlogUser> SignInManager
 @inject IImageService _imageService
 
 @model X.PagedList.IPagedList<Blog>
-    @* @model X.PagedList.IPagedList<Blog> *@
+    
 
 
 @{
@@ -101,7 +100,7 @@
 *@
 
 <div class="row">
-    @foreach (var blog in Model.OrderByDescending(b => b.BlogName))
+    @foreach (var blog in Model.OrderBy(b => b.BlogName))
     {
         <div class="row gy-2">
             <div class="col-3">

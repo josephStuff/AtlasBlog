@@ -18,7 +18,7 @@ namespace AtlasBlog.Services
         {
 
             var resultSet = _dbContext.BlogPosts
-                                        .Where(b => b.BlogPostState == Enums.BlogPostState  
+                                        .Where(b => b.BlogPostState == Enums.BlogPostState
                                          .DefinitelyReady && !b.IsDeleted).AsQueryable();
 
             // ---------  IF SEARCH TERM IS SUPPLIED   ---   LOOK FOR IT INSIDE THE resultSet -------<
@@ -43,7 +43,6 @@ namespace AtlasBlog.Services
             return resultSet.OrderByDescending(r => r.Comments);
 
         }
-
 
     }
 }
