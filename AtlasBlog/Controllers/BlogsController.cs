@@ -82,7 +82,7 @@ namespace AtlasBlog.Controllers
         }
 
         // GET: Blogs/Create
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             return View();
         }

@@ -176,7 +176,7 @@ namespace AtlasBlog.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,ResearchTopic,Slug,IsDeleted,Abstract,BlogPostState,Body,Created")] BlogPost blogPost, List<int> tagIds)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,ResearchTopic,Slug,IsDeleted,Abstract,BlogPostState,Body,Created")] BlogPost blogPost, List<int> tagIds)
         {
             if (id != blogPost.Id)
             {
@@ -240,7 +240,7 @@ namespace AtlasBlog.Controllers
 
                     await _context.SaveChangesAsync();
 
-                    //return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -257,6 +257,7 @@ namespace AtlasBlog.Controllers
             }
 
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "BlogName", blogPost.BlogId);
+            ViewData["TagIds"] = new MultiSelectList(_context.Tags, "Id", "Text", tagIds);
             return View(blogPost);
         }
 
