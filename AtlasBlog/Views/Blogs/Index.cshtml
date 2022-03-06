@@ -5,12 +5,11 @@
 @using X.PagedList.Mvc.Core
 @using X.PagedList.Web.Common
 
-
 @inject SignInManager<BlogUser> SignInManager
 @inject IImageService _imageService
 
 @model X.PagedList.IPagedList<Blog>
-    
+
 
 
 @{
@@ -100,22 +99,24 @@
 *@
 
 <div class="row">
-    @foreach (var blog in Model.OrderBy(b => b.BlogName))
+    @foreach (var blog in Model!.OrderBy(b => b.BlogName))
     {
         <div class="row gy-2">
             <div class="col-3">
                 <div class="glass-jw-style p-1 ">
                     <div class="text-center overflow">
                         <h5 class="card-title text-center overflow" style="height: 3.2rem;">
-                            <span><img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;" 
-                            src="@_imageService.ConvertByteArrayToFile(blog?.ImageData, blog?.ImageExt)"></span>@Html.DisplayFor(modelItem => blog.BlogName)
+                            <span>
+                                <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
+                                 src="@_imageService.ConvertByteArrayToFile(blog?.ImageData, blog?.ImageExt)">
+                            </span>@Html.DisplayFor(modelItem => blog.BlogName)
                         </h5>
                     </div>
                 </div>
             </div>
             @foreach (var blogPost in blog.BlogPosts)
             {
-                <div class="glass-jw-style" style="width: 18rem">
+                <div class="col-12 col-md-3 glass-jw-style" style="">
                     <div class="hoverButton mt-1">
                         <div class="text-center  overflow">
                             <a class="noUnderline" asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
@@ -152,7 +153,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div>            
             }
         </div>
     }

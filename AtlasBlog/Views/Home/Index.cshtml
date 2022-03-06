@@ -64,31 +64,37 @@
 <div class="row">
     @foreach (var item in Model.OrderByDescending(i => i.BlogName))
     {
-        <div class="col-12 col-md-4 col-lg-3 border px-1 g-3 mx-1">
-            <div class="text-center overflow">
-                <h5 class="card-title text-center overflow yellowText" style="">@Html.DisplayFor(modelItem => item.BlogName)</h5>
-                <hr />
-                <div>@Html.DisplayFor(modelItem => item.ResearchTopic)</div>
-                <hr />
-            </div>
-            <div class="row p-2">                
-                <div class="text-center">
-                    <span><img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
-                    src="@_imageService.ConvertByteArrayToFile(item?.ImageData, item?.ImageExt)">Posted: @Html.DisplayFor(modelItem => item.Created)</span>
-                </div>
-                <div class="d-flex justify-content-end align-items-end">
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
-                            <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                        </a>
-                        <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
-                            <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
-                        </a>
-                        <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
-                            <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
-                        </a>
-                    }
+        <div class="col-12 col-md-3">
+            <div class="px-1 g-3 h-100 border">
+                <a class="noUnderline" asp-controller="Blogs" asp-action="Index" asp-route-slug="">
+                    <div class="text-center overflow">
+                        <h5 class="card-title text-center overflow yellowText" style="">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                        <div class="border-top border-bottom py-2">@Html.DisplayFor(modelItem => item.ResearchTopic)</div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="text-center">
+                            <span>
+                                <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
+                                 src="@_imageService.ConvertByteArrayToFile(item?.ImageData, item?.ImageExt)">Posted: @Html.DisplayFor(modelItem => item.Created)
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                <div class="d-flex align-items-end justify-content-sm-center">
+                    <div class="">
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-controller="Blogs" asp-route-id="@item.Id">
+                                <i class="bi-pencil-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                            </a>
+                            <a asp-action="Details" asp-controller="Blogs" asp-route-id="@item?.Id">
+                                <i class="bi-person-fill" style="font-size: 1.5rem; color:lightyellow;"></i>
+                            </a>
+                            <a asp-action="Delete" asp-controller="Blogs" asp-route-id="@item?.Id">
+                                <i class="bi-trash-fill" style="font-size: 1.5rem; color:red;"></i>
+                            </a>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
