@@ -36,7 +36,8 @@ body {
     color: var(--dark-jw-color);
     padding-bottom: calc(13em + 74px);
 }
- header {
+
+header {
      background: url(~/img/blueRoom.jpg)
  }
 
@@ -45,16 +46,16 @@ body {
 }
 
 .purpleText {
-    color: white;
+    color: purple;
 }
 
 .yellowText {
-    color: yellow;
+    color: #0094ff;
 }
 
 .bigBackground {
     /*position: center;*/
-    background: black;
+    background: none;
     background-size: cover;
     /*height:;
     background-repeat: no-repeat;*/

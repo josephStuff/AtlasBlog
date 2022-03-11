@@ -51,7 +51,7 @@
 
                     <form asp-action="SearchIndex" asp-controller="BlogPosts">
                         <input name="SearchTerm" class="form-control" />
-                        <button type="submit" class="btn-outline w-100 fw-bold glass-button text-light">SEARCH</button>
+                        <button type="submit" class="btn-outline w-100 fw-bold text-light">SEARCH</button>
                     </form>
 
                 </div>
@@ -62,7 +62,7 @@
 
 
 <div class="row">
-    @foreach (var item in Model.OrderByDescending(i => i.BlogName))
+    @foreach (var item in Model!.OrderByDescending(i => i.BlogName))
     {
         <div class="col-12 col-md-3">
             <div class="px-1 g-3 h-100 border">
@@ -75,7 +75,7 @@
                         <div class="text-center">
                             <span>
                                 <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
-                                 src="@_imageService.ConvertByteArrayToFile(item?.ImageData, item?.ImageExt)">Posted: @Html.DisplayFor(modelItem => item.Created)
+                                 src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageExt!)">Posted: @Html.DisplayFor(modelItem => item.Created)
                             </span>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
     <div class="d-flex align-content-end">
         <div class="purpleText" type="text">
 
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Page @(Model!.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
             @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
             new PagedListRenderOptions
             {
