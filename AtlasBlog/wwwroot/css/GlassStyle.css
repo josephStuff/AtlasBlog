@@ -8,7 +8,7 @@
 }
 
 .glass-jw-style {
-    color: yellow;
+    /*color: yellow;*/
     backdrop-filter: blur(14px);
     backdrop-filter: brightness(3);
     background-color: gray;
@@ -60,8 +60,9 @@
 /* a:hover, a:active, a:focus { */
 
 a {
-    color: #0094ff;
+    color: purple;
 }
+
 
 a:hover {
     color: #ff0000;

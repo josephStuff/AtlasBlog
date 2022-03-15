@@ -6,7 +6,7 @@
 
 .mainHeight {
     min-height: 90vh;
-    margin-bottom: 6rem;
+    margin-bottom: 5rem;
 }
 
 html {
@@ -25,16 +25,16 @@ html {
 }
 
 body {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .pageBG {
-    /*position: absolute ;*/
-    /*width: 100%;*/
-    background: url(/img/whiteGrid.png);
-    background-size:  inherit;
+    position: static;
+    width: 100%;
+    background: url(/img/windowsRedHero.png);
+    background-size:  cover;
     color: var(--dark-jw-color);
-    padding-bottom: calc(13em + 74px);
+    padding-bottom: calc(5em + 74px);
 }
 
 header {
@@ -49,14 +49,11 @@ header {
     color: purple;
 }
 
-.yellowText {
-    color: #0094ff;
-}
 
 .bigBackground {
     /*position: center;*/
     background: none;
-    background-size: cover;
+    /*background-size: ;*/
     /*height:;
     background-repeat: no-repeat;*/
 }

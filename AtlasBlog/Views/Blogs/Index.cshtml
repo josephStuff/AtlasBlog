@@ -10,8 +10,6 @@
 
 @model X.PagedList.IPagedList<Blog>
 
-
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -108,25 +106,25 @@
                         <h5 class="card-title text-center overflow" style="height: 3.2rem;">
                             <span>
                                 <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
-                                 src="@_imageService.ConvertByteArrayToFile(blog?.ImageData, blog?.ImageExt)">
-                            </span>@Html.DisplayFor(modelItem => blog.BlogName)
+                                 src="@_imageService.ConvertByteArrayToFile(blog?.ImageData!, blog?.ImageExt!)">
+                            </span>@Html.DisplayFor(modelItem => blog!.BlogName)
                         </h5>
                     </div>
                 </div>
             </div>
-            @foreach (var blogPost in blog.BlogPosts)
+            @foreach (var blogPost in blog!.BlogPosts)
             {
                 <div class="col-12 col-md-3 glass-jw-style" style="">
                     <div class="hoverButton mt-1">
                         <div class="text-center  overflow">
                             <a class="noUnderline" asp-controller="BlogPosts" asp-action="Details" asp-route-slug="@blogPost.Slug">
-                                <div class="card bg-black card-text border-primary p-2">
-                                    @Html.DisplayFor(blogPostItem => blogPost.Blog.ResearchTopic)
+                                <div class="card card-text border-primary p-2">
+                                    @Html.DisplayFor(blogPostItem => blogPost.Blog!.ResearchTopic)
                                 </div>
-                                <div class="card bg-black card-text border-primary p-2" style="height: 4rem;">
+                                <div class="card card-text border-primary p-2" >
                                     @Html.DisplayFor(blogPostItem => blogPost.Title)
                                 </div>
-                                <div class="card bg-black card-text border-primary p-2" style="height: 4rem;">
+                                <div class="card card-text border-primary p-2" style="height: 2.5em;" >
                                     @Html.Raw(blogPost.Body)
                                 </div>
                             </a>
@@ -164,7 +162,7 @@
     <div class="d-flex align-content-end">
         <div class="purpleText" type="text">
 
-            Page @(Model.PageNumber < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Page @(Model!.PageNumber < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
             @Html.PagedListPager(Model, pageNum => Url.Action("Index", new { pageNum }),
             new PagedListRenderOptions
             {

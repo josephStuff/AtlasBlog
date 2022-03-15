@@ -10,7 +10,9 @@
 
 @model X.PagedList.IPagedList<Blog>
 
-
+    
+<header class="masthead container-fluid pageBG" style="">
+                
 @{
     ViewData["Title"] = "Home Index";
 }
@@ -27,20 +29,6 @@
     </p>
 }
 
-@*
-    @if (SignInManager.IsSignedIn(User))
-    {
-    <p>
-    <a asp-action="Create">Create New</a>
-    </p>
-    }
-    else
-    {
-    <p>
-    <a asp-action="Create" asp-area="Identity">Login to Create</a>
-    </p>
-    }*@
-
 
 <div class="py-md-5 d-flex d-block">
     <div class="container">
@@ -51,7 +39,7 @@
 
                     <form asp-action="SearchIndex" asp-controller="BlogPosts">
                         <input name="SearchTerm" class="form-control" />
-                        <button type="submit" class="btn-outline w-100 fw-bold text-light">SEARCH</button>
+                        <button type="submit" class="btn-secondary btn-outline w-100 fw-bold redText">SEARCH</button>
                     </form>
 
                 </div>
@@ -60,20 +48,26 @@
     </div>
 </div>
 
+</header>   
 
-<div class="row">
+<div class="row  mt-3">
     @foreach (var item in Model!.OrderByDescending(i => i.BlogName))
     {
         <div class="col-12 col-md-3">
-            <div class="px-1 g-3 h-100 border">
+            <div class="px-1 g-3 h-100 border glass-jw-style purpleText">
                 <a class="noUnderline" asp-controller="Blogs" asp-action="Index" asp-route-slug="">
                     <div class="text-center overflow">
-                        <h5 class="card-title text-center overflow yellowText" style="">@Html.DisplayFor(modelItem => item.BlogName)</h5>
+                        <h5 class="card-title text-center overflow " style="">@Html.DisplayFor(modelItem => item.BlogName)</h5>
                         <div class="border-top border-bottom py-2">@Html.DisplayFor(modelItem => item.ResearchTopic)</div>
                     </div>
                     <div class="row p-2">
                         <div class="text-center">
                             <span>
+                                @if(item.ImageData == null)
+                                {
+                                    <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
+                                 src="~/img/DefaultImage.png">Posted: @Html.DisplayFor(modelItem => item.Created);
+                                }
                                 <img class="img-fluid float-start rounded-circle" style="max-width: 3rem; height: auto;"
                                  src="@_imageService.ConvertByteArrayToFile(item.ImageData!, item.ImageExt!)">Posted: @Html.DisplayFor(modelItem => item.Created)
                             </span>
@@ -102,7 +96,7 @@
 </div>
 
 
-<div class="row mt-5">
+<div class="row mt-4">
     <div class="d-flex align-content-end">
         <div class="purpleText" type="text">
 
