@@ -19,7 +19,6 @@ namespace AtlasBlog.Controllers.API
             _context = context;
         }
 
-
         /// <summary>
         /// Returns the specified number of latest Posts
         /// </summary>
@@ -33,6 +32,7 @@ namespace AtlasBlog.Controllers.API
         {
             //How to return top latest production ready posts that aren't deleted
             //  The latest Posts ----------------
+
 
             var posts = await _context.BlogPosts.Where(b => !b.IsDeleted &&
                                                     b.BlogPostState == BlogPostState.DefinitelyReady)

@@ -8,6 +8,9 @@ namespace AtlasBlog.Models
     {
         public int Id { get; set; }
 
+        /// <summary>
+        /// This is the BlogPost Foriegn Key
+        /// </summary>
         [Required]
         public int BlogId { get; set; }
 
@@ -15,6 +18,9 @@ namespace AtlasBlog.Models
         [StringLength(100, ErrorMessage = "The {0} must be a different number of characters long!", MinimumLength = 5)]
         public string Title { get; set; } = "";
 
+        /// <summary>
+        /// The Slug is derived from the title and must be unique 
+        /// </summary>
         public string Slug { get; set; } = "";
 
 
