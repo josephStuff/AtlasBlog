@@ -31,23 +31,14 @@
                 @if (User.Identity!.IsAuthenticated)
                 {
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Blogs" asp-action="Index">Blog Posts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="BlogPosts" asp-action="Index">Blogs Comments</a>
-                        </li>
+                        <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="Blogs" asp-action="Index">Blog Posts</a></li>
+                        <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="BlogPosts" asp-action="Index">Blogs Comments</a></li>
+                        <li><a class="nav-link " asp-area="" asp-controller="Swagger" asp-action="Index">Api Page</a></li>
                         @if (User.IsInRole("Administrator"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Comments" asp-action="Index">Comments</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Tags" asp-action="Index">Tags</a>
-                            </li>
+                            <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="Comments" asp-action="Index">Comments</a></li>
+                            <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="Tags" asp-action="Index">Tags</a></li>
                         }
                     </ul>
                 }

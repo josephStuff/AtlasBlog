@@ -1,9 +1,5 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AtlasBlog.Data;
@@ -23,7 +19,16 @@ namespace AtlasBlog.Controllers.API
             _context = context;
         }
 
-        [HttpGet]
+
+        /// <summary>
+        /// Returns the specified number of latest Posts
+        /// </summary>
+        /// <param name="num">inter count of records</param>
+        /// <returns>
+        /// Returns a list of Blog Posts
+        /// </returns>
+
+        [HttpGet("GetTopXPosts/{num:int}")]
         public async Task<ActionResult<IEnumerable<BlogPost>>> GetTopXPosts(int num)
         {
             //How to return top latest production ready posts that aren't deleted
@@ -37,6 +42,7 @@ namespace AtlasBlog.Controllers.API
 
             return posts;
         }
+
 
     }
 }
