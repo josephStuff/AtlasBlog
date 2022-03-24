@@ -8,12 +8,19 @@ using AtlasBlog.Enums;
 
 namespace AtlasBlog.Controllers.API
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class BlogPostsApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
         public BlogPostsApiController(ApplicationDbContext context)
         {
             _context = context;

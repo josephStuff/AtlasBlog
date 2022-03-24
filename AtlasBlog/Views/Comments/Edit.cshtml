@@ -63,7 +63,6 @@
             </div>
 
         </form>
-
     </div>
 </div>
 
@@ -73,20 +72,20 @@
 
 @section Scripts {
 
-    <script>
+<script>
+    document.getElementById('quillCreate').addEventListener("submit", function() {
+        document.getElementById('Body').value = quill.container.firstChild.innerHTML;
+    });
+</script>
 
-        document.getElementById('quillCreate').addEventListener("submit", function() {
-            document.getElementById('Body').value = quill.container.firstChild.innerHTML;
-        });
+<script>
+    var quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+</script>
 
-    </script>
-
-    <script>
-        var quill = new Quill('#editor', {
-            theme: 'snow'
-        });
-    </script>
-
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
