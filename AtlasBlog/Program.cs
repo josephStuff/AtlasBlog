@@ -2,7 +2,6 @@ using AtlasBlog.Data;
 using AtlasBlog.Models;
 using AtlasBlog.Services;
 using AtlasBlog.Services.Interfaces;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -11,18 +10,22 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Adding in a COTS policy to avoid getting denied from my portfolio
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DefaultCorsPolicy", builder =>
+         builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+});
+
 
 // Add services to the container.
-//var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
 var connectionString = ConnectionService.GetConnectionString(builder.Configuration);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentity<BlogUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddDefaultTokenProviders()
@@ -91,6 +94,8 @@ else
 }
 
 
+app.UseCors("DefaultCorsPolicy");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -106,10 +111,10 @@ app.UseSwaggerUI(s =>
 {
     s.SwaggerEndpoint("/swagger/v1/swagger.json", "Atlas Blog API");
 
-    if (!app.Environment.IsDevelopment())
-    {
-        s.RoutePrefix = "";
-    }
+    //if (!app.Environment.IsDevelopment())
+    //{
+    //    s.RoutePrefix = "";
+    //}
 });
 
 
