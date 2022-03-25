@@ -114,10 +114,10 @@ app.UseSwaggerUI(s =>
     s.InjectJavascript("/js/swaggerUI.js");
     s.DocumentTitle = "CF Atlas Blog API";
 
-    //if (!app.Environment.IsDevelopment())
-    //{
-    //    s.RoutePrefix = "";
-    //}
+    if (!app.Environment.IsDevelopment())
+    {
+        s.RoutePrefix = "";
+    }
 });
 
 
